@@ -1,0 +1,4 @@
+https://cssgradient.io/
+https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+https://www.youtube.com/watch?v=uxf0--uiX0I
+https://fontawesome.com/v6.0/icons/

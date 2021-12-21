@@ -1,0 +1,135 @@
+body {
+    width: 94%;
+    margin-left: 3%;
+    background-color: #AEB6BF;
+}
+
+header {
+    text-align: center;
+    height: 60px;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 0%, rgba(13,13,99,1) 100%);
+    color: white;
+    padding-top: 5px;
+    width: 102%;
+    margin-left: -1%;
+}
+
+header h1 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.title {
+   margin-top: 50px;
+}
+
+main {
+    padding-bottom: 43%;
+}
+
+.search {
+    width: 30%;
+    height: 85%;
+    margin-left: 2.5%;
+}
+
+.search hr {
+    height: 2px;
+    width: 72%;
+    background-color: black;
+    margin-left: 49px;
+}
+
+.conditions {
+    width: 61%;
+    height: 80%;
+    margin-left: 36%;
+}
+
+.search, .conditions {
+    position: absolute;
+    margin-top: 1%;
+}
+
+.current {
+    border: 2px solid black;
+    height: 42%;
+    background-color: white;
+}
+
+.current h2 {
+    margin-top: 2px;
+}
+
+.forecast-heading {
+    height: 8%;
+}
+
+.forecast-heading h3 {
+    margin-top: 8px;
+    margin-left: 6px;
+}
+
+.days {
+    height: 40%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.days p {
+    margin-top: 2px;
+}
+
+.current, .forecast-heading, .days {
+    width: 90%;
+    margin-left: 5%;
+}
+
+.first, .second, .third, .fourth, .fifth {
+    border: 1px solid grey;
+    width: 18%;
+    background-color: #273746;
+    color: white;
+}
+
+.search-heading {
+    height: 10%;
+}
+
+.search-heading h2 {
+    text-align: center;
+}
+
+.bar {
+    height: 20%;
+}
+
+.bar input {
+    width: 70%;
+    height: 40%;
+}
+
+.bar button {
+    width: 72%;
+    height: 35%;
+    margin-top: 10px;
+    background-color: #3296F0;
+    color: white;
+}
+
+.popular {
+    height: 68%;
+}
+
+.popular button {
+   width: 72%;
+   height: 9%;
+   background-color: #D5D8DC;
+   margin-top: 10px;
+}
+
+.bar input, .bar button, .popular button {
+    margin-left: 50px;
+    border-radius: 5px;
+}
