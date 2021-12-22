@@ -240,6 +240,32 @@ async function infoChicago () {
             divI.classList.add('fas', 'fa-sun');
         }
     }
+
+    var uvIndex = document.getElementById('c-uv');
+
+    uvIndex.style.background = "none";
+    uvIndex.style.fontWeight = "bold";
+
+    console.log(data.current.uvi);
+
+    if (data.current.uvi >= 0 && data.current.uvi <= 2) {
+        uvIndex.style.background = "green";
+        uvIndex.style.color = "white";
+    }
+    else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
+        uvIndex.style.background = "yellow";
+    }
+    else if (data.current.uvi === 6 || data.current.uvi === 7) {
+        uvIndex.style.background = "orange";
+    } 
+    else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
+        uvIndex.style.background = "green";
+        uvIndex.style.color = "white";
+    }
+    else {
+        uvIndex.style.background = "purple";
+        uvIndex.style.color = "white";
+    }
 }
 
 
