@@ -47,26 +47,19 @@ async function infoChicago () {
     document.getElementById('i-wind').textContent = data.daily[5].wind_speed + " ";
     document.getElementById('i-humidity').textContent = data.daily[5].humidity;
 
-    // sun <i class="fas fa-sun"></i>
-    // partially cloudy <i class="fas fa-cloud-sun"></i>
-    // cloudy <i class="fas fa-cloud"></i>
-    // rain <i class="fas fa-cloud-showers-heavy"></i>
-    // wind <i class="fas fa-wind"></i>
+    // <i class="fas fa-wind"></i>
+    if (data.current.wind_speed > 20) {
+        var div = document.getElementById('icon');
+        div.classList.add('fas', 'fa-wind');
+    }
+    else {
 
-    // element.classList.add("my-class");
+    }
 
-    // if (data.current.wind_speed > 20) {
-    //     document.getElementById('icon').innerHTML =  "<i class=fas fa-wind></i>";
-    // }
+    console.log(data.current.weather[0].description);
 }
 
-// Method 1
-// var element = document.getElementById("icon");
-// element.classList.add("fas fa-wind");
 
-// Method 2
-var div = document.getElementById('icon');
-div.classList.add('fas', 'fa-sun');
 
 async function infoAustin () {
 
