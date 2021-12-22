@@ -20,8 +20,6 @@ async function infoChicago () {
     document.getElementById('c-humidity').textContent = data.current.humidity;
     document.getElementById('c-uv').textContent = data.current.uvi;
 
-    console.log();
-
     document.getElementById('f-day').textContent = tommorow;
     document.getElementById('f-temp').textContent = data.daily[1].temp.day
     document.getElementById('f-wind').textContent = data.daily[1].wind_speed + " ";
@@ -47,9 +45,13 @@ async function infoChicago () {
     document.getElementById('i-wind').textContent = data.daily[5].wind_speed + " ";
     document.getElementById('i-humidity').textContent = data.daily[5].humidity;
 
-    // <i class="fas fa-wind"></i>
+    console.log(data.current.weather[0].description);
+    
+    var div = document.getElementById('icon');
+
+    console.log(div);
+
     if (data.current.wind_speed > 20) { 
-        var div = document.getElementById('icon');
         div.classList.add('fas', 'fa-wind');
     }
     else {
@@ -58,36 +60,31 @@ async function infoChicago () {
         data.current.weather[0].description === "scattered clouds" ||
         data.current.weather[0].description === "broken clouds") 
         {
-            var div = document.getElementById('icon');
             div.classList.add('fas', 'fa-cloud-sun');
         } 
         else if (data.current.weather[0].description === "shower rain" ||
         data.current.weather[0].description === "rain")
         {
-            var div = document.getElementById('icon');
             div.classList.add('fas', 'cloud-rain');
         }
         else if (data.current.weather[0].description === "thunderstorm")
         {
-            var div = document.getElementById('icon');
             div.classList.add('fas', 'fa-bolt');
         }
         else if (data.current.weather[0].description === "snow")
         {
-            var div = document.getElementById('icon');
             div.classList.add('fas', 'fa-snowflake');
         }
         else 
         {
-            var div = document.getElementById('icon');
             div.classList.add('fas', 'fa-sun');
         }
     }
-
-    console.log(data.current.weather[0].description);
 }
 
+// var div = document.getElementById('icon');
 
+// div.classList.add('fas', 'fa-sun');
 
 async function infoAustin () {
 
