@@ -47,6 +47,11 @@ async function infoChicago () {
     document.getElementById('i-wind').textContent = data.daily[5].wind_speed + " ";
     document.getElementById('i-humidity').textContent = data.daily[5].humidity;
 
+    // sun <i class="fas fa-sun"></i>
+    // partially cloudy <i class="fas fa-cloud-sun"></i>
+    // cloudy <i class="fas fa-cloud"></i>
+    // rain <i class="fas fa-cloud-showers-heavy"></i>
+    // wind <i class="fas fa-wind"></i>
 }
 
 async function infoAustin () {
