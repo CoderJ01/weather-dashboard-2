@@ -52,7 +52,21 @@ async function infoChicago () {
     // cloudy <i class="fas fa-cloud"></i>
     // rain <i class="fas fa-cloud-showers-heavy"></i>
     // wind <i class="fas fa-wind"></i>
+
+    // element.classList.add("my-class");
+
+    // if (data.current.wind_speed > 20) {
+    //     document.getElementById('icon').innerHTML =  "<i class=fas fa-wind></i>";
+    // }
 }
+
+// Method 1
+// var element = document.getElementById("icon");
+// element.classList.add("fas fa-wind");
+
+// Method 2
+var div = document.getElementById('icon');
+div.classList.add('fas', 'fa-sun');
 
 async function infoAustin () {
 
