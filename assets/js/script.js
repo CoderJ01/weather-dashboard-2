@@ -48,12 +48,40 @@ async function infoChicago () {
     document.getElementById('i-humidity').textContent = data.daily[5].humidity;
 
     // <i class="fas fa-wind"></i>
-    if (data.current.wind_speed > 20) {
+    if (data.current.wind_speed > 20) { 
         var div = document.getElementById('icon');
         div.classList.add('fas', 'fa-wind');
     }
     else {
 
+        if (data.current.weather[0].description === "few clouds" ||
+        data.current.weather[0].description === "scattered clouds" ||
+        data.current.weather[0].description === "broken clouds") 
+        {
+            var div = document.getElementById('icon');
+            div.classList.add('fas', 'fa-cloud-sun');
+        } 
+        else if (data.current.weather[0].description === "shower rain" ||
+        data.current.weather[0].description === "rain")
+        {
+            var div = document.getElementById('icon');
+            div.classList.add('fas', 'cloud-rain');
+        }
+        else if (data.current.weather[0].description === "thunderstorm")
+        {
+            var div = document.getElementById('icon');
+            div.classList.add('fas', 'fa-bolt');
+        }
+        else if (data.current.weather[0].description === "snow")
+        {
+            var div = document.getElementById('icon');
+            div.classList.add('fas', 'fa-snowflake');
+        }
+        else 
+        {
+            var div = document.getElementById('icon');
+            div.classList.add('fas', 'fa-sun');
+        }
     }
 
     console.log(data.current.weather[0].description);
