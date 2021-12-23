@@ -81,9 +81,19 @@ main {
     margin-top: 2px;
 }
 
+.current {
+    position: relative;
+}
+
 .current, .forecast-heading, .days {
     width: 90%;
     margin-left: 5%;
+}
+
+.current i {
+    margin-left: 26%;
+    margin-top: -6%;
+    position: absolute;
 }
 
 .first, .second, .third, .fourth, .fifth {
