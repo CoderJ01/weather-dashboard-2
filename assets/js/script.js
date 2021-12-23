@@ -174,7 +174,7 @@ async function infoChicago () {
     var divO = document.getElementById('o-icon');
 
     if (data.current.wind_speed > 20) { 
-        div.classList.add('fas', 'fa-wind');
+        divO.classList.add('fas', 'fa-wind');
     }
     else {
 
@@ -438,7 +438,7 @@ async function infoAustin () {
     var divO = document.getElementById('o-icon');
 
     if (data.current.wind_speed > 20) { 
-        div.classList.add('fas', 'fa-wind');
+        divO.classList.add('fas', 'fa-wind');
     }
     else {
 
@@ -701,7 +701,7 @@ async function infoNewYork () {
     var divO = document.getElementById('o-icon');
 
     if (data.current.wind_speed > 20) { 
-        div.classList.add('fas', 'fa-wind');
+        divO.classList.add('fas', 'fa-wind');
     }
     else {
 
@@ -964,7 +964,7 @@ async function infoOrlando () {
     var divO = document.getElementById('o-icon');
 
     if (data.current.wind_speed > 20) { 
-        div.classList.add('fas', 'fa-wind');
+        divO.classList.add('fas', 'fa-wind');
     }
     else {
 
@@ -1227,7 +1227,7 @@ async function infoSanFrancisco () {
     var divO = document.getElementById('o-icon');
 
     if (data.current.wind_speed > 20) { 
-        div.classList.add('fas', 'fa-wind');
+        divO.classList.add('fas', 'fa-wind');
     }
     else {
 
@@ -1490,7 +1490,7 @@ async function infoSeattle () {
     var divO = document.getElementById('o-icon');
 
     if (data.current.wind_speed > 20) { 
-        div.classList.add('fas', 'fa-wind');
+        divO.classList.add('fas', 'fa-wind');
     }
     else {
 
@@ -1753,7 +1753,7 @@ async function infoDenver () {
     var divO = document.getElementById('o-icon');
 
     if (data.current.wind_speed > 20) { 
-        div.classList.add('fas', 'fa-wind');
+        divO.classList.add('fas', 'fa-wind');
     }
     else {
 
@@ -2015,7 +2015,7 @@ async function infoAtlanta () {
     var divO = document.getElementById('o-icon');
 
     if (data.current.wind_speed > 20) { 
-        div.classList.add('fas', 'fa-wind');
+        divO.classList.add('fas', 'fa-wind');
     }
     else {
 
