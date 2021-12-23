@@ -107,12 +107,13 @@ main {
 
 .bar input {
     width: 70%;
-    height: 40%;
+    height: 35px;
+    margin-top: 10px;
 }
 
 .bar button {
     width: 72%;
-    height: 35%;
+    height: 35px;
     margin-top: 10px;
     background-color: #3296F0;
     color: white;
