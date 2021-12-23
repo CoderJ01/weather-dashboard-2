@@ -10,7 +10,8 @@ function store(event) {
 }
 
 function searchInput () {
-    window.alert("This button saves searchs and displays this message.")
+        window.alert(searchChoice.value);
 }
 
 document.getElementById('search').addEventListener("click", searchInput);
+
