@@ -1,7 +1,7 @@
 function store() {
     var newData = document.getElementById('input').value;
 
-    if(localStorage.getItem('data') === null) {
+    if(localStorage.getItem('data') = null) {
         localStorage.setItem('data', '[]');
     }
 
@@ -9,6 +9,4 @@ function store() {
     oldData.push(newData);
 
     localStorage.setItem('data', JSON.stringify(oldData));
-
-    console.log(localStorage);
 }
