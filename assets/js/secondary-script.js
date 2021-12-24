@@ -1,13 +1,15 @@
-function store(event) {
+// function store(event) {
 
-    var cityInput = document.getElementById('input');
+//     var cityInput = document.getElementById('input');
 
-    event.preventDefault();
+//     event.preventDefault();
 
-    if (cityInput) {
-        cityInput.value = "";
-    }
-}
+//     if (cityInput) {
+//         cityInput.value = "";
+//         localStorage.setItem('city', cityInput.value);
+//         localStorage.getItem('city');
+//     }
+// }
 
 async function searchInput (event) {
     event.preventDefault();
@@ -15,13 +17,11 @@ async function searchInput (event) {
     
     var response = await fetch(weatherChoice);
     var data = await response.json();
-    console.log(data);
     var temp  = data;
 
     var weatherUVI = apiUVI + data.coord.lat + units + data.coord.lon + settingsUVI;
     var responseUVI = await fetch(weatherUVI);
     var dataUVI = await responseUVI.json();
-    console.log(dataUVI);
 
     var today = moment().format('L');
     
@@ -290,4 +290,9 @@ enterKey.addEventListener("keyup", function(event) {
         document.getElementById('search').click();
     }
 });
+
+var TestingOneTwoThree = "See if this string is stored in localStorage.";
+localStorage.setItem('confirmation', TestingOneTwoThree);
+var getString = localStorage.getItem('confirmation');
+console.log(getString);
 
