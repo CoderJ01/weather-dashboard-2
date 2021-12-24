@@ -35,34 +35,32 @@ async function searchInput (event) {
     document.getElementById('c-temp').textContent = data.main.temp;
     document.getElementById('c-wind').textContent = data.wind.speed + " ";
     document.getElementById('c-humidity').textContent = data.main.humidity;
-    console.log(data.coord.lat);
-    console.log(data.coord.lon);
     document.getElementById('c-uv').textContent = dataUVI.current.uvi;
 
-    // document.getElementById('f-day').textContent = tommorow;
-    // document.getElementById('f-temp').textContent = data.daily[1].temp.day
-    // document.getElementById('f-wind').textContent = data.daily[1].wind_speed + " ";
-    // document.getElementById('f-humidity').textContent = data.daily[1].humidity;
+    document.getElementById('f-day').textContent = tommorow;
+    document.getElementById('f-temp').textContent = dataUVI.daily[1].temp.day
+    document.getElementById('f-wind').textContent = dataUVI.daily[1].wind_speed + " ";
+    document.getElementById('f-humidity').textContent = dataUVI.daily[1].humidity;
 
-    // document.getElementById('s-day').textContent = next;
-    // document.getElementById('s-temp').textContent = data.daily[2].temp.day
-    // document.getElementById('s-wind').textContent = data.daily[2].wind_speed + " ";
-    // document.getElementById('s-humidity').textContent = data.daily[2].humidity;
+    document.getElementById('s-day').textContent = next;
+    document.getElementById('s-temp').textContent = dataUVI.daily[2].temp.day
+    document.getElementById('s-wind').textContent = dataUVI.daily[2].wind_speed + " ";
+    document.getElementById('s-humidity').textContent = dataUVI.daily[2].humidity;
 
-    // document.getElementById('t-day').textContent = then;
-    // document.getElementById('t-temp').textContent = data.daily[3].temp.day
-    // document.getElementById('t-wind').textContent = data.daily[3].wind_speed + " ";
-    // document.getElementById('t-humidity').textContent = data.daily[3].humidity;
+    document.getElementById('t-day').textContent = then;
+    document.getElementById('t-temp').textContent = dataUVI.daily[3].temp.day
+    document.getElementById('t-wind').textContent = dataUVI.daily[3].wind_speed + " ";
+    document.getElementById('t-humidity').textContent = dataUVI.daily[3].humidity;
 
-    // document.getElementById('o-day').textContent = fourth;
-    // document.getElementById('o-temp').textContent = data.daily[4].temp.day
-    // document.getElementById('o-wind').textContent = data.daily[4].wind_speed + " ";
-    // document.getElementById('o-humidity').textContent = data.daily[4].humidity;
+    document.getElementById('o-day').textContent = fourth;
+    document.getElementById('o-temp').textContent = dataUVI.daily[4].temp.day
+    document.getElementById('o-wind').textContent = dataUVI.daily[4].wind_speed + " ";
+    document.getElementById('o-humidity').textContent = dataUVI.daily[4].humidity;
 
-    // document.getElementById('i-day').textContent = last;
-    // document.getElementById('i-temp').textContent = data.daily[5].temp.day
-    // document.getElementById('i-wind').textContent = data.daily[5].wind_speed + " ";
-    // document.getElementById('i-humidity').textContent = data.daily[5].humidity;
+    document.getElementById('i-day').textContent = last;
+    document.getElementById('i-temp').textContent = dataUVI.daily[5].temp.day
+    document.getElementById('i-wind').textContent = dataUVI.daily[5].wind_speed + " ";
+    document.getElementById('i-humidity').textContent = dataUVI.daily[5].humidity;
     
     // var div = document.getElementById('icon');
 
