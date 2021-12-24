@@ -282,3 +282,12 @@ async function searchInput (event) {
 
 document.getElementById('search').addEventListener("click", searchInput);
 
+var enterKey = document.getElementById('input');
+
+enterKey.addEventListener("keyup", function(event) {
+    if(event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById('search').click();
+    }
+});
+
