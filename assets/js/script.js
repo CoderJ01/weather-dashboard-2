@@ -1843,7 +1843,9 @@ async function infoAtlanta () {
 
     var response = await fetch(weatherAtlanta);
     var data = await response.json();
+    // var uviData = await response.json();
     var temp  = data;
+    console.log(data);
 
     var today = moment().format('L');
     
