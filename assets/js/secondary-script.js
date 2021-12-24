@@ -256,29 +256,29 @@ async function searchInput (event) {
     //     }
     // }
 
-    // var uvIndex = document.getElementById('c-uv');
+    var uvIndex = document.getElementById('c-uv');
 
-    // uvIndex.style.background = "none";
-    // uvIndex.style.fontWeight = "bold";
+    uvIndex.style.background = "none";
+    uvIndex.style.fontWeight = "bold";
 
-    // if (data.current.uvi >= 0 && data.current.uvi <= 2) {
-    //     uvIndex.style.background = "green";
-    //     uvIndex.style.color = "white";
-    // }
-    // else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
-    //     uvIndex.style.background = "yellow";
-    // }
-    // else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
-    //     uvIndex.style.background = "orange";
-    // } 
-    // else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
-    //     uvIndex.style.background = "green";
-    //     uvIndex.style.color = "white";
-    // }
-    // else {
-    //     uvIndex.style.background = "purple";
-    //     uvIndex.style.color = "white";
-    // }
+    if (dataUVI.current.uvi >= 0 && dataUVI.current.uvi <= 2) {
+        uvIndex.style.background = "green";
+        uvIndex.style.color = "white";
+    }
+    else if (dataUVI.current.uvi >= 3 && dataUVI.current.uvi <= 5) {
+        uvIndex.style.background = "yellow";
+    }
+    else if (dataUVI.current.uvi >= 6 && dataUVI.current.uvi <= 7) {
+        uvIndex.style.background = "orange";
+    } 
+    else if (dataUVI.current.uvi >= 8 && dataUVI.current.uvi <= 10) {
+        uvIndex.style.background = "green";
+        uvIndex.style.color = "white";
+    }
+    else {
+        uvIndex.style.background = "purple";
+        uvIndex.style.color = "white";
+    }
 }
 
 
