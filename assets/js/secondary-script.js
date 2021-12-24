@@ -62,197 +62,197 @@ async function searchInput (event) {
     document.getElementById('i-wind').textContent = dataUVI.daily[5].wind_speed + " ";
     document.getElementById('i-humidity').textContent = dataUVI.daily[5].humidity;
     
-    // var div = document.getElementById('icon');
+    var div = document.getElementById('icon');
 
-    // if (data.current.wind_speed > 20) { 
-    //     div.classList.add('fas', 'fa-wind');
-    // }
-    // else {
+    if (dataUVI.current.wind_speed > 20) { 
+        div.classList.add('fas', 'fa-wind');
+    }
+    else {
 
-    //     if (data.current.weather[0].description === "few clouds" ||
-    //     data.current.weather[0].description === "scattered clouds" ||
-    //     data.current.weather[0].description === "broken clouds") 
-    //     {
-    //         div.classList.add('fas', 'fa-cloud-sun');
-    //     } 
-    //     else if (data.current.weather[0].description === "shower rain" ||
-    //     data.current.weather[0].description === "rain")
-    //     {
-    //         div.classList.add('fas', 'cloud-rain');
-    //     }
-    //     else if (data.current.weather[0].description === "thunderstorm")
-    //     {
-    //         div.classList.add('fas', 'fa-bolt');
-    //     }
-    //     else if (data.current.weather[0].description === "snow")
-    //     {
-    //         div.classList.add('fas', 'fa-snowflake');
-    //     }
-    //     else 
-    //     {
-    //         div.classList.add('fas', 'fa-sun');
-    //     }
-    // }
+        if (dataUVI.current.weather[0].description === "few clouds" ||
+        dataUVI.current.weather[0].description === "scattered clouds" ||
+        dataUVI.current.weather[0].description === "broken clouds") 
+        {
+            div.classList.add('fas', 'fa-cloud-sun');
+        } 
+        else if (dataUVI.current.weather[0].description === "shower rain" ||
+        dataUVI.current.weather[0].description === "rain")
+        {
+            div.classList.add('fas', 'cloud-rain');
+        }
+        else if (dataUVI.current.weather[0].description === "thunderstorm")
+        {
+            div.classList.add('fas', 'fa-bolt');
+        }
+        else if (dataUVI.current.weather[0].description === "snow")
+        {
+            div.classList.add('fas', 'fa-snowflake');
+        }
+        else 
+        {
+            div.classList.add('fas', 'fa-sun');
+        }
+    }
 
-    // var divF = document.getElementById('f-icon');
+    var divF = document.getElementById('f-icon');
 
-    // if (data.current.wind_speed > 20) { 
-    //     divF.classList.add('fas', 'fa-wind');
-    // }
-    // else {
+    if (dataUVI.current.wind_speed > 20) { 
+        divF.classList.add('fas', 'fa-wind');
+    }
+    else {
 
-    //     if (data.daily[1].weather[0].description === "few clouds" ||
-    //     data.daily[1].weather[0].description === "scattered clouds" ||
-    //     data.daily[1].weather[0].description === "broken clouds") 
-    //     {
-    //         divF.classList.add('fas', 'fa-cloud-sun');
-    //     } 
-    //     else if (data.daily[1].weather[0].description === "shower rain" ||
-    //     data.daily[1].weather[0].description === "rain")
-    //     {
-    //         divF.classList.add('fas', 'cloud-rain');
-    //     }
-    //     else if (data.daily[1].weather[0].description === "thunderstorm")
-    //     {
-    //         divF.classList.add('fas', 'fa-bolt');
-    //     }
-    //     else if (data.daily[1].weather[0].description === "snow")
-    //     {
-    //         divF.classList.add('fas', 'fa-snowflake');
-    //     }
-    //     else 
-    //     {
-    //         divF.classList.add('fas', 'fa-sun');
-    //     }
-    // }
+        if (dataUVI.daily[1].weather[0].description === "few clouds" ||
+        dataUVI.daily[1].weather[0].description === "scattered clouds" ||
+        dataUVI.daily[1].weather[0].description === "broken clouds") 
+        {
+            divF.classList.add('fas', 'fa-cloud-sun');
+        } 
+        else if (dataUVI.daily[1].weather[0].description === "shower rain" ||
+        dataUVI.daily[1].weather[0].description === "rain")
+        {
+            divF.classList.add('fas', 'cloud-rain');
+        }
+        else if (dataUVI.daily[1].weather[0].description === "thunderstorm")
+        {
+            divF.classList.add('fas', 'fa-bolt');
+        }
+        else if (dataUVI.daily[1].weather[0].description === "snow")
+        {
+            divF.classList.add('fas', 'fa-snowflake');
+        }
+        else 
+        {
+            divF.classList.add('fas', 'fa-sun');
+        }
+    }
 
-    // var divS = document.getElementById('s-icon');
+    var divS = document.getElementById('s-icon');
 
-    // if (data.current.wind_speed > 20) { 
-    //     divS.classList.add('fas', 'fa-wind');
-    // }
-    // else {
+    if (dataUVI.current.wind_speed > 20) { 
+        divS.classList.add('fas', 'fa-wind');
+    }
+    else {
 
-    //     if (data.daily[1].weather[0].description === "few clouds" ||
-    //     data.daily[1].weather[0].description === "scattered clouds" ||
-    //     data.daily[1].weather[0].description === "broken clouds") 
-    //     {
-    //         divS.classList.add('fas', 'fa-cloud-sun');
-    //     } 
-    //     else if (data.daily[1].weather[0].description === "shower rain" ||
-    //     data.daily[1].weather[0].description === "rain")
-    //     {
-    //         divS.classList.add('fas', 'cloud-rain');
-    //     }
-    //     else if (data.daily[1].weather[0].description === "thunderstorm")
-    //     {
-    //         divS.classList.add('fas', 'fa-bolt');
-    //     }
-    //     else if (data.daily[1].weather[0].description === "snow")
-    //     {
-    //         divS.classList.add('fas', 'fa-snowflake');
-    //     }
-    //     else 
-    //     {
-    //         divS.classList.add('fas', 'fa-sun');
-    //     }
-    // }
+        if (dataUVI.daily[1].weather[0].description === "few clouds" ||
+        dataUVI.daily[1].weather[0].description === "scattered clouds" ||
+        dataUVI.daily[1].weather[0].description === "broken clouds") 
+        {
+            divS.classList.add('fas', 'fa-cloud-sun');
+        } 
+        else if (dataUVI.daily[1].weather[0].description === "shower rain" ||
+        dataUVI.daily[1].weather[0].description === "rain")
+        {
+            divS.classList.add('fas', 'cloud-rain');
+        }
+        else if (dataUVI.daily[1].weather[0].description === "thunderstorm")
+        {
+            divS.classList.add('fas', 'fa-bolt');
+        }
+        else if (dataUVI.daily[1].weather[0].description === "snow")
+        {
+            divS.classList.add('fas', 'fa-snowflake');
+        }
+        else 
+        {
+            divS.classList.add('fas', 'fa-sun');
+        }
+    }
 
-    // var divT = document.getElementById('t-icon');
+    var divT = document.getElementById('t-icon');
 
-    // if (data.current.wind_speed > 20) { 
-    //     divT.classList.add('fas', 'fa-wind');
-    // }
-    // else {
+    if (dataUVI.current.wind_speed > 20) { 
+        divT.classList.add('fas', 'fa-wind');
+    }
+    else {
 
-    //     if (data.daily[1].weather[0].description === "few clouds" ||
-    //     data.daily[1].weather[0].description === "scattered clouds" ||
-    //     data.daily[1].weather[0].description === "broken clouds") 
-    //     {
-    //         divT.classList.add('fas', 'fa-cloud-sun');
-    //     } 
-    //     else if (data.daily[1].weather[0].description === "shower rain" ||
-    //     data.daily[1].weather[0].description === "rain")
-    //     {
-    //         divT.classList.add('fas', 'cloud-rain');
-    //     }
-    //     else if (data.daily[1].weather[0].description === "thunderstorm")
-    //     {
-    //         divT.classList.add('fas', 'fa-bolt');
-    //     }
-    //     else if (data.daily[1].weather[0].description === "snow")
-    //     {
-    //         divT.classList.add('fas', 'fa-snowflake');
-    //     }
-    //     else 
-    //     {
-    //         divT.classList.add('fas', 'fa-sun');
-    //     }
-    // }
+        if (dataUVI.daily[1].weather[0].description === "few clouds" ||
+        dataUVI.daily[1].weather[0].description === "scattered clouds" ||
+        dataUVI.daily[1].weather[0].description === "broken clouds") 
+        {
+            divT.classList.add('fas', 'fa-cloud-sun');
+        } 
+        else if (dataUVI.daily[1].weather[0].description === "shower rain" ||
+        dataUVI.daily[1].weather[0].description === "rain")
+        {
+            divT.classList.add('fas', 'cloud-rain');
+        }
+        else if (dataUVI.daily[1].weather[0].description === "thunderstorm")
+        {
+            divT.classList.add('fas', 'fa-bolt');
+        }
+        else if (dataUVI.daily[1].weather[0].description === "snow")
+        {
+            divT.classList.add('fas', 'fa-snowflake');
+        }
+        else 
+        {
+            divT.classList.add('fas', 'fa-sun');
+        }
+    }
 
-    // var divO = document.getElementById('o-icon');
+    var divO = document.getElementById('o-icon');
 
-    // if (data.current.wind_speed > 20) { 
-    //     divO.classList.add('fas', 'fa-wind');
-    // }
-    // else {
+    if (dataUVI.current.wind_speed > 20) { 
+        divO.classList.add('fas', 'fa-wind');
+    }
+    else {
 
-    //     if (data.daily[1].weather[0].description === "few clouds" ||
-    //     data.daily[1].weather[0].description === "scattered clouds" ||
-    //     data.daily[1].weather[0].description === "broken clouds") 
-    //     {
-    //         divO.classList.add('fas', 'fa-cloud-sun');
-    //     } 
-    //     else if (data.daily[1].weather[0].description === "shower rain" ||
-    //     data.daily[1].weather[0].description === "rain")
-    //     {
-    //         divO.classList.add('fas', 'cloud-rain');
-    //     }
-    //     else if (data.daily[1].weather[0].description === "thunderstorm")
-    //     {
-    //         divO.classList.add('fas', 'fa-bolt');
-    //     }
-    //     else if (data.daily[1].weather[0].description === "snow")
-    //     {
-    //         divO.classList.add('fas', 'fa-snowflake');
-    //     }
-    //     else 
-    //     {
-    //         divO.classList.add('fas', 'fa-sun');
-    //     }
-    // }
+        if (dataUVI.daily[1].weather[0].description === "few clouds" ||
+        dataUVI.daily[1].weather[0].description === "scattered clouds" ||
+        dataUVI.daily[1].weather[0].description === "broken clouds") 
+        {
+            divO.classList.add('fas', 'fa-cloud-sun');
+        } 
+        else if (dataUVI.daily[1].weather[0].description === "shower rain" ||
+        dataUVI.daily[1].weather[0].description === "rain")
+        {
+            divO.classList.add('fas', 'cloud-rain');
+        }
+        else if (dataUVI.daily[1].weather[0].description === "thunderstorm")
+        {
+            divO.classList.add('fas', 'fa-bolt');
+        }
+        else if (dataUVI.daily[1].weather[0].description === "snow")
+        {
+            divO.classList.add('fas', 'fa-snowflake');
+        }
+        else 
+        {
+            divO.classList.add('fas', 'fa-sun');
+        }
+    }
 
-    // var divI = document.getElementById('i-icon');
+    var divI = document.getElementById('i-icon');
 
-    // if (data.current.wind_speed > 20) { 
-    //     divI.classList.add('fas', 'fa-wind');
-    // }
-    // else {
+    if (dataUVI.current.wind_speed > 20) { 
+        divI.classList.add('fas', 'fa-wind');
+    }
+    else {
 
-    //     if (data.daily[1].weather[0].description === "few clouds" ||
-    //     data.daily[1].weather[0].description === "scattered clouds" ||
-    //     data.daily[1].weather[0].description === "broken clouds") 
-    //     {
-    //         divI.classList.add('fas', 'fa-cloud-sun');
-    //     } 
-    //     else if (data.daily[1].weather[0].description === "shower rain" ||
-    //     data.daily[1].weather[0].description === "rain")
-    //     {
-    //         divI.classList.add('fas', 'cloud-rain');
-    //     }
-    //     else if (data.daily[1].weather[0].description === "thunderstorm")
-    //     {
-    //         divI.classList.add('fas', 'fa-bolt');
-    //     }
-    //     else if (data.daily[1].weather[0].description === "snow")
-    //     {
-    //         divI.classList.add('fas', 'fa-snowflake');
-    //     }
-    //     else 
-    //     {
-    //         divI.classList.add('fas', 'fa-sun');
-    //     }
-    // }
+        if (dataUVI.daily[1].weather[0].description === "few clouds" ||
+        dataUVI.daily[1].weather[0].description === "scattered clouds" ||
+        dataUVI.daily[1].weather[0].description === "broken clouds") 
+        {
+            divI.classList.add('fas', 'fa-cloud-sun');
+        } 
+        else if (dataUVI.daily[1].weather[0].description === "shower rain" ||
+        dataUVI.daily[1].weather[0].description === "rain")
+        {
+            divI.classList.add('fas', 'cloud-rain');
+        }
+        else if (dataUVI.daily[1].weather[0].description === "thunderstorm")
+        {
+            divI.classList.add('fas', 'fa-bolt');
+        }
+        else if (dataUVI.daily[1].weather[0].description === "snow")
+        {
+            divI.classList.add('fas', 'fa-snowflake');
+        }
+        else 
+        {
+            divI.classList.add('fas', 'fa-sun');
+        }
+    }
 
     var uvIndex = document.getElementById('c-uv');
 
