@@ -121,24 +121,6 @@ main {
     margin-top: 10px;
 }
 
-/* committed classes = attempt to add search bar under input */
-
-/* .history {
-    width: 216px;
-    height: 100px;
-    background-color: #566573;
-    margin-top: -15px;
-    margin-left: 50px;
-    position: fixed;
-}
-
-.history ul {
-    list-style-type: none;
-    color: white;
-    margin-left: -35px;
-    margin-top: 2px;
-} */
-
 .bar button {
     width: 72%;
     height: 35px;

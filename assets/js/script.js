@@ -263,7 +263,7 @@ async function infoChicago () {
         uvIndex.style.background = "orange";
     } 
     else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
-        uvIndex.style.background = "green";
+        uvIndex.style.background = "red";
         uvIndex.style.color = "white";
     }
     else {
@@ -526,7 +526,7 @@ async function infoAustin () {
         uvIndex.style.background = "orange";
     } 
     else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
-        uvIndex.style.background = "green";
+        uvIndex.style.background = "red";
         uvIndex.style.color = "white";
     }
     else {
@@ -788,7 +788,7 @@ async function infoNewYork () {
         uvIndex.style.background = "orange";
     } 
     else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
-        uvIndex.style.background = "green";
+        uvIndex.style.background = "red";
         uvIndex.style.color = "white";
     }
     else {
@@ -1050,7 +1050,7 @@ async function infoOrlando () {
         uvIndex.style.background = "orange";
     } 
     else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
-        uvIndex.style.background = "green";
+        uvIndex.style.background = "red";
         uvIndex.style.color = "white";
     }
     else {
@@ -1312,7 +1312,7 @@ async function infoSanFrancisco () {
         uvIndex.style.background = "orange";
     } 
     else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
-        uvIndex.style.background = "green";
+        uvIndex.style.background = "red";
         uvIndex.style.color = "white";
     }
     else {
@@ -1574,7 +1574,7 @@ async function infoSeattle () {
         uvIndex.style.background = "orange";
     } 
     else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
-        uvIndex.style.background = "green";
+        uvIndex.style.background = "red";
         uvIndex.style.color = "white";
     }
     else {
@@ -1836,7 +1836,7 @@ async function infoDenver () {
         uvIndex.style.background = "orange";
     } 
     else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
-        uvIndex.style.background = "green";
+        uvIndex.style.background = "red";
         uvIndex.style.color = "white";
     }
     else {
@@ -2097,7 +2097,7 @@ async function infoAtlanta () {
         uvIndex.style.background = "orange";
     } 
     else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
-        uvIndex.style.background = "green";
+        uvIndex.style.background = "red";
         uvIndex.style.color = "white";
     }
     else {

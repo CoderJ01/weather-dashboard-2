@@ -14,22 +14,18 @@ function store() {
     localStorage.setItem('data', JSON.stringify(old_data));
 }
 
-// commited function designed to display contents of store();
-// potentially useful for search bar
-
-// if(localStorage.getItem('data') != null){
-//     document.getElementById('past-city').innerHTML = JSON.parse(localStorage.getItem('data'));
-// } 
-
-// seacrhInput responds to city the user submits into search bar
+// searchInput responds to city the user submits into search bar
 
 async function searchInput (event) {
     event.preventDefault();
     var weatherChoice = api + searchChoice.value + settings;
     
+    // fetches API info from Open Weather (akin to method used in script.js)
     var response = await fetch(weatherChoice);
     var data = await response.json();
 
+    // fetches API for the retrieval of UV index, the API fetched from weatherChoice
+    // lacks the info for UV index (in contrast to script.js API link variables)
     var weatherUVI = apiUVI + data.coord.lat + units + data.coord.lon + settingsUVI;
     var responseUVI = await fetch(weatherUVI);
     var dataUVI = await responseUVI.json();
@@ -281,7 +277,7 @@ async function searchInput (event) {
         uvIndex.style.background = "orange";
     } 
     else if (dataUVI.current.uvi >= 8 && dataUVI.current.uvi <= 10) {
-        uvIndex.style.background = "green";
+        uvIndex.style.background = "red";
         uvIndex.style.color = "white";
     }
     else {
@@ -289,7 +285,6 @@ async function searchInput (event) {
         uvIndex.style.color = "white";
     }
 }
-
 
 document.getElementById('search').addEventListener("click", searchInput);
 
