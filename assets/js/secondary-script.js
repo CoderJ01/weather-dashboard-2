@@ -293,6 +293,8 @@ async function searchInput (event) {
 
 document.getElementById('search').addEventListener("click", searchInput);
 
+// allow users to press 'Enter' key on keyboard for convenience
+
 var enterKey = document.getElementById('input');
 
 enterKey.addEventListener("keyup", function(event) {
