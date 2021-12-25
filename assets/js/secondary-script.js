@@ -12,6 +12,10 @@ function store() {
     localStorage.setItem('data', JSON.stringify(old_data));
 }
 
+// if(localStorage.getItem('data') != null){
+//     document.getElementById('past-city').innerHTML = JSON.parse(localStorage.getItem('data'));
+// } 
+
 async function searchInput (event) {
     event.preventDefault();
     var weatherChoice = api + searchChoice.value + settings;
