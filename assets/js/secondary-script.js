@@ -1,15 +1,23 @@
-// function store(event) {
+function store() {
 
-//     var cityInput = document.getElementById('input');
+    // var cityInput = document.getElementById('input');
 
-//     event.preventDefault();
+    // event.preventDefault();
 
-//     if (cityInput) {
-//         cityInput.value = "";
-//         localStorage.setItem('city', cityInput.value);
-//         localStorage.getItem('city');
-//     }
-// }
+    // if (cityInput) {
+    //     cityInput.value = "";
+    //     localStorage.setItem('city', cityInput.value);
+    //     localStorage.getItem('city');
+    // }
+
+    // var TestingOneTwoThree = "See if this string is stored in localStorage.";
+    // localStorage.setItem('confirmation', TestingOneTwoThree);
+    // var getString = localStorage.getItem('confirmation');
+    // console.log(getString);
+
+    var storeCity = searchChoice.value;
+    localStorage.setItem('city', storeCity);
+}
 
 async function searchInput (event) {
     event.preventDefault();
@@ -291,8 +299,8 @@ enterKey.addEventListener("keyup", function(event) {
     }
 });
 
-var TestingOneTwoThree = "See if this string is stored in localStorage.";
-localStorage.setItem('confirmation', TestingOneTwoThree);
-var getString = localStorage.getItem('confirmation');
-console.log(getString);
+
+
+
+
 
