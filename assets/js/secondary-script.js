@@ -1,4 +1,4 @@
-function store(event) {
+function store() {
 
     var new_data = searchChoice.value;
     
