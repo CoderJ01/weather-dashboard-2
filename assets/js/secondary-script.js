@@ -1,22 +1,15 @@
-function store() {
+function store(event) {
 
-    // var cityInput = document.getElementById('input');
+    var new_data = searchChoice.value;
+    
+    if(localStorage.getItem('data') === null) {
+        localStorage.setItem('data', '[]');
+    }
 
-    // event.preventDefault();
+    var old_data = JSON.parse(localStorage.getItem('data'));
+    old_data.push(new_data);
 
-    // if (cityInput) {
-    //     cityInput.value = "";
-    //     localStorage.setItem('city', cityInput.value);
-    //     localStorage.getItem('city');
-    // }
-
-    // var TestingOneTwoThree = "See if this string is stored in localStorage.";
-    // localStorage.setItem('confirmation', TestingOneTwoThree);
-    // var getString = localStorage.getItem('confirmation');
-    // console.log(getString);
-
-    var storeCity = searchChoice.value;
-    localStorage.setItem('city', storeCity);
+    localStorage.setItem('data', JSON.stringify(old_data));
 }
 
 async function searchInput (event) {
