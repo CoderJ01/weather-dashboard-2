@@ -8,10 +8,14 @@
         <title>Weather Dashboard</title>
     </head>
     <body>
+        
+        <!-- Heading -->
         <header>
             <h1>Weather Dashboard</h1>
         </header>
         <main>
+
+            <!-- Search Section (left side of desktop, top of iPhone) -->
             <div class="search">
                 <div class="search-heading">
                     <h2>Search for a City</h2>
@@ -19,16 +23,17 @@
                 <div class="bar">
                     <form id="city-form">
                         <input type="text" class="input" placeholder="San Diego" id="input">
+                        <!-- attempt to add search bar -->
                         <!-- <div class="history">
                             <ul id="x">
                                 <li id="past-city"></li>
                             </ul>
                         </div> -->
-                        <button id="search" onclick="store();">Search</button>
+                        <button id="search" onclick="store();">Search</button> <!-- This button responds to seacrh input -->
                     </form>
                 </div>
                 <hr>
-                <div class="popular">
+                <div class="popular"> <!-- buttons of popular cities-->
                     <button id="austin" onclick="infoAustin();">Austin</button>
                     <button id="chicago" onclick="infoChicago();">Chicago</button>
                     <button id="new-york" onclick="infoNewYork();">New York</button>
@@ -39,7 +44,9 @@
                     <button id="atlanta" onclick="infoAtlanta();">Atlanta</button>
                 </div>
             </div>
-            <div class="conditions">
+
+            <!-- Display Section (desktop right, iPhone bottom) -->
+            <div class="conditions"> <!-- displays current conditions of chosen city-->
                 <div class="current">
                     <h2 id="city">City<text id="date"></text></h2><i id="icon"></i>
                     <p>Temp:  <text id="c-temp"></text><text>°F</text></p>
@@ -52,7 +59,7 @@
                     <h3>5-day Forecast</h3>
                 </div>
                 <div class="days">
-                    <div class="first">
+                    <div class="first"> <!-- displays weather conditions of next day-->
                         <p id="f-day"></p>
                         <i id="f-icon"></i>
                         <p>Temp:  <text id="f-temp"></text><text>°F</text></p>
@@ -60,7 +67,7 @@
                         <p>Humidity:  <text id="f-humidity"></text><text>%</text></p>
 
                     </div>
-                    <div class="second">
+                    <div class="second"> <!-- displays weather conditions of the following day-->
                         <p id="s-day"></p>
                         <i id="s-icon"></i>
                         <p>Temp:  <text id="s-temp"></text><text>°F</text></p>
@@ -68,7 +75,7 @@
                         <p>Humidity:  <text id="s-humidity"></text><text>%</text></p>
 
                     </div>
-                    <div class="third">
+                    <div class="third"> <!-- ...and so on and so forth (classes 'third', 'fourth', and 'fifth')-->
                         <p id="t-day"></p>
                         <i id="t-icon"></i>
                         <p>Temp:  <text id="t-temp"></text><text>°F</text></p>

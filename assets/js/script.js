@@ -1,9 +1,13 @@
+// each function responds to the button click of respective popular city 
+// (e.g. infoChicago reponds to click of 'Chicago' button)
+
 async function infoChicago () {
 
+    // fetch api infomation of popular city
     var response = await fetch(weatherChicago);
     var data = await response.json();
-    var temp  = data;
 
+    // display dates using Moment JS
     var today = moment().format('L');
     
     var tommorow = moment().add(1, 'day').format('L');
@@ -12,12 +16,15 @@ async function infoChicago () {
     var fourth = moment().add(4, 'day').format('L');
     var last = moment().add(5, 'day').format('L');
 
+    // display current weather conditions of city
     document.getElementById('city').textContent = "Chicago " + today;
     document.getElementById('c-temp').textContent = data.current.temp;
     document.getElementById('c-wind').textContent = data.current.wind_speed + " ";
     document.getElementById('c-humidity').textContent = data.current.humidity;
     document.getElementById('c-uv').textContent = data.current.uvi;
 
+    // display weather conditions for the next five days 
+    // 1 : 2 : 3 : 4 : 5 :: f : s : t : o : i
     document.getElementById('f-day').textContent = tommorow;
     document.getElementById('f-temp').textContent = data.daily[1].temp.day
     document.getElementById('f-wind').textContent = data.daily[1].wind_speed + " ";
@@ -43,6 +50,7 @@ async function infoChicago () {
     document.getElementById('i-wind').textContent = data.daily[5].wind_speed + " ";
     document.getElementById('i-humidity').textContent = data.daily[5].humidity;
     
+    // place icon with current day conditions
     var div = document.getElementById('icon');
 
     if (data.current.wind_speed > 20) { 
@@ -74,6 +82,8 @@ async function infoChicago () {
             div.classList.add('fas', 'fa-sun');
         }
     }
+
+    // place icon for next five days, same anology expression (1 : 2 :: f : s) applys
 
     var divF = document.getElementById('f-icon');
 
@@ -235,6 +245,8 @@ async function infoChicago () {
         }
     }
 
+    // set up color scheme depending of UV index
+
     var uvIndex = document.getElementById('c-uv');
 
     uvIndex.style.background = "none";
@@ -264,7 +276,6 @@ async function infoAustin () {
 
     var response = await fetch(weatherAustin);
     var data = await response.json();
-    var temp  = data;
 
     var today = moment().format('L');
     
@@ -529,7 +540,6 @@ async function infoNewYork () {
 
     var response = await fetch(weatherNewYork);
     var data = await response.json();
-    var temp  = data;
 
     var today = moment().format('L');
     
@@ -792,7 +802,6 @@ async function infoOrlando () {
 
     var response = await fetch(weatherOrlando);
     var data = await response.json();
-    var temp  = data;
 
     var today = moment().format('L');
     
@@ -1055,7 +1064,6 @@ async function infoSanFrancisco () {
 
     var response = await fetch(weatherSanFrancisco);
     var data = await response.json();
-    var temp  = data;
 
     var today = moment().format('L');
     
@@ -1318,7 +1326,6 @@ async function infoSeattle () {
 
     var response = await fetch(weatherSeattle);
     var data = await response.json();
-    var temp  = data;
 
     var today = moment().format('L');
     
@@ -1581,7 +1588,6 @@ async function infoDenver () {
 
     var response = await fetch(weatherDenver);
     var data = await response.json();
-    var temp  = data;
 
     var today = moment().format('L');
     
@@ -1843,9 +1849,6 @@ async function infoAtlanta () {
 
     var response = await fetch(weatherAtlanta);
     var data = await response.json();
-    // var uviData = await response.json();
-    var temp  = data;
-    console.log(data);
 
     var today = moment().format('L');
     
