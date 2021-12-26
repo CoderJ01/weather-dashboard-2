@@ -17,6 +17,15 @@ function store() {
 // searchInput responds to city the user submits into search bar
 
 async function searchInput (event) {
+    var searchChoice = document.getElementById('input');
+    var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
+    var settings = '&units=imperial&appid=' + key;
+
+    var searchChoiceUVI = document.getElementById('input');
+    var apiUVI = 'https://api.openweathermap.org/data/2.5/onecall?lat=';
+    var units = '&&units=imperial&lon=';
+    var settingsUVI = '&exclude=hourly&appid=' + key;
+
     event.preventDefault();
     var weatherChoice = api + searchChoice.value + settings;
     
@@ -31,12 +40,6 @@ async function searchInput (event) {
     var dataUVI = await responseUVI.json();
 
     var today = moment().format('L');
-    
-    var tommorow = moment().add(1, 'day').format('L');
-    var next = moment().add(2, 'day').format('L');
-    var then = moment().add(3, 'day').format('L');
-    var fourth = moment().add(4, 'day').format('L');
-    var last = moment().add(5, 'day').format('L');
 
     document.getElementById('city').textContent = searchChoice.value + " " + today;
     document.getElementById('c-temp').textContent = data.main.temp;

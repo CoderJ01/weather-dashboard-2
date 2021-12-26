@@ -1,25 +1,57 @@
-// each function responds to the button click of respective popular city 
-// (e.g. infoChicago reponds to click of 'Chicago' button)
-
-async function infoChicago () {
-
-    // fetch api infomation of popular city
-    var response = await fetch(weatherChicago);
-    var data = await response.json();
-
-    // display dates using Moment JS
+// display dates using Moment JS
+function displayDate () {
     var today = moment().format('L');
-    
     var tommorow = moment().add(1, 'day').format('L');
     var next = moment().add(2, 'day').format('L');
     var then = moment().add(3, 'day').format('L');
     var fourth = moment().add(4, 'day').format('L');
     var last = moment().add(5, 'day').format('L');
 
-    // display current weather conditions of city
+    return {
+        today,
+        tommorow,
+        next,
+        then, 
+        fourth,
+        last
+    };
+}
+
+var {today, tommorow, next, then, fourth, last} = displayDate();
+
+// retrieve APIs from Open Weather website
+function retrieveAPIs() {
+    var weatherChicago = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.44&&units=imperial&lon=-94.04&exclude=hourly&appid=' + key;
+    var weatherAustin = 'https://api.openweathermap.org/data/2.5/onecall?lat=30.15&&units=imperial&lon=-97.45&exclude=hourly&appid=' + key;
+    var weatherNewYork = 'https://api.openweathermap.org/data/2.5/onecall?lat=40.40&&units=imperial&lon=-73.56&exclude=hourly&appid=' + key;
+    var weatherOrlando = 'https://api.openweathermap.org/data/2.5/onecall?lat=28.25&&units=imperial&lon=-81.18&exclude=hourly&appid=' + key;
+    var weatherSanFrancisco = 'https://api.openweathermap.org/data/2.5/onecall?lat=37.47&&units=imperial&lon=-122.25&exclude=hourly&appid=' + key;
+    var weatherSeattle = 'https://api.openweathermap.org/data/2.5/onecall?lat=47.37&&units=imperial&lon=-122.20&exclude=hourly&appid=' + key;
+    var weatherDenver = 'https://api.openweathermap.org/data/2.5/onecall?lat=39.44&&units=imperial&lon=-104.56&exclude=hourly&appid=' + key;
+    var weatherAtlanta = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.45&&units=imperial&lon=-84.23&exclude=hourly&appid=' + key;
+
+    return {weatherChicago, 
+        weatherAustin,
+        weatherNewYork, 
+        weatherOrlando, 
+        weatherSanFrancisco, 
+        weatherSeattle, 
+        weatherDenver, 
+        weatherAtlanta};
+}
+
+var {weatherChicago, weatherAustin, weatherNewYork, weatherOrlando, weatherSanFrancisco, weatherSeattle, weatherDenver, weatherAtlanta} = retrieveAPIs();
+
+async function infoChicago() {
+
+    // fetch api infomation of popular city
+    var response = await fetch(weatherChicago);
+    var data = await response.json();
+
+    // display weather conditions for the current day
     document.getElementById('city').textContent = "Chicago " + today;
     document.getElementById('c-temp').textContent = data.current.temp;
-    document.getElementById('c-wind').textContent = data.current.wind_speed + " ";
+    document.getElementById('c-wind').textContent = data.current.wind_speed;
     document.getElementById('c-humidity').textContent = data.current.humidity;
     document.getElementById('c-uv').textContent = data.current.uvi;
 
@@ -48,7 +80,7 @@ async function infoChicago () {
     document.getElementById('i-day').textContent = last;
     document.getElementById('i-temp').textContent = data.daily[5].temp.day
     document.getElementById('i-wind').textContent = data.daily[5].wind_speed + " ";
-    document.getElementById('i-humidity').textContent = data.daily[5].humidity;
+    document.getElementById('i-humidity').textContent = data.daily[5].humidity; 
     
     // place icon with current day conditions
     var div = document.getElementById('icon');
@@ -84,7 +116,6 @@ async function infoChicago () {
     }
 
     // place icon for next five days, same anology expression (1 : 2 :: f : s) applys
-
     var divF = document.getElementById('f-icon');
 
     if (data.current.wind_speed > 20) { 
@@ -246,7 +277,6 @@ async function infoChicago () {
     }
 
     // set up color scheme depending of UV index
-
     var uvIndex = document.getElementById('c-uv');
 
     uvIndex.style.background = "none";
@@ -258,9 +288,11 @@ async function infoChicago () {
     }
     else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
         uvIndex.style.background = "yellow";
+        uvIndex.style.color = "black";
     }
     else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
         uvIndex.style.background = "orange";
+        uvIndex.style.color = "black";
     } 
     else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
         uvIndex.style.background = "red";
@@ -271,19 +303,10 @@ async function infoChicago () {
         uvIndex.style.color = "white";
     }
 }
-
+ 
 async function infoAustin () {
-
     var response = await fetch(weatherAustin);
     var data = await response.json();
-
-    var today = moment().format('L');
-    
-    var tommorow = moment().add(1, 'day').format('L');
-    var next = moment().add(2, 'day').format('L');
-    var then = moment().add(3, 'day').format('L');
-    var fourth = moment().add(4, 'day').format('L');
-    var last = moment().add(5, 'day').format('L');
 
     document.getElementById('city').textContent = "Austin " + today;
     document.getElementById('c-temp').textContent = data.current.temp;
@@ -521,9 +544,11 @@ async function infoAustin () {
     }
     else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
         uvIndex.style.background = "yellow";
+        uvIndex.style.color = "black";
     }
     else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
         uvIndex.style.background = "orange";
+        uvIndex.style.color = "black";
     } 
     else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
         uvIndex.style.background = "red";
@@ -540,14 +565,6 @@ async function infoNewYork () {
 
     var response = await fetch(weatherNewYork);
     var data = await response.json();
-
-    var today = moment().format('L');
-    
-    var tommorow = moment().add(1, 'day').format('L');
-    var next = moment().add(2, 'day').format('L');
-    var then = moment().add(3, 'day').format('L');
-    var fourth = moment().add(4, 'day').format('L');
-    var last = moment().add(5, 'day').format('L');
 
     document.getElementById('city').textContent = "New York " + today;
     document.getElementById('c-temp').textContent = data.current.temp;
@@ -783,9 +800,11 @@ async function infoNewYork () {
     }
     else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
         uvIndex.style.background = "yellow";
+        uvIndex.style.color = "black";
     }
     else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
         uvIndex.style.background = "orange";
+        uvIndex.style.color = "black";
     } 
     else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
         uvIndex.style.background = "red";
@@ -802,14 +821,6 @@ async function infoOrlando () {
 
     var response = await fetch(weatherOrlando);
     var data = await response.json();
-
-    var today = moment().format('L');
-    
-    var tommorow = moment().add(1, 'day').format('L');
-    var next = moment().add(2, 'day').format('L');
-    var then = moment().add(3, 'day').format('L');
-    var fourth = moment().add(4, 'day').format('L');
-    var last = moment().add(5, 'day').format('L');
 
     document.getElementById('city').textContent = "Orlando " + today;
     document.getElementById('c-temp').textContent = data.current.temp;
@@ -1045,9 +1056,11 @@ async function infoOrlando () {
     }
     else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
         uvIndex.style.background = "yellow";
+        uvIndex.style.color = "black";
     }
     else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
         uvIndex.style.background = "orange";
+        uvIndex.style.color = "black";
     } 
     else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
         uvIndex.style.background = "red";
@@ -1064,14 +1077,6 @@ async function infoSanFrancisco () {
 
     var response = await fetch(weatherSanFrancisco);
     var data = await response.json();
-
-    var today = moment().format('L');
-    
-    var tommorow = moment().add(1, 'day').format('L');
-    var next = moment().add(2, 'day').format('L');
-    var then = moment().add(3, 'day').format('L');
-    var fourth = moment().add(4, 'day').format('L');
-    var last = moment().add(5, 'day').format('L');
 
     document.getElementById('city').textContent = "San Francisco " + today;
     document.getElementById('c-temp').textContent = data.current.temp;
@@ -1307,9 +1312,11 @@ async function infoSanFrancisco () {
     }
     else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
         uvIndex.style.background = "yellow";
+        uvIndex.style.color = "black";
     }
     else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
         uvIndex.style.background = "orange";
+        uvIndex.style.color = "black";
     } 
     else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
         uvIndex.style.background = "red";
@@ -1326,14 +1333,6 @@ async function infoSeattle () {
 
     var response = await fetch(weatherSeattle);
     var data = await response.json();
-
-    var today = moment().format('L');
-    
-    var tommorow = moment().add(1, 'day').format('L');
-    var next = moment().add(2, 'day').format('L');
-    var then = moment().add(3, 'day').format('L');
-    var fourth = moment().add(4, 'day').format('L');
-    var last = moment().add(5, 'day').format('L');
 
     document.getElementById('city').textContent = "Seattle " + today;
     document.getElementById('c-temp').textContent = data.current.temp;
@@ -1569,9 +1568,11 @@ async function infoSeattle () {
     }
     else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
         uvIndex.style.background = "yellow";
+        uvIndex.style.color = "black";
     }
     else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
         uvIndex.style.background = "orange";
+        uvIndex.style.color = "black";
     } 
     else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
         uvIndex.style.background = "red";
@@ -1588,14 +1589,6 @@ async function infoDenver () {
 
     var response = await fetch(weatherDenver);
     var data = await response.json();
-
-    var today = moment().format('L');
-    
-    var tommorow = moment().add(1, 'day').format('L');
-    var next = moment().add(2, 'day').format('L');
-    var then = moment().add(3, 'day').format('L');
-    var fourth = moment().add(4, 'day').format('L');
-    var last = moment().add(5, 'day').format('L');
 
     document.getElementById('city').textContent = "Denver " + today;
     document.getElementById('c-temp').textContent = data.current.temp;
@@ -1831,9 +1824,11 @@ async function infoDenver () {
     }
     else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
         uvIndex.style.background = "yellow";
+        uvIndex.style.color = "black";
     }
     else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
         uvIndex.style.background = "orange";
+        uvIndex.style.color = "black";
     } 
     else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
         uvIndex.style.background = "red";
@@ -1849,14 +1844,6 @@ async function infoAtlanta () {
 
     var response = await fetch(weatherAtlanta);
     var data = await response.json();
-
-    var today = moment().format('L');
-    
-    var tommorow = moment().add(1, 'day').format('L');
-    var next = moment().add(2, 'day').format('L');
-    var then = moment().add(3, 'day').format('L');
-    var fourth = moment().add(4, 'day').format('L');
-    var last = moment().add(5, 'day').format('L');
 
     document.getElementById('city').textContent = "Atlanta " + today;
     document.getElementById('c-temp').textContent = data.current.temp;
@@ -2092,9 +2079,11 @@ async function infoAtlanta () {
     }
     else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
         uvIndex.style.background = "yellow";
+        uvIndex.style.color = "black";
     }
     else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
         uvIndex.style.background = "orange";
+        uvIndex.style.color = "black";
     } 
     else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
         uvIndex.style.background = "red";
