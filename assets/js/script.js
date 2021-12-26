@@ -21,14 +21,14 @@ var {today, tommorow, next, then, fourth, last} = displayDate();
 
 // retrieve APIs from Open Weather website
 function retrieveAPIs() {
-    var weatherChicago = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.44&&units=imperial&lon=-94.04&exclude=hourly&appid=' + key;
-    var weatherAustin = 'https://api.openweathermap.org/data/2.5/onecall?lat=30.15&&units=imperial&lon=-97.45&exclude=hourly&appid=' + key;
-    var weatherNewYork = 'https://api.openweathermap.org/data/2.5/onecall?lat=40.40&&units=imperial&lon=-73.56&exclude=hourly&appid=' + key;
-    var weatherOrlando = 'https://api.openweathermap.org/data/2.5/onecall?lat=28.25&&units=imperial&lon=-81.18&exclude=hourly&appid=' + key;
-    var weatherSanFrancisco = 'https://api.openweathermap.org/data/2.5/onecall?lat=37.47&&units=imperial&lon=-122.25&exclude=hourly&appid=' + key;
-    var weatherSeattle = 'https://api.openweathermap.org/data/2.5/onecall?lat=47.37&&units=imperial&lon=-122.20&exclude=hourly&appid=' + key;
-    var weatherDenver = 'https://api.openweathermap.org/data/2.5/onecall?lat=39.44&&units=imperial&lon=-104.56&exclude=hourly&appid=' + key;
-    var weatherAtlanta = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.45&&units=imperial&lon=-84.23&exclude=hourly&appid=' + key;
+    var weatherChicago = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.44&&units=imperial&lon=-94.04&exclude=hourly&appid=' + KEY;
+    var weatherAustin = 'https://api.openweathermap.org/data/2.5/onecall?lat=30.15&&units=imperial&lon=-97.45&exclude=hourly&appid=' + KEY;
+    var weatherNewYork = 'https://api.openweathermap.org/data/2.5/onecall?lat=40.40&&units=imperial&lon=-73.56&exclude=hourly&appid=' + KEY;
+    var weatherOrlando = 'https://api.openweathermap.org/data/2.5/onecall?lat=28.25&&units=imperial&lon=-81.18&exclude=hourly&appid=' + KEY;
+    var weatherSanFrancisco = 'https://api.openweathermap.org/data/2.5/onecall?lat=37.47&&units=imperial&lon=-122.25&exclude=hourly&appid=' + KEY;
+    var weatherSeattle = 'https://api.openweathermap.org/data/2.5/onecall?lat=47.37&&units=imperial&lon=-122.20&exclude=hourly&appid=' + KEY;
+    var weatherDenver = 'https://api.openweathermap.org/data/2.5/onecall?lat=39.44&&units=imperial&lon=-104.56&exclude=hourly&appid=' + KEY;
+    var weatherAtlanta = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.45&&units=imperial&lon=-84.23&exclude=hourly&appid=' + KEY;
 
     return {weatherChicago, 
         weatherAustin,

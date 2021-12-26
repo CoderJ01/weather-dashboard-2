@@ -19,12 +19,12 @@ function store() {
 async function searchInput (event) {
     var searchChoice = document.getElementById('input');
     var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
-    var settings = '&units=imperial&appid=' + key;
+    var settings = '&units=imperial&appid=' + KEY;
 
     var searchChoiceUVI = document.getElementById('input');
     var apiUVI = 'https://api.openweathermap.org/data/2.5/onecall?lat=';
     var units = '&&units=imperial&lon=';
-    var settingsUVI = '&exclude=hourly&appid=' + key;
+    var settingsUVI = '&exclude=hourly&appid=' + KEY;
 
     event.preventDefault();
     var weatherChoice = api + searchChoice.value + settings;
