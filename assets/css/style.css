@@ -155,13 +155,13 @@ main {
     }
 
     header h1 {
-        margin-left: -40px;
+        margin-left: -90px;
         font-size: 75px;
     }
 
    .search {
        width: 100%;
-       margin-left: 8%;
+       margin-left: 4%;
        margin-top: 5%;
    }
 
@@ -171,6 +171,7 @@ main {
    }
 
    .bar input {
+       margin-left: 7%;
        height: 60px;
        font-size: 30px;
    }
@@ -187,7 +188,7 @@ main {
 
    .conditions {
        margin-top: 140%;
-       margin-left: 0%;
+       margin-left: -3%;
        width: 100%;
        position: absolute;
    }
@@ -235,15 +236,20 @@ main {
     }
 
     header h1 {
-        margin-right: 23px;
+        font-size: 80px;
+        margin-left: -3px;
     }
 
     .search {
-        margin-left: 0px;
+        margin-left: 40px;
     }
 
     .search-heading h2 {
         margin-left: -55px;
+    }
+
+    .bar input {
+        margin-left: 9%;
     }
 
     .popular {
@@ -253,6 +259,7 @@ main {
     .conditions {
         width: 95%;
         margin-top: 1000px;
+        margin-left: 26px;
     }
 
     .current {
@@ -276,7 +283,7 @@ main {
     }
 
     .search {
-        margin-left: -3px;
+        margin-left: 18px;
         margin-top: 0px;
     }
 
@@ -284,8 +291,12 @@ main {
         margin-left: -10px;
     }
 
+    .bar input {
+        margin-left: 12%;
+    }
+
     .conditions {
-        margin-left: -3px;
+        margin-left: 20px;
     }
 
     .days p {
@@ -301,10 +312,14 @@ main {
 @media screen and (max-width: 375px) {
     
     .search {
-        margin-left: -6px;
+        margin-left: 15px;
     }
 
     .search h2 {
-        margin-left: -12px;
+        margin-left: 0px;
+    }
+
+    .bar input {
+        margin-left: 13%;;
     }
 }
