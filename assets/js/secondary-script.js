@@ -1,5 +1,5 @@
 // free API from Open Weather
-KEY = '3f2e409528a52056b62087fa623591ee';
+var KEY = '3f2e409528a52056b62087fa623591ee';
 
 // store(); stores the city that user submits to search bar
 
