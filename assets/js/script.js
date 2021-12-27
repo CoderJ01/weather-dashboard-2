@@ -1,3 +1,6 @@
+// free API from Open Weather
+var KEY = '3f2e409528a52056b62087fa623591ee';
+
 // display dates using Moment JS
 function displayDate () {
     var today = moment().format('L');
