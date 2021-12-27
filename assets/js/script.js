@@ -54,7 +54,7 @@ async function infoChicago() {
     // display weather conditions for the current day
     document.getElementById('city').textContent = "Chicago " + today;
     document.getElementById('c-temp').textContent = data.current.temp;
-    document.getElementById('c-wind').textContent = data.current.wind_speed;
+    document.getElementById('c-wind').textContent = data.current.wind_speed + " ";
     document.getElementById('c-humidity').textContent = data.current.humidity;
     document.getElementById('c-uv').textContent = data.current.uvi;
 
