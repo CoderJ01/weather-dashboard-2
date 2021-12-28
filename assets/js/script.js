@@ -54,59 +54,65 @@ var {weatherChicago, weatherAustin, weatherNewYork, weatherOrlando, weatherSanFr
 
    
 
-function infoChicago() {
+async function infoChicago() {
 
     fetch(weatherChicago)
     .then(function(response) {
       // request was successful
       if (response.ok) {  
-  
-        console.log(response);
         response.json().then(function(data) {
-          console.log(data);
-          console.log(data.current.temp);
+          
+          // create variables for current conditions
           var temp = data.current.temp;
           var wind = data.current.wind_speed;
           var humid = data.current.humidity;
           var uvi = data.current.uvi;
-          testC(data, temp, wind, humid, uvi);
+          displayCurrent (data, temp, wind, humid, uvi);
         });
       } else {
         alert("Error: " + response.statusText);
       }
     })
     .catch(function(error) {
-      // Notice this `.catch()` getting chained onto the end of the `.then()` method
       alert("Unable to connect to Open Weather");
     });
-  }
+  
+    document.getElementById('city').textContent = "Chicago " + today;
+}
 
-function testC (data, temp, wind, humid, uvi) {
-          // display weather conditions for the current day
-document.getElementById('city').textContent = "Chicago " + today;
+// display weather conditions for the current day
+function displayCurrent (data, temp, wind, humid, uvi, fiveDayForecast) {
+  
 document.getElementById('c-temp').textContent = temp;
 document.getElementById('c-wind').textContent = wind + " ";
 document.getElementById('c-humidity').textContent = humid;
 document.getElementById('c-uv').textContent = uvi; 
+
+}
+   
+function fiveDayForecast() {
+    document.getElementById('f-day').textContent = tommorow;
+    document.getElementById('s-day').textContent = next;
+    document.getElementById('t-day').textContent = then;
+    document.getElementById('o-day').textContent = fourth;
+    document.getElementById('i-day').textContent = last;
 }
 
-testC();
+fiveDayForecast();
 
 
 
 
 
-    // // display weather conditions for the current day
-    // document.getElementById('city').textContent = "Chicago " + today;
-    // document.getElementById('c-temp').textContent = data.current.temp;
-    // document.getElementById('c-wind').textContent = data.current.wind_speed + " ";
-    // document.getElementById('c-humidity').textContent = data.current.humidity;
-    // document.getElementById('c-uv').textContent = data.current.uvi;
 
-    // // display weather conditions for the next five days 
-    // // 1 : 2 : 3 : 4 : 5 :: f : s : t : o : i
-    // document.getElementById('f-day').textContent = tommorow;
-    // document.getElementById('f-temp').textContent = data.daily[1].temp.day
+
+
+
+
+    // display weather conditions for the next five days 
+    // 1 : 2 : 3 : 4 : 5 :: f : s : t : o : i
+    
+    // document.getElementById('f-temp').textContent = data.daily[1].temp.day;
     // document.getElementById('f-wind').textContent = data.daily[1].wind_speed + " ";
     // document.getElementById('f-humidity').textContent = data.daily[1].humidity;
 
