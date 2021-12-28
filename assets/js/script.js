@@ -81,12 +81,13 @@ async function infoChicago() {
 }
 
 // display weather conditions for the current day
-function displayCurrent (data, temp, wind, humid, uvi, fiveDayForecast) {
+function displayCurrent (data, temp, wind, humid, uvi) {
   
 document.getElementById('c-temp').textContent = temp;
 document.getElementById('c-wind').textContent = wind + " ";
 document.getElementById('c-humidity').textContent = humid;
 document.getElementById('c-uv').textContent = uvi; 
+fiveDayForecast();
 
 }
    
@@ -98,7 +99,7 @@ function fiveDayForecast() {
     document.getElementById('i-day').textContent = last;
 }
 
-fiveDayForecast();
+//fiveDayForecast();
 
 
 
