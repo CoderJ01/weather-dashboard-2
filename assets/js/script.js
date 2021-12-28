@@ -50,6 +50,12 @@ var {weatherChicago, weatherAustin, weatherNewYork, weatherOrlando, weatherSanFr
     // var response = await fetch(weatherChicago);
     // var data = await response.json();
 
+    
+
+   
+
+function infoChicago() {
+
     fetch(weatherChicago)
     .then(function(response) {
       // request was successful
@@ -63,7 +69,7 @@ var {weatherChicago, weatherAustin, weatherNewYork, weatherOrlando, weatherSanFr
           var wind = data.current.wind_speed;
           var humid = data.current.humidity;
           var uvi = data.current.uvi;
-          infoChicago(data, temp, wind, humid, uvi);
+          testC(data, temp, wind, humid, uvi);
         });
       } else {
         alert("Error: " + response.statusText);
@@ -73,20 +79,21 @@ var {weatherChicago, weatherAustin, weatherNewYork, weatherOrlando, weatherSanFr
       // Notice this `.catch()` getting chained onto the end of the `.then()` method
       alert("Unable to connect to Open Weather");
     });
+  }
 
-   
-
-function infoChicago(data, temp, wind, humid, uvi) {
-    // display weather conditions for the current day
+function testC (data, temp, wind, humid, uvi) {
+          // display weather conditions for the current day
 document.getElementById('city').textContent = "Chicago " + today;
 document.getElementById('c-temp').textContent = temp;
 document.getElementById('c-wind').textContent = wind + " ";
 document.getElementById('c-humidity').textContent = humid;
 document.getElementById('c-uv').textContent = uvi; 
+}
 
-  }
+testC();
 
-  
+
+
 
 
     // // display weather conditions for the current day
