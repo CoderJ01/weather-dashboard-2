@@ -45,6 +45,48 @@ function retrieveAPIs() {
 
 var {weatherChicago, weatherAustin, weatherNewYork, weatherOrlando, weatherSanFrancisco, weatherSeattle, weatherDenver, weatherAtlanta} = retrieveAPIs();
 
+// const request = (async () => {
+
+//     var response = await fetch(weatherChicago);
+
+//     var data = await response.text();
+//     hiThere(data);
+// })();
+
+// function hiThere(data) {
+//     console.log(data);
+//     console.log(data.current.humidity);
+// }
+
+// fetch(weatherChicago)
+//   .then((response) => response.json())
+//   .then((data) => console.log(data));
+
+  fetch(weatherChicago)
+  .then(function(response) {
+    // request was successful
+    if (response.ok) {
+      console.log(response);
+      response.json().then(function(data) {
+        console.log(data);
+        console.log(data.current.temp);
+        var temp = data.current.temp;
+        Hey(data, temp);
+      });
+    } else {
+      alert("Error: " + response.statusText);
+    }
+  })
+  .catch(function(error) {
+    // Notice this `.catch()` getting chained onto the end of the `.then()` method
+    alert("Unable to connect to Open Weather");
+  });
+
+  function Hey(data, temp) {
+      console.log(data);
+      console.log(temp);
+  }
+
 async function infoChicago() {
 
     // fetch api infomation of popular city
