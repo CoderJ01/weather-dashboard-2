@@ -54,12 +54,18 @@ async function infoChicago() {
           var uvi = data.current.uvi;
           displayCurrent (data, temp, wind, humid, uvi);
           var fiveDayTemp = [];
+          var fiveDayWind = [];
+          var fiveDayHumid = [];
 
           for (var i = 1; i < 6; i++) {
               fiveDayTemp[i] = data.daily[i].temp.day;
+              fiveDayWind[i] = data.daily[i].wind_speed;
+              fiveDayHumid[i] = data.daily[i].humidity;
           }
 
           tempForFive(fiveDayTemp);
+          windForFive(fiveDayWind);
+          humidForFive(fiveDayHumid);
         });
       } else {
         alert("Error: " + response.statusText);
@@ -103,77 +109,60 @@ function tempForFive(fiveDayTemp) {
     document.getElementById('i-temp').textContent = fiveDayTemp[5]; 
 }
 
+function windForFive(fiveDayWind) {
+
+    document.getElementById('f-wind').textContent = fiveDayWind[1] + " ";
+    document.getElementById('s-wind').textContent = fiveDayWind[2] + " ";
+    document.getElementById('t-wind').textContent = fiveDayWind[3] + " ";
+    document.getElementById('o-wind').textContent = fiveDayWind[4] + " ";
+    document.getElementById('i-wind').textContent = fiveDayWind[5] + " ";
+
+}
+
+function humidForFive(fiveDayHumid) {
+
+    document.getElementById('f-humidity').textContent = fiveDayHumid[1];
+    document.getElementById('s-humidity').textContent = fiveDayHumid[2];
+    document.getElementById('t-humidity').textContent = fiveDayHumid[3];
+    document.getElementById('o-humidity').textContent = fiveDayHumid[4];
+    document.getElementById('i-humidity').textContent = fiveDayHumid[5];
+     
+}
 
 
-
-
-
-
-
-
-
-
-
-
-    // display weather conditions for the next five days 
-    // 1 : 2 : 3 : 4 : 5 :: f : s : t : o : i
     
-    // document.getElementById('f-temp').textContent = data.daily[1].temp.day;
-    // document.getElementById('f-wind').textContent = data.daily[1].wind_speed + " ";
-    // document.getElementById('f-humidity').textContent = data.daily[1].humidity;
+    //// place icon with current day conditions 
+    var div = document.getElementById('icon');
 
-    // document.getElementById('s-day').textContent = next;
-    // document.getElementById('s-temp').textContent = data.daily[2].temp.day
-    // document.getElementById('s-wind').textContent = data.daily[2].wind_speed + " ";
-    // document.getElementById('s-humidity').textContent = data.daily[2].humidity;
+    if (data.current.wind_speed > 20) { 
+        div.classList.add('fas', 'fa-wind');
+    }
+    else {
 
-    // document.getElementById('t-day').textContent = then;
-    // document.getElementById('t-temp').textContent = data.daily[3].temp.day
-    // document.getElementById('t-wind').textContent = data.daily[3].wind_speed + " ";
-    // document.getElementById('t-humidity').textContent = data.daily[3].humidity;
-
-    // document.getElementById('o-day').textContent = fourth;
-    // document.getElementById('o-temp').textContent = data.daily[4].temp.day
-    // document.getElementById('o-wind').textContent = data.daily[4].wind_speed + " ";
-    // document.getElementById('o-humidity').textContent = data.daily[4].humidity;
-
-    // document.getElementById('i-day').textContent = last;
-    // document.getElementById('i-temp').textContent = data.daily[5].temp.day
-    // document.getElementById('i-wind').textContent = data.daily[5].wind_speed + " ";
-    // document.getElementById('i-humidity').textContent = data.daily[5].humidity; 
-    
-    // // place icon with current day conditions
-    // var div = document.getElementById('icon');
-
-    // if (data.current.wind_speed > 20) { 
-    //     div.classList.add('fas', 'fa-wind');
-    // }
-    // else {
-
-    //     if (data.current.weather[0].description === "few clouds" ||
-    //     data.current.weather[0].description === "scattered clouds" ||
-    //     data.current.weather[0].description === "broken clouds") 
-    //     {
-    //         div.classList.add('fas', 'fa-cloud-sun');
-    //     } 
-    //     else if (data.current.weather[0].description === "shower rain" ||
-    //     data.current.weather[0].description === "rain")
-    //     {
-    //         div.classList.add('fas', 'cloud-rain');
-    //     }
-    //     else if (data.current.weather[0].description === "thunderstorm")
-    //     {
-    //         div.classList.add('fas', 'fa-bolt');
-    //     }
-    //     else if (data.current.weather[0].description === "snow")
-    //     {
-    //         div.classList.add('fas', 'fa-snowflake');
-    //     }
-    //     else 
-    //     {
-    //         div.classList.add('fas', 'fa-sun');
-    //     }
-    // }
+        if (data.current.weather[0].description === "few clouds" ||
+        data.current.weather[0].description === "scattered clouds" ||
+        data.current.weather[0].description === "broken clouds") 
+        {
+            div.classList.add('fas', 'fa-cloud-sun');
+        } 
+        else if (data.current.weather[0].description === "shower rain" ||
+        data.current.weather[0].description === "rain")
+        {
+            div.classList.add('fas', 'cloud-rain');
+        }
+        else if (data.current.weather[0].description === "thunderstorm")
+        {
+            div.classList.add('fas', 'fa-bolt');
+        }
+        else if (data.current.weather[0].description === "snow")
+        {
+            div.classList.add('fas', 'fa-snowflake');
+        }
+        else 
+        {
+            div.classList.add('fas', 'fa-sun');
+        }
+    }
 
     // // place icon for next five days, same anology expression (1 : 2 :: f : s) applys
     // var divF = document.getElementById('f-icon');
