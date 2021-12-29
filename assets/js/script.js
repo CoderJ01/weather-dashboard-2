@@ -45,15 +45,6 @@ function retrieveAPIs() {
 
 var {weatherChicago, weatherAustin, weatherNewYork, weatherOrlando, weatherSanFrancisco, weatherSeattle, weatherDenver, weatherAtlanta} = retrieveAPIs();
 
-
-      // // fetch api infomation of popular city
-    // var response = await fetch(weatherChicago);
-    // var data = await response.json();
-
-    
-
-   
-
 async function infoChicago() {
 
     fetch(weatherChicago)
@@ -68,6 +59,11 @@ async function infoChicago() {
           var humid = data.current.humidity;
           var uvi = data.current.uvi;
           displayCurrent (data, temp, wind, humid, uvi);
+
+          for(i = 1; i < 6; i++) {
+            //data.daily[i].temp.day;
+            console.log(i);
+          }
         });
       } else {
         alert("Error: " + response.statusText);
@@ -99,7 +95,6 @@ function fiveDayForecast() {
     document.getElementById('i-day').textContent = last;
 }
 
-//fiveDayForecast();
 
 
 
