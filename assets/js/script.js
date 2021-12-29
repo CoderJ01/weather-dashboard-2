@@ -56,16 +56,21 @@ async function infoChicago() {
           var fiveDayTemp = [];
           var fiveDayWind = [];
           var fiveDayHumid = [];
+          var description = [];
 
           for (var i = 1; i < 6; i++) {
               fiveDayTemp[i] = data.daily[i].temp.day;
               fiveDayWind[i] = data.daily[i].wind_speed;
               fiveDayHumid[i] = data.daily[i].humidity;
+              description[i] = data.daily[i].weather[0].description;
           }
+
+          console.log(data);
 
           tempForFive(fiveDayTemp);
           windForFive(fiveDayWind);
           humidForFive(fiveDayHumid);
+          displayIcons(wind, description);
         });
       } else {
         alert("Error: " + response.statusText);
@@ -129,32 +134,33 @@ function humidForFive(fiveDayHumid) {
      
 }
 
+  // place icon with current day conditions 
 
-    
-    //// place icon with current day conditions 
+function displayIcons (wind, description) {
+
     var div = document.getElementById('icon');
 
-    if (data.current.wind_speed > 20) { 
+     if (wind > 20) { 
         div.classList.add('fas', 'fa-wind');
     }
     else {
 
-        if (data.current.weather[0].description === "few clouds" ||
-        data.current.weather[0].description === "scattered clouds" ||
-        data.current.weather[0].description === "broken clouds") 
+        if (description[1] === "few clouds" ||
+        description[1] === "scattered clouds" ||
+        description[1] === "broken clouds") 
         {
             div.classList.add('fas', 'fa-cloud-sun');
         } 
-        else if (data.current.weather[0].description === "shower rain" ||
-        data.current.weather[0].description === "rain")
+        else if (description[1] === "shower rain" ||
+        description[1].description === "rain")
         {
             div.classList.add('fas', 'cloud-rain');
         }
-        else if (data.current.weather[0].description === "thunderstorm")
+        else if (description[1] === "thunderstorm")
         {
             div.classList.add('fas', 'fa-bolt');
         }
-        else if (data.current.weather[0].description === "snow")
+        else if (description[1] === "snow")
         {
             div.classList.add('fas', 'fa-snowflake');
         }
@@ -163,6 +169,13 @@ function humidForFive(fiveDayHumid) {
             div.classList.add('fas', 'fa-sun');
         }
     }
+}
+
+
+    
+
+
+   
 
     // // place icon for next five days, same anology expression (1 : 2 :: f : s) applys
     // var divF = document.getElementById('f-icon');
