@@ -10,14 +10,7 @@ function displayDate () {
     var fourth = moment().add(4, 'day').format('L');
     var last = moment().add(5, 'day').format('L');
 
-    return {
-        today,
-        tommorow,
-        next,
-        then, 
-        fourth,
-        last
-    };
+    return {today, tommorow, next, then, fourth, last}; 
 }
 
 var {today, tommorow, next, then, fourth, last} = displayDate();
@@ -44,6 +37,7 @@ function retrieveAPIs() {
 }
 
 var {weatherChicago, weatherAustin, weatherNewYork, weatherOrlando, weatherSanFrancisco, weatherSeattle, weatherDenver, weatherAtlanta} = retrieveAPIs();
+var pickedCity;
 
 async function infoChicago() {
 
@@ -59,11 +53,13 @@ async function infoChicago() {
           var humid = data.current.humidity;
           var uvi = data.current.uvi;
           displayCurrent (data, temp, wind, humid, uvi);
+          var fiveDayTemp = [];
 
-          for(i = 1; i < 6; i++) {
-            //data.daily[i].temp.day;
-            console.log(i);
+          for (var i = 1; i < 6; i++) {
+              fiveDayTemp[i] = data.daily[i].temp.day;
           }
+
+          tempForFive(fiveDayTemp);
         });
       } else {
         alert("Error: " + response.statusText);
@@ -79,21 +75,35 @@ async function infoChicago() {
 // display weather conditions for the current day
 function displayCurrent (data, temp, wind, humid, uvi) {
   
+
 document.getElementById('c-temp').textContent = temp;
 document.getElementById('c-wind').textContent = wind + " ";
 document.getElementById('c-humidity').textContent = humid;
 document.getElementById('c-uv').textContent = uvi; 
-fiveDayForecast();
+fiveDates();
 
 }
-   
-function fiveDayForecast() {
+
+// display dates for next five days   
+function fiveDates() {
     document.getElementById('f-day').textContent = tommorow;
     document.getElementById('s-day').textContent = next;
     document.getElementById('t-day').textContent = then;
     document.getElementById('o-day').textContent = fourth;
     document.getElementById('i-day').textContent = last;
 }
+
+// get temperature for next five days
+function tempForFive(fiveDayTemp) {
+
+    document.getElementById('f-temp').textContent = fiveDayTemp[1];
+    document.getElementById('s-temp').textContent = fiveDayTemp[2];
+    document.getElementById('t-temp').textContent = fiveDayTemp[3];
+    document.getElementById('o-temp').textContent = fiveDayTemp[4];
+    document.getElementById('i-temp').textContent = fiveDayTemp[5]; 
+}
+
+
 
 
 
