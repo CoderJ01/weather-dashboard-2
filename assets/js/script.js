@@ -406,6 +406,11 @@ async function searchInput(event) {
     var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
     var settings = '&units=imperial&appid=' + freeAPI;
 
+    var searchChoiceUVI = document.getElementById('input');
+    var apiUVI = 'https://api.openweathermap.org/data/2.5/onecall?lat=';
+    var units = '&&units=imperial&lon=';
+    var settingsUVI = '&exclude=hourly&appid=' + freeAPI;
+
     event.preventDefault();
     var weatherChoice = api + searchChoice.value + settings;
 
@@ -415,10 +420,27 @@ async function searchInput(event) {
       if (response.ok) {  
         response.json().then(function(data) {
 
-          // do another fetch
-            
+          var weatherUVI = apiUVI + data.coord.lat + units + data.coord.lon + settingsUVI;
+
+          // fetches API for the retrieval of UV index, the API fetched from weatherChoice
+          // first API lacks the info for UV index
+          fetch(weatherUVI)
+          .then(function (responseUVI) {
+            if(responseUVI.ok) {
+              responseUVI.json().then(function (dataUVI) {
+
+              });
+            }
+            else {
+              alert("Error: " + responseUVI.statusText);
+            }
+          }).catch(function (error) {
+              alert("Unable to connect to Open Weather");
+          }); 
+
         });
-      } else {
+      } 
+      else {
         alert("Error: " + response.statusText);
       }
     })
