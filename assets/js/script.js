@@ -47,6 +47,48 @@ async function infoChicago () {
   infoWeather(chosenAPI, city);
 }
 
+async function infoAustin () {
+  var chosenAPI = weatherAPI[1];
+  var city = "Austin ";
+  infoWeather(chosenAPI, city);
+}
+
+async function infoNewYork () {
+  var chosenAPI = weatherAPI[2];
+  var city = "New York ";
+  infoWeather(chosenAPI, city);
+}
+
+async function infoOrlando () {
+  var chosenAPI = weatherAPI[3];
+  var city = "Orlando ";
+  infoWeather(chosenAPI, city);
+}
+
+async function infoSanFrancisco () {
+  var chosenAPI = weatherAPI[4];
+  var city = "San Francisco ";
+  infoWeather(chosenAPI, city);
+}
+
+async function infoSeattle () {
+  var chosenAPI = weatherAPI[5];
+  var city = "Seattle ";
+  infoWeather(chosenAPI, city);
+}
+
+async function infoDenver () {
+  var chosenAPI = weatherAPI[6];
+  var city = "Denver ";
+  infoWeather(chosenAPI, city);
+}
+
+async function infoAtlanta () {
+  var chosenAPI = weatherAPI[7];
+  var city = "Atlanta ";
+  infoWeather(chosenAPI, city);
+}
+
 function infoWeather(chosenAPI, city) {
   fetch(chosenAPI)
   .then(function(response) {
@@ -88,369 +130,6 @@ function infoWeather(chosenAPI, city) {
 
   document.getElementById('city').textContent = city + today;
 }
-
-// async function infoChicago() {
-
-//     fetch(weatherChicago)
-//     .then(function(response) {
-//       // request was successful
-//       if (response.ok) {  
-//         response.json().then(function(data) {
-          
-//           // create variables for current conditions
-//           var temp = data.current.temp;
-//           var wind = data.current.wind_speed;
-//           var humid = data.current.humidity;
-//           var uvi = data.current.uvi;
-//           displayCurrent (data, temp, wind, humid, uvi);
-//           var fiveDayTemp = [];
-//           var fiveDayWind = [];
-//           var fiveDayHumid = [];
-//           var description = [];
-
-//           for (var i = 0; i < 6; i++) {
-//               fiveDayTemp[i] = data.daily[i].temp.day;
-//               fiveDayWind[i] = data.daily[i].wind_speed;
-//               fiveDayHumid[i] = data.daily[i].humidity;
-//               description[i] = data.daily[i].weather[0].description;
-//           }
-
-//           tempForFive(fiveDayTemp);
-//           windForFive(fiveDayWind);
-//           humidForFive(fiveDayHumid);
-//           displayIcons(wind, description);
-//           uvIndex(uvi);
-//         });
-//       } else {
-//         alert("Error: " + response.statusText);
-//       }
-//     })
-//     .catch(function(error) {
-//       alert("Unable to connect to Open Weather");
-//     });
-  
-//     document.getElementById('city').textContent = "Chicago " + today;
-// }
-
-async function infoAustin() {
-
-    fetch(weatherAustin)
-    .then(function(response) {
-      // request was successful
-      if (response.ok) {  
-        response.json().then(function(data) {
-          
-          // create variables for current conditions
-          var temp = data.current.temp;
-          var wind = data.current.wind_speed;
-          var humid = data.current.humidity;
-          var uvi = data.current.uvi;
-          displayCurrent (data, temp, wind, humid, uvi);
-          var fiveDayTemp = [];
-          var fiveDayWind = [];
-          var fiveDayHumid = [];
-          var description = [];
-
-          for (var i = 0; i < 6; i++) {
-              fiveDayTemp[i] = data.daily[i].temp.day;
-              fiveDayWind[i] = data.daily[i].wind_speed;
-              fiveDayHumid[i] = data.daily[i].humidity;
-              description[i] = data.daily[i].weather[0].description;
-          }
-
-          tempForFive(fiveDayTemp);
-          windForFive(fiveDayWind);
-          humidForFive(fiveDayHumid);
-          displayIcons(wind, description);
-          uvIndex(uvi);
-        });
-      } else {
-        alert("Error: " + response.statusText);
-      }
-    })
-    .catch(function(error) {
-      alert("Unable to connect to Open Weather");
-    });
-  
-    document.getElementById('city').textContent = "Austin " + today;
-}
-
-async function infoNewYork() {
-
-    fetch(weatherNewYork)
-    .then(function(response) {
-      // request was successful
-      if (response.ok) {  
-        response.json().then(function(data) {
-          
-          // create variables for current conditions
-          var temp = data.current.temp;
-          var wind = data.current.wind_speed;
-          var humid = data.current.humidity;
-          var uvi = data.current.uvi;
-          displayCurrent (data, temp, wind, humid, uvi);
-          var fiveDayTemp = [];
-          var fiveDayWind = [];
-          var fiveDayHumid = [];
-          var description = [];
-
-          for (var i = 0; i < 6; i++) {
-              fiveDayTemp[i] = data.daily[i].temp.day;
-              fiveDayWind[i] = data.daily[i].wind_speed;
-              fiveDayHumid[i] = data.daily[i].humidity;
-              description[i] = data.daily[i].weather[0].description;
-          }
-
-          tempForFive(fiveDayTemp);
-          windForFive(fiveDayWind);
-          humidForFive(fiveDayHumid);
-          displayIcons(wind, description);
-          uvIndex(uvi);
-        });
-      } else {
-        alert("Error: " + response.statusText);
-      }
-    })
-    .catch(function(error) {
-      alert("Unable to connect to Open Weather");
-    });
-  
-    document.getElementById('city').textContent = "New York " + today;
-}
-
-async function infoOrlando() {
-
-    fetch(weatherOrlando)
-    .then(function(response) {
-      // request was successful
-      if (response.ok) {  
-        response.json().then(function(data) {
-          
-          // create variables for current conditions
-          var temp = data.current.temp;
-          var wind = data.current.wind_speed;
-          var humid = data.current.humidity;
-          var uvi = data.current.uvi;
-          displayCurrent (data, temp, wind, humid, uvi);
-          var fiveDayTemp = [];
-          var fiveDayWind = [];
-          var fiveDayHumid = [];
-          var description = [];
-
-          for (var i = 0; i < 6; i++) {
-              fiveDayTemp[i] = data.daily[i].temp.day;
-              fiveDayWind[i] = data.daily[i].wind_speed;
-              fiveDayHumid[i] = data.daily[i].humidity;
-              description[i] = data.daily[i].weather[0].description;
-          }
-
-          tempForFive(fiveDayTemp);
-          windForFive(fiveDayWind);
-          humidForFive(fiveDayHumid);
-          displayIcons(wind, description);
-          uvIndex(uvi);
-        });
-      } else {
-        alert("Error: " + response.statusText);
-      }
-    })
-    .catch(function(error) {
-      alert("Unable to connect to Open Weather");
-    });
-  
-    document.getElementById('city').textContent = "Orlando " + today;
-}
-
-async function infoSanFrancisco() {
-
-    fetch(weatherSanFrancisco)
-    .then(function(response) {
-      // request was successful
-      if (response.ok) {  
-        response.json().then(function(data) {
-          
-          // create variables for current conditions
-          var temp = data.current.temp;
-          var wind = data.current.wind_speed;
-          var humid = data.current.humidity;
-          var uvi = data.current.uvi;
-          displayCurrent (data, temp, wind, humid, uvi);
-          var fiveDayTemp = [];
-          var fiveDayWind = [];
-          var fiveDayHumid = [];
-          var description = [];
-
-          for (var i = 0; i < 6; i++) {
-              fiveDayTemp[i] = data.daily[i].temp.day;
-              fiveDayWind[i] = data.daily[i].wind_speed;
-              fiveDayHumid[i] = data.daily[i].humidity;
-              description[i] = data.daily[i].weather[0].description;
-          }
-
-          tempForFive(fiveDayTemp);
-          windForFive(fiveDayWind);
-          humidForFive(fiveDayHumid);
-          displayIcons(wind, description);
-          uvIndex(uvi);
-        });
-      } else {
-        alert("Error: " + response.statusText);
-      }
-    })
-    .catch(function(error) {
-      alert("Unable to connect to Open Weather");
-    });
-  
-    document.getElementById('city').textContent = "San Francisco " + today;
-}
-
-async function infoSeattle() {
-
-    fetch(weatherSeattle)
-    .then(function(response) {
-      // request was successful
-      if (response.ok) {  
-        response.json().then(function(data) {
-          
-          // create variables for current conditions
-          var temp = data.current.temp;
-          var wind = data.current.wind_speed;
-          var humid = data.current.humidity;
-          var uvi = data.current.uvi;
-          displayCurrent (data, temp, wind, humid, uvi);
-          var fiveDayTemp = [];
-          var fiveDayWind = [];
-          var fiveDayHumid = [];
-          var description = [];
-
-          for (var i = 0; i < 6; i++) {
-              fiveDayTemp[i] = data.daily[i].temp.day;
-              fiveDayWind[i] = data.daily[i].wind_speed;
-              fiveDayHumid[i] = data.daily[i].humidity;
-              description[i] = data.daily[i].weather[0].description;
-          }
-
-          tempForFive(fiveDayTemp);
-          windForFive(fiveDayWind);
-          humidForFive(fiveDayHumid);
-          displayIcons(wind, description);
-          uvIndex(uvi);
-        });
-      } else {
-        alert("Error: " + response.statusText);
-      }
-    })
-    .catch(function(error) {
-      alert("Unable to connect to Open Weather");
-    });
-  
-    document.getElementById('city').textContent = "Seattle " + today;
-}
-
-async function infoDenver() {
-
-    fetch(weatherDenver)
-    .then(function(response) {
-      // request was successful
-      if (response.ok) {  
-        response.json().then(function(data) {
-          
-          // create variables for current conditions
-          var temp = data.current.temp;
-          var wind = data.current.wind_speed;
-          var humid = data.current.humidity;
-          var uvi = data.current.uvi;
-          displayCurrent (data, temp, wind, humid, uvi);
-          var fiveDayTemp = [];
-          var fiveDayWind = [];
-          var fiveDayHumid = [];
-          var description = [];
-
-          for (var i = 0; i < 6; i++) {
-              fiveDayTemp[i] = data.daily[i].temp.day;
-              fiveDayWind[i] = data.daily[i].wind_speed;
-              fiveDayHumid[i] = data.daily[i].humidity;
-              description[i] = data.daily[i].weather[0].description;
-          }
-
-          tempForFive(fiveDayTemp);
-          windForFive(fiveDayWind);
-          humidForFive(fiveDayHumid);
-          displayIcons(wind, description);
-          uvIndex(uvi);
-        });
-      } else {
-        alert("Error: " + response.statusText);
-      }
-    })
-    .catch(function(error) {
-      alert("Unable to connect to Open Weather");
-    });
-  
-    document.getElementById('city').textContent = "Denver " + today;
-}
-
-async function infoAtlanta() {
-
-    fetch(weatherAtlanta)
-    .then(function(response) {
-      // request was successful
-      if (response.ok) {  
-        response.json().then(function(data) {
-          
-          // create variables for current conditions
-          var temp = data.current.temp;
-          var wind = data.current.wind_speed;
-          var humid = data.current.humidity;
-          var uvi = data.current.uvi;
-          displayCurrent (data, temp, wind, humid, uvi);
-          var fiveDayTemp = [];
-          var fiveDayWind = [];
-          var fiveDayHumid = [];
-          var description = [];
-
-          for (var i = 0; i < 6; i++) {
-              fiveDayTemp[i] = data.daily[i].temp.day;
-              fiveDayWind[i] = data.daily[i].wind_speed;
-              fiveDayHumid[i] = data.daily[i].humidity;
-              description[i] = data.daily[i].weather[0].description;
-          }
-
-          tempForFive(fiveDayTemp);
-          windForFive(fiveDayWind);
-          humidForFive(fiveDayHumid);
-          displayIcons(wind, description);
-          uvIndex(uvi);
-        });
-      } else {
-        alert("Error: " + response.statusText);
-      }
-    })
-    .catch(function(error) {
-      alert("Unable to connect to Open Weather");
-    });
-  
-    document.getElementById('city').textContent = "Atlanta " + today;
-}
-
-var searchChoice = document.getElementById('input');
-
-// store city that user searches in bar
-function store() {
-
-  var new_data = searchChoice.value;
-  
-  if(localStorage.getItem('data') === null) {
-      localStorage.setItem('data', '[]');
-  }
-
-  var old_data = JSON.parse(localStorage.getItem('data'));
-  old_data.push(new_data);
-
-  localStorage.setItem('data', JSON.stringify(old_data));
-}
-
-// searchInput responds to city the user submits into search bar
 
 async function searchInput(event) {
    
@@ -526,11 +205,11 @@ async function searchInput(event) {
 
 // display weather conditions for the current day
 function displayCurrent (data, temp, wind, humid, uvi) {
-  document.getElementById('c-temp').textContent = temp;
-  document.getElementById('c-wind').textContent = wind + " ";
-  document.getElementById('c-humidity').textContent = humid;
-  document.getElementById('c-uv').textContent = uvi; 
-  fiveDates();
+    document.getElementById('c-temp').textContent = temp;
+    document.getElementById('c-wind').textContent = wind + " ";
+    document.getElementById('c-humidity').textContent = humid;
+    document.getElementById('c-uv').textContent = uvi; 
+    fiveDates();
 }
 
 // display dates for next five days   
@@ -544,7 +223,6 @@ function fiveDates() {
 
 // get temperature for next five days
 function tempForFive(fiveDayTemp) {
-
     document.getElementById('f-temp').textContent = fiveDayTemp[1];
     document.getElementById('s-temp').textContent = fiveDayTemp[2];
     document.getElementById('t-temp').textContent = fiveDayTemp[3];
@@ -554,7 +232,6 @@ function tempForFive(fiveDayTemp) {
 
 // get wind speed for five days
 function windForFive(fiveDayWind) {
-
     document.getElementById('f-wind').textContent = fiveDayWind[1] + " ";
     document.getElementById('s-wind').textContent = fiveDayWind[2] + " ";
     document.getElementById('t-wind').textContent = fiveDayWind[3] + " ";
@@ -565,7 +242,6 @@ function windForFive(fiveDayWind) {
 
 // get humidity for five days
 function humidForFive(fiveDayHumid) {
-
     document.getElementById('f-humidity').textContent = fiveDayHumid[1];
     document.getElementById('s-humidity').textContent = fiveDayHumid[2];
     document.getElementById('t-humidity').textContent = fiveDayHumid[3];
