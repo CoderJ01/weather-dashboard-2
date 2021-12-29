@@ -414,34 +414,9 @@ async function searchInput(event) {
       // request was successful
       if (response.ok) {  
         response.json().then(function(data) {
-           // fetches API for the retrieval of UV index, the API fetched from weatherChoice
-            // var weatherUVI = apiUVI + data.coord.lat + units + data.coord.lon + settingsUVI;
-            // var responseUVI = await fetch(weatherUVI);
-            // var dataUVI = await responseUVI.json();
-            // console.log(weatherUVI);      
-          // create variables for current conditions
-          var temp = data.main.temp;
-          var wind = data.wind.speed + " ";
-          var humid = data.main.humidity;
-          //var uvi = dataUVI.current.uvi;
-          displayCurrent (data, temp, wind, humid, uvi);
-          var fiveDayTemp = [];
-          var fiveDayWind = [];
-          var fiveDayHumid = [];
-          var description = [];
 
-          for (var i = 0; i < 6; i++) {
-              fiveDayTemp[i] = data.daily[i].temp.day;
-              fiveDayWind[i] = data.daily[i].wind_speed;
-              fiveDayHumid[i] = data.daily[i].humidity;
-              description[i] = data.daily[i].weather[0].description;
-          }
-
-          tempForFive(fiveDayTemp);
-          windForFive(fiveDayWind);
-          humidForFive(fiveDayHumid);
-          displayIcons(wind, description);
-          uvIndex(uvi);
+          // do another fetch
+            
         });
       } else {
         alert("Error: " + response.statusText);
