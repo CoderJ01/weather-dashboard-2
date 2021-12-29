@@ -131,6 +131,23 @@ function infoWeather(chosenAPI, city) {
   document.getElementById('city').textContent = city + today;
 }
 
+var searchChoice = document.getElementById('input'); 
+
+// Store city that user submits to search bar
+function store() {
+
+  var new_data = searchChoice.value;
+  
+  if(localStorage.getItem('data') === null) {
+      localStorage.setItem('data', '[]');
+  }
+
+  var old_data = JSON.parse(localStorage.getItem('data'));
+  old_data.push(new_data);
+
+  localStorage.setItem('data', JSON.stringify(old_data));
+}
+
 async function searchInput(event) {
    
     var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
@@ -246,8 +263,7 @@ function humidForFive(fiveDayHumid) {
     document.getElementById('s-humidity').textContent = fiveDayHumid[2];
     document.getElementById('t-humidity').textContent = fiveDayHumid[3];
     document.getElementById('o-humidity').textContent = fiveDayHumid[4];
-    document.getElementById('i-humidity').textContent = fiveDayHumid[5];
-     
+    document.getElementById('i-humidity').textContent = fiveDayHumid[5];    
 }
 
 // place icons
