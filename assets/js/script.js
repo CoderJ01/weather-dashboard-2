@@ -429,6 +429,29 @@ async function searchInput(event) {
             if(responseUVI.ok) {
               responseUVI.json().then(function (dataUVI) {
 
+                var temp = data.main.temp;
+                var wind = data.wind.speed + " ";
+                var humid = data.main.humidity;
+                var uvi = dataUVI.current.uvi;
+                console.log(uvi);
+                displayCurrent (data, temp, wind, humid, uvi);
+                var fiveDayTemp = [];
+                var fiveDayWind = [];
+                var fiveDayHumid = [];
+                var description = [];
+      
+                for (var i = 0; i < 6; i++) {
+                    fiveDayTemp[i] = dataUVI.daily[i].temp.day;
+                    fiveDayWind[i] = dataUVI.daily[i].wind_speed;
+                    fiveDayHumid[i] = dataUVI.daily[i].humidity;
+                    description[i] = dataUVI.daily[i].weather[0].description;
+                }
+      
+                tempForFive(fiveDayTemp);
+                windForFive(fiveDayWind);
+                humidForFive(fiveDayHumid);
+                displayIcons(wind, description);
+                uvIndex(uvi);
               });
             }
             else {
