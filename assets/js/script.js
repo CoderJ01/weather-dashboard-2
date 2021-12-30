@@ -150,18 +150,11 @@ function storeSearch () {
   console.log(old_data);
   console.log(new_data);
 
-  for (var i = 0; i < 12; i++) {
+  var output = old_data.filter(function (x) {
+    return x;
+  });
 
-    if(old_data[i] === undefined || old_data === null || new_data === '' || new_data === old_data) {
-      old_data[i] = "";
-    }
-
-    // if(old_data[i] === old_data[i + 1]){
-    //   old_data.pop(old_data[i + 1]);
-    // }
-  } 
-
-  console.log(old_data);
+  console.log(output);
 
   document.getElementById('menu-a').innerHTML = old_data[0];
   document.getElementById('menu-b').innerHTML = old_data[1];
@@ -177,9 +170,7 @@ function storeSearch () {
   document.getElementById('menu-l').innerHTML = old_data[11];
 }
 
-var numbers = ['1', '2', '3', '4'];
-numbers = numbers.filter((n) => {return n != 3});
-console.log(numbers); // [1,2,4]
+
 
 async function searchInput(event) {
    
