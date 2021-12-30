@@ -134,7 +134,7 @@ function infoWeather(chosenAPI, city) {
 var searchChoice = document.getElementById('input'); 
 
 // Store city that user submits to search bar
-function store() {
+function storeSearch() {
 
   var new_data = searchChoice.value;
   
@@ -146,6 +146,31 @@ function store() {
   old_data.push(new_data);
 
   localStorage.setItem('data', JSON.stringify(old_data));
+
+  console.log(old_data);
+  console.log(new_data);
+
+  for (var i = 0; i < 12; i++) {
+
+    if(old_data[i] === undefined) {
+      old_data[i] = "";
+    }
+
+  }
+
+    document.getElementById('menu-a').innerHTML = old_data[0];
+    document.getElementById('menu-b').innerHTML = old_data[1];
+    document.getElementById('menu-c').innerHTML = old_data[2];
+    document.getElementById('menu-d').innerHTML = old_data[3];
+    document.getElementById('menu-e').innerHTML = old_data[4];
+    document.getElementById('menu-f').innerHTML = old_data[5];
+    document.getElementById('menu-g').innerHTML = old_data[6];
+    document.getElementById('menu-h').innerHTML = old_data[7];
+    document.getElementById('menu-i').innerHTML = old_data[8];
+    document.getElementById('menu-j').innerHTML = old_data[9];
+    document.getElementById('menu-k').innerHTML = old_data[10];
+    document.getElementById('menu-l').innerHTML = old_data[11];
+  
 }
 
 async function searchInput(event) {
@@ -170,7 +195,7 @@ async function searchInput(event) {
           var weatherUVI = apiUVI + data.coord.lat + units + data.coord.lon + settingsUVI;
 
           // fetches API for the retrieval of UV index, the API fetched from weatherChoice
-          // first API lacks the info for UV index
+          // first API within this function lacks the info for UV index
           fetch(weatherUVI)
           .then(function (responseUVI) {
             if(responseUVI.ok) {
@@ -319,7 +344,7 @@ function uvIndex (uvi) {
     uvIndex.style.background = "none";
     uvIndex.style.fontWeight = "bold";
 
-    if (uvi >= 0 && uvi <= 2) {
+    if (uvi >= 0 || uvi <= 2) {
         uvIndex.style.background = "green";
         uvIndex.style.color = "white";
     }
