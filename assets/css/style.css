@@ -125,14 +125,15 @@ main {
     background-color: #566573;
     width: 72%;
     margin-left: 50px;
-    margin-top: -17px;
+    margin-top: 0px;
     color: white;
     border-radius: 5px;
+    position: absolute;
 }
 
 .menu-display p {
     font-size: 17px;
-    margin-left: 3px;
+    margin-left: 4px;
 }
 
 .bar button {

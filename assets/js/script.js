@@ -134,7 +134,8 @@ function infoWeather(chosenAPI, city) {
 var searchChoice = document.getElementById('input'); 
 
 // Store city that user submits to search bar
-function storeSearch () {
+function storeSearch (event) {
+  event.preventDefault();
 
   var new_data = searchChoice.value;
   
@@ -151,13 +152,25 @@ function storeSearch () {
     return x;
   });
 
-  var result = [...new Set(output)];
+  var result = [];
+  result = [...new Set(output)];
 
   for (var i = 0; i < 12; i++) {
     if (result[i] === undefined) {
       result[i] = "";
     }
   }
+
+  console.log(result);
+
+  displayResultsMenu(result);
+}
+
+// display user's search history
+function displayResultsMenu(result) {
+
+  document.querySelector('.menu-display').innerHTML = "";
+  document.querySelector('.menu-display').style.background = "none";
 
   document.getElementById('menu-a').innerHTML = result[0];
   document.getElementById('menu-b').innerHTML = result[1];
@@ -172,6 +185,8 @@ function storeSearch () {
   document.getElementById('menu-k').innerHTML = result[10];
   document.getElementById('menu-l').innerHTML = result[11];
 }
+
+displayResultsMenu(); 
 
 async function searchInput(event) {
    
