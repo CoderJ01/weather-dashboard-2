@@ -160,6 +160,12 @@ function storeSearch () {
 
   console.log(result)
 
+  for (var i = 0; i < 12; i++) {
+    if (result[i] === undefined) {
+      result[i] = "";
+    }
+  }
+
   document.getElementById('menu-a').innerHTML = result[0];
   document.getElementById('menu-b').innerHTML = result[1];
   document.getElementById('menu-c').innerHTML = result[2];
