@@ -158,23 +158,21 @@ function storeSearch () {
 
   var result = [...new Set(output)];
 
-  console.log(result);
+  console.log(result)
 
-  document.getElementById('menu-a').innerHTML = old_data[0];
-  document.getElementById('menu-b').innerHTML = old_data[1];
-  document.getElementById('menu-c').innerHTML = old_data[2];
-  document.getElementById('menu-d').innerHTML = old_data[3];
-  document.getElementById('menu-e').innerHTML = old_data[4];
-  document.getElementById('menu-f').innerHTML = old_data[5];
-  document.getElementById('menu-g').innerHTML = old_data[6];
-  document.getElementById('menu-h').innerHTML = old_data[7];
-  document.getElementById('menu-i').innerHTML = old_data[8];
-  document.getElementById('menu-j').innerHTML = old_data[9];
-  document.getElementById('menu-k').innerHTML = old_data[10];
-  document.getElementById('menu-l').innerHTML = old_data[11];
+  document.getElementById('menu-a').innerHTML = result[0];
+  document.getElementById('menu-b').innerHTML = result[1];
+  document.getElementById('menu-c').innerHTML = result[2];
+  document.getElementById('menu-d').innerHTML = result[3];
+  document.getElementById('menu-e').innerHTML = result[4];
+  document.getElementById('menu-f').innerHTML = result[5];
+  document.getElementById('menu-g').innerHTML = result[6];
+  document.getElementById('menu-h').innerHTML = result[7];
+  document.getElementById('menu-i').innerHTML = result[8];
+  document.getElementById('menu-j').innerHTML = result[9];
+  document.getElementById('menu-k').innerHTML = result[10];
+  document.getElementById('menu-l').innerHTML = result[11];
 }
-
-
 
 async function searchInput(event) {
    
