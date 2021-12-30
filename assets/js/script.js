@@ -156,6 +156,10 @@ function storeSearch () {
 
   console.log(output);
 
+  var result = [...new Set(output)];
+
+  console.log(result);
+
   document.getElementById('menu-a').innerHTML = old_data[0];
   document.getElementById('menu-b').innerHTML = old_data[1];
   document.getElementById('menu-c').innerHTML = old_data[2];
