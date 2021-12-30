@@ -147,18 +147,11 @@ function storeSearch () {
 
   localStorage.setItem('data', JSON.stringify(old_data));
 
-  console.log(old_data);
-  console.log(new_data);
-
   var output = old_data.filter(function (x) {
     return x;
   });
 
-  console.log(output);
-
   var result = [...new Set(output)];
-
-  console.log(result)
 
   for (var i = 0; i < 12; i++) {
     if (result[i] === undefined) {
