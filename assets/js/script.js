@@ -134,7 +134,7 @@ function infoWeather(chosenAPI, city) {
 var searchChoice = document.getElementById('input'); 
 
 // Store city that user submits to search bar
-function storeSearch() {
+function storeSearch () {
 
   var new_data = searchChoice.value;
   
@@ -152,25 +152,27 @@ function storeSearch() {
 
   for (var i = 0; i < 12; i++) {
 
-    if(old_data[i] === undefined) {
+    if(old_data[i] === undefined || old_data === null || new_data === '' || new_data === old_data) {
       old_data[i] = "";
     }
 
+    if(old_data[i + 1] === old_data[i]) {
+      old_data[i + 1] = "";
+    }
   }
 
-    document.getElementById('menu-a').innerHTML = old_data[0];
-    document.getElementById('menu-b').innerHTML = old_data[1];
-    document.getElementById('menu-c').innerHTML = old_data[2];
-    document.getElementById('menu-d').innerHTML = old_data[3];
-    document.getElementById('menu-e').innerHTML = old_data[4];
-    document.getElementById('menu-f').innerHTML = old_data[5];
-    document.getElementById('menu-g').innerHTML = old_data[6];
-    document.getElementById('menu-h').innerHTML = old_data[7];
-    document.getElementById('menu-i').innerHTML = old_data[8];
-    document.getElementById('menu-j').innerHTML = old_data[9];
-    document.getElementById('menu-k').innerHTML = old_data[10];
-    document.getElementById('menu-l').innerHTML = old_data[11];
-  
+  document.getElementById('menu-a').innerHTML = old_data[0];
+  document.getElementById('menu-b').innerHTML = old_data[1];
+  document.getElementById('menu-c').innerHTML = old_data[2];
+  document.getElementById('menu-d').innerHTML = old_data[3];
+  document.getElementById('menu-e').innerHTML = old_data[4];
+  document.getElementById('menu-f').innerHTML = old_data[5];
+  document.getElementById('menu-g').innerHTML = old_data[6];
+  document.getElementById('menu-h').innerHTML = old_data[7];
+  document.getElementById('menu-i').innerHTML = old_data[8];
+  document.getElementById('menu-j').innerHTML = old_data[9];
+  document.getElementById('menu-k').innerHTML = old_data[10];
+  document.getElementById('menu-l').innerHTML = old_data[11];
 }
 
 async function searchInput(event) {
@@ -178,7 +180,6 @@ async function searchInput(event) {
     var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
     var settings = '&units=imperial&appid=' + freeAPI;
 
-    var searchChoiceUVI = document.getElementById('input');
     var apiUVI = 'https://api.openweathermap.org/data/2.5/onecall?lat=';
     var units = '&&units=imperial&lon=';
     var settingsUVI = '&exclude=hourly&appid=' + freeAPI;
@@ -344,7 +345,7 @@ function uvIndex (uvi) {
     uvIndex.style.background = "none";
     uvIndex.style.fontWeight = "bold";
 
-    if (uvi >= 0 || uvi <= 2) {
+    if (uvi >= 0 && uvi <= 2) {
         uvIndex.style.background = "green";
         uvIndex.style.color = "white";
     }
@@ -375,6 +376,5 @@ enterKey.addEventListener("keyup", function(event) {
         document.getElementById('search').click();
     }
 });
-
 document.getElementById('search').addEventListener("click", searchInput);
  
