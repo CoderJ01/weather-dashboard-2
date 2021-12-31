@@ -176,10 +176,6 @@ function storeSearch (preventSave) {
   
   }
 
-  console.log(old_data);
-  console.log("New: " + new_data);
-  console.log(result);
-
   displayResultsMenu(result);
 }
 
@@ -198,6 +194,8 @@ async function displayResultsMenu(result) {
   document.getElementById('menu-j').innerHTML = result[9];
   document.getElementById('menu-k').innerHTML = result[10];
   document.getElementById('menu-l').innerHTML = result[11];
+
+  console.log(result[4]);
 
 }
 
@@ -405,5 +403,6 @@ enterKey.addEventListener("keyup", function(event) {
         document.getElementById('search').click();
     }
 });
+
 document.getElementById('search').addEventListener("click", searchInput);
  
