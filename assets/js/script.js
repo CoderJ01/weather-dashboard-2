@@ -141,8 +141,8 @@ function saveOrNot(preventSave) {
 }
 
 // Store city that user submits to search bar
-function storeSearch (noSave/*, event*/) {
-  // event.preventDefault();
+function storeSearch (noSave/*,event*/) {
+  //event.preventDefault();
   console.log(noSave);
 
   var new_data = searchChoice.value;
@@ -177,6 +177,7 @@ function storeSearch (noSave/*, event*/) {
   result = [...new Set(output)];
 
 
+  // Prevent display of the word "undefined" in search menu
   for (var i = 0; i < 12; i++) {
     
     if (result[i] === undefined) {
@@ -187,6 +188,7 @@ function storeSearch (noSave/*, event*/) {
 
   console.log(old_data);
   console.log(new_data);
+  console.log(result);
 
   displayResultsMenu(result);
 }

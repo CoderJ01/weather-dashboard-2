@@ -15,9 +15,9 @@ The purpose of this website is to display the weather conditions of any city tha
 ## Challenges
 For a novice programmer, the creation of a dashboard such as this one is a formidable undertaking. Through independent research of server-side APIs, said programmer will likely find out that API keys are generally best hidden. Some sites charge a user for the use of certain API keys. These keys can be stolen and maliciously used by unethical individuals. Should the programmer mistakenly push the keys onto GitHub or the like, the coder can delete the commits with the keys or set the repository to private and create another repository to showcase.
 
-Luckily, the API used for this repository can be rendered useless via the generation or another one via Open Weather. Upon my discovery of this, I set weather-dashboard (first version, [commits](https://github.com/CoderJ01/weather-dashboard/commits/main) here) to be viewed publicly.
-
 However, if the API is free and the user can generate another one from the personal account the API comes from, then temporarily exposing it for showcase isn't detrimental.
+
+Luckily, the API used for this repository can be rendered useless via the generation or another one via Open Weather. Upon my discovery of this, I set weather-dashboard (first version, [commits](https://github.com/CoderJ01/weather-dashboard/commits/main) here) to be viewed publicly.
 
 ## Website Link
 https://coderj01.github.io/weather-dashboard-2/
