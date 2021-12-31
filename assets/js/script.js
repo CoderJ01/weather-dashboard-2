@@ -167,10 +167,7 @@ function storeSearch (event) {
 }
 
 // display user's search history
-function displayResultsMenu(result) {
-
-  document.querySelector('.menu-display').innerHTML = "";
-  document.querySelector('.menu-display').style.background = "none";
+async function displayResultsMenu(result) {
 
   document.getElementById('menu-a').innerHTML = result[0];
   document.getElementById('menu-b').innerHTML = result[1];
@@ -186,7 +183,7 @@ function displayResultsMenu(result) {
   document.getElementById('menu-l').innerHTML = result[11];
 }
 
-displayResultsMenu(); 
+displayResultsMenu();
 
 async function searchInput(event) {
    

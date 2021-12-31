@@ -109,6 +109,7 @@ main {
 
 .search-heading h2 {
     text-align: center;
+    margin-left: -18px;
 }
 
 .bar {
@@ -119,6 +120,11 @@ main {
     width: 70%;
     height: 35px;
     margin-top: 10px;
+}
+
+.display-history h2 {
+    margin-left: 119px;
+
 }
 
 .menu-display {
