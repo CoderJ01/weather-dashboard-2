@@ -156,15 +156,14 @@ function storeSearch (noSave/*, event*/) {
 
   localStorage.setItem('data', JSON.stringify(old_data));
 
+  // If invalid input is submitted, "" will be passed to output variable to be deleted
   for (var i = 0; i < 12; i++) {
 
-    if (noSave === false) {
-      old_data[i] = old_data[i];
-      document.getElementById('austin').style.background = "green";
+    if (noSave !== false) {
+      new_data = "";
     }
     else {
-      blank = "";
-      document.getElementById('austin').style.background = "red";
+      new_data = new_data;
     }
   }
 
@@ -187,7 +186,7 @@ function storeSearch (noSave/*, event*/) {
   }
 
   console.log(old_data);
-  console.log(blank);
+  console.log(new_data);
 
   displayResultsMenu(result);
 }
@@ -275,7 +274,6 @@ async function searchInput(event) {
         alert("Error: " + response.statusText);
         preventSave = true;
       }
-      console.log(preventSave);
       saveOrNot(preventSave);
     })
     .catch(function(error) {
@@ -384,15 +382,15 @@ function uvIndex (uvi) {
     uvIndex.style.background = "none";
     uvIndex.style.fontWeight = "bold";
 
-    if (uvi >= 0 && uvi <= 2) {
+    if (uvi >= 0 && uvi <= 3) {
         uvIndex.style.background = "green";
         uvIndex.style.color = "white";
     }
-    else if (uvi >= 3 && uvi <= 5) {
+    else if (uvi >= 3 && uvi <= 6) {
         uvIndex.style.background = "yellow";
         uvIndex.style.color = "black";
     }
-    else if (uvi >= 6 && uvi <= 7) {
+    else if (uvi >= 6 && uvi <= 8) {
         uvIndex.style.background = "orange";
         uvIndex.style.color = "black";
     } 
