@@ -161,8 +161,6 @@ function storeSearch (event) {
     }
   }
 
-  console.log(result);
-
   displayResultsMenu(result);
 }
 
@@ -200,6 +198,7 @@ async function searchInput(event) {
     fetch(weatherChoice)
     .then(function(response) {
       // request was successful
+      var preventSave = false;
       if (response.ok) {  
         response.json().then(function(data) {
 
@@ -247,14 +246,26 @@ async function searchInput(event) {
       } 
       else {
         alert("Error: " + response.statusText);
+        preventSave = true;
       }
+      console.log(preventSave);
+      saveOrNot(preventSave);
     })
     .catch(function(error) {
       alert("Unable to connect to Open Weather");
     });
-  
+
     document.getElementById('city').textContent = searchChoice.value + " " + today;
 }
+
+function saveOrNot (preventSave) {
+  console.log(preventSave);
+
+  return preventSave;
+}
+
+var hey = saveOrNot();
+console.log(hey);
 
 // display weather conditions for the current day
 function displayCurrent (data, temp, wind, humid, uvi) {
