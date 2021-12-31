@@ -133,9 +133,17 @@ function infoWeather(chosenAPI, city) {
 
 var searchChoice = document.getElementById('input'); 
 
+// function corresponds to input validity
+// if input is valid (no alert), noSave = false; else, noSave = true
+function saveOrNot(preventSave) {
+  var noSave = preventSave;
+  storeSearch(noSave);
+}
+
 // Store city that user submits to search bar
-function storeSearch (event) {
-  event.preventDefault();
+function storeSearch (noSave/*, event*/) {
+  // event.preventDefault();
+  console.log(noSave);
 
   var new_data = searchChoice.value;
   
@@ -148,18 +156,38 @@ function storeSearch (event) {
 
   localStorage.setItem('data', JSON.stringify(old_data));
 
-  var output = old_data.filter(function (x) {
+  for (var i = 0; i < 12; i++) {
+
+    if (noSave === false) {
+      old_data[i] = old_data[i];
+      document.getElementById('austin').style.background = "green";
+    }
+    else {
+      blank = "";
+      document.getElementById('austin').style.background = "red";
+    }
+  }
+
+  // delete blanks from array
+  var output = blank.filter(function (x) {
     return x;
   });
 
+  // delete duplicates from array
   var result = [];
   result = [...new Set(output)];
 
+
   for (var i = 0; i < 12; i++) {
+    
     if (result[i] === undefined) {
       result[i] = "";
     }
+  
   }
+
+  console.log(old_data);
+  console.log(blank);
 
   displayResultsMenu(result);
 }
@@ -179,9 +207,8 @@ async function displayResultsMenu(result) {
   document.getElementById('menu-j').innerHTML = result[9];
   document.getElementById('menu-k').innerHTML = result[10];
   document.getElementById('menu-l').innerHTML = result[11];
-}
 
-displayResultsMenu();
+}
 
 async function searchInput(event) {
    
@@ -198,8 +225,8 @@ async function searchInput(event) {
     fetch(weatherChoice)
     .then(function(response) {
       // request was successful
-      var preventSave = false;
       if (response.ok) {  
+        var preventSave = false; 
         response.json().then(function(data) {
 
           var weatherUVI = apiUVI + data.coord.lat + units + data.coord.lon + settingsUVI;
@@ -257,15 +284,6 @@ async function searchInput(event) {
 
     document.getElementById('city').textContent = searchChoice.value + " " + today;
 }
-
-function saveOrNot (preventSave) {
-  console.log(preventSave);
-
-  return preventSave;
-}
-
-var hey = saveOrNot();
-console.log(hey);
 
 // display weather conditions for the current day
 function displayCurrent (data, temp, wind, humid, uvi) {
