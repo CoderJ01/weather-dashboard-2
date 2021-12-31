@@ -133,19 +133,20 @@ function infoWeather(chosenAPI, city) {
 
 var searchChoice = document.getElementById('input'); 
 
-// function corresponds to input validity
-// if input is valid (no alert), noSave = false; else, noSave = true
-function saveOrNot(preventSave) {
-  var noSave = preventSave;
-  storeSearch(noSave);
-}
-
 // Store city that user submits to search bar
-function storeSearch (noSave/*,event*/) {
-  //event.preventDefault();
-  console.log(noSave);
+function storeSearch (preventSave) {
 
-  var new_data = searchChoice.value;
+  console.log(preventSave);
+
+  var new_data =  searchChoice.value;
+
+   // If invalid input is submitted, "" will be passed to output variable to be deleted
+  if (preventSave === false) {
+    new_data = new_data;
+  }
+    else {
+      new_data = "";
+  }
   
   if(localStorage.getItem('data') === null) {
       localStorage.setItem('data', '[]');
@@ -156,19 +157,8 @@ function storeSearch (noSave/*,event*/) {
 
   localStorage.setItem('data', JSON.stringify(old_data));
 
-  // If invalid input is submitted, "" will be passed to output variable to be deleted
-  for (var i = 0; i < 12; i++) {
-
-    if (noSave !== false) {
-      new_data = "";
-    }
-    else {
-      new_data = new_data;
-    }
-  }
-
   // delete blanks from array
-  var output = blank.filter(function (x) {
+  var output = old_data.filter(function (x) {
     return x;
   });
 
@@ -187,7 +177,7 @@ function storeSearch (noSave/*,event*/) {
   }
 
   console.log(old_data);
-  console.log(new_data);
+  console.log("New: " + new_data);
   console.log(result);
 
   displayResultsMenu(result);
@@ -276,7 +266,7 @@ async function searchInput(event) {
         alert("Error: " + response.statusText);
         preventSave = true;
       }
-      saveOrNot(preventSave);
+      storeSearch(preventSave);
     })
     .catch(function(error) {
       alert("Unable to connect to Open Weather");
