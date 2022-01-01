@@ -164,6 +164,7 @@ main {
 .menu-display p {
     font-size: 17px;
     margin-left: 4px;
+    text-align: center;
 }
 
 .menu-display p:hover {

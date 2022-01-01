@@ -271,13 +271,14 @@ async function getCoord(latitude, longitude, name) {
     cityName[i] = name[i]
   }
 
-  console.log(cityName);
+  var testing;
+  testing = document.getElementById('menu-a');
+  testing.addEventListener("click", menuA(climateChoice, cityName));
 }
 
-
-async function menuA (climateChoice, cityName) {
+function menuA (climateChoice, cityName) {
   var chosenAPI = climateChoice[0];
-  var city = "Testing";
+  var city = "Testing123";
   infoWeather(chosenAPI, city);
 }
 
@@ -389,7 +390,6 @@ function windForFive(fiveDayWind) {
     document.getElementById('t-wind').textContent = fiveDayWind[3] + " ";
     document.getElementById('o-wind').textContent = fiveDayWind[4] + " ";
     document.getElementById('i-wind').textContent = fiveDayWind[5] + " ";
-
 }
 
 // get humidity for five days
@@ -486,5 +486,7 @@ enterKey.addEventListener("keyup", function(event) {
     }
 });
 
+
 document.getElementById('search').addEventListener("click", searchInput);
+
  
