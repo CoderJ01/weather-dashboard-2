@@ -206,7 +206,9 @@ function apiFromHistory (historyChoice) {
   var weatherChoice = [];
 
   for (var i = 0; i < 12; i++) {
-    weatherChoice[i] = api + historyChoice[i] + settings;
+    if(historyChoice[i] !== "") {
+      weatherChoice[i] = api + historyChoice[i] + settings;
+    }
   }
 
   var stored = historyChoice;
@@ -220,72 +222,52 @@ async function fetchForCoord(stored, chosen) {
   var response = [];
   var data = [];
 
-  // fetch API only for existing cities in search history
-  if (stored[0] !== "") {
-    response[0] = await fetch(chosen[0]);
-    data[0] = await response[0].json();
+  // fetch APIs of only existing cities in search menu
+  for (var i = 0; i < 12; i++) {
+    if (stored[i] !== "") {
+      response[i] = await fetch(chosen[i]);
+      data[i] = await response[i].json();
+    }
   }
 
-  if (stored[1] !== "") {
-    response[1] = await fetch(chosen[1]);
-    data[1] = await response[1].json();
-  }
-  
-  if (stored[2] !== "") {
-    response[2] = await fetch(chosen[2]);
-    data[2] = await response[2].json();
+  var latitude = [];
+  var longitude = [];
+
+  // Obtain coordinates for use
+  for (var i = 0; i < 12; i++) {
+    if (stored[i] !== "") {
+      latitude[i] = data[i].coord.lat;
+      longitude[i] = data[i].coord.lon;
+    }
   }
 
-  if (stored[3] !== "") {
-    response[3] = await fetch(chosen[3]);
-    data[3] = await response[3].json();
+  var name = [];
+
+  // Obtain city names
+  for (var i = 0; i < 12; i++) {
+    if (stored[i] !== "") {
+      name[i] = stored[i];
+    }
   }
 
-  if (stored[4] !== "") {
-    response[4] = await fetch(chosen[4]);
-    data[4] = await response[4].json();
-  }
+  getCoordAndNames(latitude, longitude, name);
+}
 
-  if (stored[5] !== "") {
-    response[5] = await fetch(chosen[5]);
-    data[5] = await response[5].json();
-  }
+// get second set of APIs for the UV index
+function getCoordAndNames(latitude, longitude, name) {
+  var api = 'https://api.openweathermap.org/data/2.5/onecall?lat=';
+  var units = '&&units=imperial&lon=';
+  var settings = '&exclude=hourly&appid=' + freeAPI;
+  var weatherChoice =[];
 
-  if (stored[6] !== "") {
-    response[6] = await fetch(chosen[6]);
-    data[6] = await response[6].json();
-  }
-
-  if (stored[7] !== "") {
-    response[7] = await fetch(chosen[7]);
-    data[7] = await response[7].json();
-  }
-
-  if (stored[8] !== "") {
-    response[8] = await fetch(chosen[8]);
-    data[8] = await response[8].json();
-  }
-
-  if (stored[9] !== "") {
-    response[9] = await fetch(chosen[9]);
-    data[9] = await response[9].json();
-  }
-
-  if (stored[10] !== "") {
-    response[10] = await fetch(chosen[10]);
-    data[10] = await response[10].json();
-  }
-
-  if (stored[11] !== "") {
-    response[11] = await fetch(chosen[11]);
-    data[11] = await response[11].json();
-  }
-
+  for (var i = 0; i < 12; i++) {
+    weatherChoice[i] = api + latitude[i] + units + longitude[i] + settings;
+  } 
 }
 
 async function menuA () {
-  var chosenAPI = weatherAPI[7];
-  var city = "Atlanta ";
+  var chosenAPI;
+  var city;
   infoWeather(chosenAPI, city);
 }
 
