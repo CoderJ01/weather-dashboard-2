@@ -1,0 +1,36 @@
+  
+  // response[0] = await fetch(chosen[0]);
+  // data[0] = await response[0].json();
+
+  // response[1] = await fetch(chosen[1]);
+  // data[1] = await response[1].json();
+
+  // response[2] = await fetch(chosen[2]);
+  // data[2] = await response[2].json();
+
+  // response[3] = await fetch(chosen[3]);
+  // data[3] = await response[3].json();
+
+  // response[4] = await fetch(chosen[4]);
+  // data[4] = await response[4].json();
+
+  // response[5] = await fetch(chosen[5]);
+  // data[5] = await response[5].json();
+
+  // response[10] = await fetch(chosen[10]);
+  // data[10] = await response[10].json();
+
+  // response[11] = await fetch(chosen[11]);
+  // data[11] = await response[11].json();
+  
+  // response[6] = await fetch(chosen[6]);
+  // data[6] = await response[6].json();
+
+  // response[7] = await fetch(chosen[7]);
+  // data[7] = await response[7].json();
+
+  // response[8] = await fetch(chosen[8]);
+  // data[8] = await response[8].json();
+
+  // response[9] = await fetch(chosen[9]);
+  // data[9] = awiat fetch(chosen[9])

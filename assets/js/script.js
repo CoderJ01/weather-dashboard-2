@@ -136,11 +136,10 @@ var searchChoice = document.getElementById('input');
 // Store city that user submits to search bar
 function storeSearch (preventSave) {
 
-  console.log(preventSave);
-
   var new_data =  searchChoice.value;
 
-   // If invalid input is submitted, "" will be passed to output variable to be deleted
+  // If invalid input is submitted, "" will be passed to output variable to be deleted
+  // Prevent storage of invalid inputs
   if (preventSave === false) {
     new_data = new_data;
   }
@@ -195,8 +194,99 @@ async function displayResultsMenu(result) {
   document.getElementById('menu-k').innerHTML = result[10];
   document.getElementById('menu-l').innerHTML = result[11];
 
-  console.log(result[4]);
+  var historyChoice = result;
+  apiFromHistory(historyChoice);
+}
 
+// set up first set of APIs
+function apiFromHistory (historyChoice) {
+  var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
+  var settings = '&units=imperial&appid=' + freeAPI;
+
+  var weatherChoice = [];
+
+  for (var i = 0; i < 12; i++) {
+    weatherChoice[i] = api + historyChoice[i] + settings;
+  }
+
+  var stored = historyChoice;
+  var chosen = weatherChoice;
+  fetchForCoord(stored, chosen);
+}
+
+// fetch first set of APIs to retrieve lat and log coordinates
+async function fetchForCoord(stored, chosen) {
+
+  var response = [];
+  var data = [];
+
+  // fetch API only for existing cities in search history
+  if (stored[0] !== "") {
+    response[0] = await fetch(chosen[0]);
+    data[0] = await response[0].json();
+  }
+
+  if (stored[1] !== "") {
+    response[1] = await fetch(chosen[1]);
+    data[1] = await response[1].json();
+  }
+  
+  if (stored[2] !== "") {
+    response[2] = await fetch(chosen[2]);
+    data[2] = await response[2].json();
+  }
+
+  if (stored[3] !== "") {
+    response[3] = await fetch(chosen[3]);
+    data[3] = await response[3].json();
+  }
+
+  if (stored[4] !== "") {
+    response[4] = await fetch(chosen[4]);
+    data[4] = await response[4].json();
+  }
+
+  if (stored[5] !== "") {
+    response[5] = await fetch(chosen[5]);
+    data[5] = await response[5].json();
+  }
+
+  if (stored[6] !== "") {
+    response[6] = await fetch(chosen[6]);
+    data[6] = await response[6].json();
+  }
+
+  if (stored[7] !== "") {
+    response[7] = await fetch(chosen[7]);
+    data[7] = await response[7].json();
+  }
+
+  if (stored[8] !== "") {
+    response[8] = await fetch(chosen[8]);
+    data[8] = await response[8].json();
+  }
+
+  if (stored[9] !== "") {
+    response[9] = await fetch(chosen[9]);
+    data[9] = await response[9].json();
+  }
+
+  if (stored[10] !== "") {
+    response[10] = await fetch(chosen[10]);
+    data[10] = await response[10].json();
+  }
+
+  if (stored[11] !== "") {
+    response[11] = await fetch(chosen[11]);
+    data[11] = await response[11].json();
+  }
+
+}
+
+async function menuA () {
+  var chosenAPI = weatherAPI[7];
+  var city = "Atlanta ";
+  infoWeather(chosenAPI, city);
 }
 
 async function searchInput(event) {
