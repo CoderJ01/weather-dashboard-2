@@ -204,7 +204,6 @@ function apiFromHistory (historyChoice) {
   var settings = '&units=imperial&appid=' + freeAPI;
 
   var weatherChoice = [];
-
   for (var i = 0; i < 12; i++) {
     if(historyChoice[i] !== "") {
       weatherChoice[i] = api + historyChoice[i] + settings;
@@ -250,24 +249,35 @@ async function fetchForCoord(stored, chosen) {
     }
   }
 
-  getCoordAndNames(latitude, longitude, name);
+  getCoord(latitude, longitude, name);
 }
 
-// get second set of APIs for the UV index
-function getCoordAndNames(latitude, longitude, name) {
+// get second set of APIs for the UV index 
+async function getCoord(latitude, longitude, name) {
   var api = 'https://api.openweathermap.org/data/2.5/onecall?lat=';
   var units = '&&units=imperial&lon=';
   var settings = '&exclude=hourly&appid=' + freeAPI;
-  var weatherChoice =[];
+  var weatherChoice = [];
+  var climateChoice = [];
+  var cityName = []; 
 
   for (var i = 0; i < 12; i++) {
     weatherChoice[i] = api + latitude[i] + units + longitude[i] + settings;
-  } 
+  }
+
+  // Remove APIs with undefined coordinates (along w/ corresponding names)
+  for (var i = 0; i < latitude.length; i++) {
+    climateChoice[i] = weatherChoice[i];
+    cityName[i] = name[i]
+  }
+
+  console.log(cityName);
 }
 
-async function menuA () {
-  var chosenAPI;
-  var city;
+
+async function menuA (climateChoice, cityName) {
+  var chosenAPI = climateChoice[0];
+  var city = "Testing";
   infoWeather(chosenAPI, city);
 }
 
