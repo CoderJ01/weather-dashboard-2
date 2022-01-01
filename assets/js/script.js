@@ -254,6 +254,8 @@ async function fetchForCoord(stored, chosen) {
 
 // get second set of APIs for the UV index 
 async function getCoord(latitude, longitude, name) {
+  var event;
+  event.preventDefault();
   var api = 'https://api.openweathermap.org/data/2.5/onecall?lat=';
   var units = '&&units=imperial&lon=';
   var settings = '&exclude=hourly&appid=' + freeAPI;
@@ -271,9 +273,11 @@ async function getCoord(latitude, longitude, name) {
     cityName[i] = name[i]
   }
 
-  var testing;
-  testing = document.getElementById('menu-a');
-  testing.addEventListener("click", menuA(climateChoice, cityName));
+  // can't pass climateChoice nor cityname into menuA
+  // menuA will be called before onClick (html) is triggered
+  // menuA(climateChoice, cityName);
+
+  // can't return climateChoice (nor return cityName);
 }
 
 function menuA (climateChoice, cityName) {
