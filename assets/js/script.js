@@ -131,6 +131,81 @@ function infoWeather(chosenAPI, city) {
   document.getElementById('city').textContent = city + today;
 }
 
+
+async function searchInput(event) {
+   
+  var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
+  var settings = '&units=imperial&appid=' + freeAPI;
+
+  var apiUVI = 'https://api.openweathermap.org/data/2.5/onecall?lat=';
+  var units = '&&units=imperial&lon=';
+  var settingsUVI = '&exclude=hourly&appid=' + freeAPI;
+
+  event.preventDefault();
+  var weatherChoice = api + searchChoice.value + settings;
+
+  fetch(weatherChoice)
+  .then(function(response) {
+    // request was successful
+    if (response.ok) {  
+      var preventSave = false; 
+      response.json().then(function(data) {
+
+        var weatherUVI = apiUVI + data.coord.lat + units + data.coord.lon + settingsUVI;
+
+        // fetches API for the retrieval of UV index, the API fetched from weatherChoice
+        // first API within this function lacks the info for UV index
+        fetch(weatherUVI)
+        .then(function (responseUVI) {
+          if(responseUVI.ok) {
+            responseUVI.json().then(function (dataUVI) {
+
+              var temp = data.main.temp;
+              var wind = data.wind.speed + " ";
+              var humid = data.main.humidity;
+              var uvi = dataUVI.current.uvi;
+              displayCurrent (data, temp, wind, humid, uvi);
+              var fiveDayTemp = [];
+              var fiveDayWind = [];
+              var fiveDayHumid = [];
+              var description = [];
+    
+              for (var i = 0; i < 6; i++) {
+                  fiveDayTemp[i] = dataUVI.daily[i].temp.day;
+                  fiveDayWind[i] = dataUVI.daily[i].wind_speed;
+                  fiveDayHumid[i] = dataUVI.daily[i].humidity;
+                  description[i] = dataUVI.daily[i].weather[0].description;
+              }
+    
+              tempForFive(fiveDayTemp);
+              windForFive(fiveDayWind);
+              humidForFive(fiveDayHumid);
+              displayIcons(wind, description);
+              uvIndex(uvi);
+            });
+          }
+          else {
+            alert("Error: " + responseUVI.statusText);
+          }
+        }).catch(function (error) {
+            alert("Unable to connect to Open Weather");
+        }); 
+
+      });
+    } 
+    else {
+      alert("Error: " + response.statusText);
+      preventSave = true;
+    }
+    storeSearch(preventSave);
+  })
+  .catch(function(error) {
+    alert("Unable to connect to Open Weather");
+  });
+
+  document.getElementById('city').textContent = searchChoice.value + " " + today;
+}
+
 var searchChoice = document.getElementById('input'); 
 
 // Store city that user submits to search bar
@@ -284,80 +359,6 @@ function menuA (climateChoice, cityName) {
   var chosenAPI = climateChoice[0];
   var city = "Testing123";
   infoWeather(chosenAPI, city);
-}
-
-async function searchInput(event) {
-   
-    var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
-    var settings = '&units=imperial&appid=' + freeAPI;
-
-    var apiUVI = 'https://api.openweathermap.org/data/2.5/onecall?lat=';
-    var units = '&&units=imperial&lon=';
-    var settingsUVI = '&exclude=hourly&appid=' + freeAPI;
-
-    event.preventDefault();
-    var weatherChoice = api + searchChoice.value + settings;
-
-    fetch(weatherChoice)
-    .then(function(response) {
-      // request was successful
-      if (response.ok) {  
-        var preventSave = false; 
-        response.json().then(function(data) {
-
-          var weatherUVI = apiUVI + data.coord.lat + units + data.coord.lon + settingsUVI;
-
-          // fetches API for the retrieval of UV index, the API fetched from weatherChoice
-          // first API within this function lacks the info for UV index
-          fetch(weatherUVI)
-          .then(function (responseUVI) {
-            if(responseUVI.ok) {
-              responseUVI.json().then(function (dataUVI) {
-
-                var temp = data.main.temp;
-                var wind = data.wind.speed + " ";
-                var humid = data.main.humidity;
-                var uvi = dataUVI.current.uvi;
-                displayCurrent (data, temp, wind, humid, uvi);
-                var fiveDayTemp = [];
-                var fiveDayWind = [];
-                var fiveDayHumid = [];
-                var description = [];
-      
-                for (var i = 0; i < 6; i++) {
-                    fiveDayTemp[i] = dataUVI.daily[i].temp.day;
-                    fiveDayWind[i] = dataUVI.daily[i].wind_speed;
-                    fiveDayHumid[i] = dataUVI.daily[i].humidity;
-                    description[i] = dataUVI.daily[i].weather[0].description;
-                }
-      
-                tempForFive(fiveDayTemp);
-                windForFive(fiveDayWind);
-                humidForFive(fiveDayHumid);
-                displayIcons(wind, description);
-                uvIndex(uvi);
-              });
-            }
-            else {
-              alert("Error: " + responseUVI.statusText);
-            }
-          }).catch(function (error) {
-              alert("Unable to connect to Open Weather");
-          }); 
-
-        });
-      } 
-      else {
-        alert("Error: " + response.statusText);
-        preventSave = true;
-      }
-      storeSearch(preventSave);
-    })
-    .catch(function(error) {
-      alert("Unable to connect to Open Weather");
-    });
-
-    document.getElementById('city').textContent = searchChoice.value + " " + today;
 }
 
 // display weather conditions for the current day
