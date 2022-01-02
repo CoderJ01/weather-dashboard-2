@@ -131,7 +131,6 @@ function infoWeather(chosenAPI, city) {
   document.getElementById('city').textContent = city + today;
 }
 
-
 async function searchInput(event) {
    
   var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
@@ -148,7 +147,7 @@ async function searchInput(event) {
   .then(function(response) {
     // request was successful
     if (response.ok) {  
-      var preventSave = false; 
+      //var preventSave = false; 
       response.json().then(function(data) {
 
         var weatherUVI = apiUVI + data.coord.lat + units + data.coord.lon + settingsUVI;
@@ -195,9 +194,10 @@ async function searchInput(event) {
     } 
     else {
       alert("Error: " + response.statusText);
-      preventSave = true;
+      //preventSave = true;
     }
-    storeSearch(preventSave);
+    //storeSearch(preventSave); // uncommit and pass on to storeSearch() to prioritize
+    // storage quality over searchability
   })
   .catch(function(error) {
     alert("Unable to connect to Open Weather");
@@ -209,18 +209,19 @@ async function searchInput(event) {
 var searchChoice = document.getElementById('input'); 
 
 // Store city that user submits to search bar
-function storeSearch (preventSave) {
+function storeSearch (event /*preventSave*/) {
+  //event.preventDefault();
 
   var new_data =  searchChoice.value;
 
-  // If invalid input is submitted, "" will be passed to output variable to be deleted
-  // Prevent storage of invalid inputs
-  if (preventSave === false) {
-    new_data = new_data;
-  }
-    else {
-      new_data = "";
-  }
+  // // If invalid input is submitted, "" will be passed to output variable to be deleted
+  // // Prevent storage of invalid inputs
+  // if (preventSave === false) {
+  //   new_data = new_data;
+  // }
+  //   else {
+  //     new_data = "";
+  // }
   
   if(localStorage.getItem('data') === null) {
       localStorage.setItem('data', '[]');
@@ -250,11 +251,14 @@ function storeSearch (preventSave) {
   
   }
 
-  displayResultsMenu(result);
+  return result;
 }
 
+var result = storeSearch();
+console.log(result[1]);
+
 // display user's search history
-async function displayResultsMenu(result) {
+async function displayResultsMenu() {
 
   document.getElementById('menu-a').innerHTML = result[0];
   document.getElementById('menu-b').innerHTML = result[1];
@@ -269,7 +273,64 @@ async function displayResultsMenu(result) {
   document.getElementById('menu-k').innerHTML = result[10];
   document.getElementById('menu-l').innerHTML = result[11];
 
-  var historyChoice = result;
+  console.log(result);
+}
+
+displayResultsMenu();
+
+// Allow user to retrieve weather conditions from search history
+function menuA () {
+  var historyChoice = result[0];
+  apiFromHistory(historyChoice);
+}
+
+function menuB () {
+  var historyChoice = result[1];
+  apiFromHistory(historyChoice);
+}
+
+function menuC () {
+  var historyChoice = result[2];
+  apiFromHistory(historyChoice);
+}
+
+function menuD () {
+  var historyChoice = result[3];
+  apiFromHistory(historyChoice);
+}
+
+function menuE () {
+  var historyChoice = result[4];
+  apiFromHistory(historyChoice);
+}
+
+function menuF () {
+  var historyChoice = result[6];
+  apiFromHistory(historyChoice);
+}
+
+function menuG () {
+  var historyChoice = result[7];
+  apiFromHistory(historyChoice);
+}
+
+function menuH () {
+  var historyChoice = result[8];
+  apiFromHistory(historyChoice);
+}
+
+function menuI () {
+  var historyChoice = result[9];
+  apiFromHistory(historyChoice);
+}
+
+function menuJ () {
+  var historyChoice = result[10];
+  apiFromHistory(historyChoice);
+}
+
+function menuK () {
+  var historyChoice = result[11];
   apiFromHistory(historyChoice);
 }
 
@@ -278,12 +339,7 @@ function apiFromHistory (historyChoice) {
   var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
   var settings = '&units=imperial&appid=' + freeAPI;
 
-  var weatherChoice = [];
-  for (var i = 0; i < 12; i++) {
-    if(historyChoice[i] !== "") {
-      weatherChoice[i] = api + historyChoice[i] + settings;
-    }
-  }
+  weatherChoice = api + historyChoice + settings;
 
   var stored = historyChoice;
   var chosen = weatherChoice;
@@ -293,71 +349,35 @@ function apiFromHistory (historyChoice) {
 // fetch first set of APIs to retrieve lat and log coordinates
 async function fetchForCoord(stored, chosen) {
 
-  var response = [];
-  var data = [];
-
   // fetch APIs of only existing cities in search menu
-  for (var i = 0; i < 12; i++) {
-    if (stored[i] !== "") {
-      response[i] = await fetch(chosen[i]);
-      data[i] = await response[i].json();
-    }
-  }
-
-  var latitude = [];
-  var longitude = [];
+  var response = await fetch(chosen);
+  var data = await response.json();
 
   // Obtain coordinates for use
-  for (var i = 0; i < 12; i++) {
-    if (stored[i] !== "") {
-      latitude[i] = data[i].coord.lat;
-      longitude[i] = data[i].coord.lon;
-    }
-  }
-
-  var name = [];
+  var latitude = data.coord.lat;
+  var longitude = data.coord.lon;
 
   // Obtain city names
-  for (var i = 0; i < 12; i++) {
-    if (stored[i] !== "") {
-      name[i] = stored[i];
-    }
-  }
-
+  var name = stored;
+    
   getCoord(latitude, longitude, name);
 }
 
 // get second set of APIs for the UV index 
 async function getCoord(latitude, longitude, name) {
-  var event;
-  event.preventDefault();
   var api = 'https://api.openweathermap.org/data/2.5/onecall?lat=';
   var units = '&&units=imperial&lon=';
   var settings = '&exclude=hourly&appid=' + freeAPI;
-  var weatherChoice = [];
-  var climateChoice = [];
-  var cityName = []; 
+ 
+  var weatherChoice = api + latitude + units + longitude + settings;
+  var cityName = name + " ";
 
-  for (var i = 0; i < 12; i++) {
-    weatherChoice[i] = api + latitude[i] + units + longitude[i] + settings;
-  }
-
-  // Remove APIs with undefined coordinates (along w/ corresponding names)
-  for (var i = 0; i < latitude.length; i++) {
-    climateChoice[i] = weatherChoice[i];
-    cityName[i] = name[i]
-  }
-
-  // can't pass climateChoice nor cityname into menuA
-  // menuA will be called before onClick (html) is triggered
-  // menuA(climateChoice, cityName);
-
-  // can't return climateChoice (nor return cityName);
+  clickedCity(weatherChoice, cityName)
 }
-
-function menuA (climateChoice, cityName) {
-  var chosenAPI = climateChoice[0];
-  var city = "Testing123";
+  
+function clickedCity (weatherChoice, cityName) {
+  var chosenAPI = weatherChoice;
+  var city = cityName;
   infoWeather(chosenAPI, city);
 }
 
