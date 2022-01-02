@@ -209,19 +209,20 @@ async function searchInput(event) {
 var searchChoice = document.getElementById('input'); 
 
 // Store city that user submits to search bar
-function storeSearch (event /*preventSave*/) {
-  //event.preventDefault();
+function storeSearch (event) {
 
   var new_data =  searchChoice.value;
 
-  // // If invalid input is submitted, "" will be passed to output variable to be deleted
-  // // Prevent storage of invalid inputs
-  // if (preventSave === false) {
-  //   new_data = new_data;
-  // }
-  //   else {
-  //     new_data = "";
-  // }
+  // Prohibit storage of popular cities with buttons
+  if(new_data=== "Austin" || new_data === "Chicago" || new_data === "New York" || new_data === "Orlando" || 
+  new_data === "San Franciso" || new_data === "Seattle" || new_data === "Denver" || new_data === "Atlanta") 
+  {
+    new_data = "";
+  }
+  else 
+  {
+    new_data = new_data;
+  }
   
   if(localStorage.getItem('data') === null) {
       localStorage.setItem('data', '[]');
@@ -255,7 +256,6 @@ function storeSearch (event /*preventSave*/) {
 }
 
 var result = storeSearch();
-console.log(result[1]);
 
 // display user's search history
 async function displayResultsMenu() {
@@ -272,8 +272,6 @@ async function displayResultsMenu() {
   document.getElementById('menu-j').innerHTML = result[9];
   document.getElementById('menu-k').innerHTML = result[10];
   document.getElementById('menu-l').innerHTML = result[11];
-
-  console.log(result);
 }
 
 displayResultsMenu();
