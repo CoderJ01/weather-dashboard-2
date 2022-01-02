@@ -41,6 +41,7 @@ function retrieveAPIs() {
 
 var weatherAPI = retrieveAPIs();
 
+// Popular cities (buttons)
 async function infoChicago () {
   var chosenAPI = weatherAPI[0];
   var city = "Chicago ";
@@ -89,6 +90,7 @@ async function infoAtlanta () {
   infoWeather(chosenAPI, city);
 }
 
+// fetch info for API (button or history menu)
 function infoWeather(chosenAPI, city) {
   fetch(chosenAPI)
   .then(function(response) {
@@ -131,6 +133,7 @@ function infoWeather(chosenAPI, city) {
   document.getElementById('city').textContent = city + today;
 }
 
+// fetch API info for searched city
 async function searchInput(event) {
    
   var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
@@ -214,7 +217,7 @@ function storeSearch (event) {
   var new_data =  searchChoice.value;
 
   // Prohibit storage of popular cities with buttons
-  if(new_data=== "Austin" || new_data === "Chicago" || new_data === "New York" || new_data === "Orlando" || 
+  if(new_data === "Austin" || new_data === "Chicago" || new_data === "New York" || new_data === "Orlando" || 
   new_data === "San Franciso" || new_data === "Seattle" || new_data === "Denver" || new_data === "Atlanta") 
   {
     new_data = "";
@@ -241,7 +244,6 @@ function storeSearch (event) {
   // delete duplicates from array
   var result = [];
   result = [...new Set(output)];
-
 
   // Prevent display of the word "undefined" in search menu
   for (var i = 0; i < 12; i++) {
@@ -332,7 +334,7 @@ function menuK () {
   apiFromHistory(historyChoice);
 }
 
-// set up first set of APIs
+// set up first API from clicked city (history menu)
 function apiFromHistory (historyChoice) {
   var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
   var settings = '&units=imperial&appid=' + freeAPI;
@@ -344,10 +346,9 @@ function apiFromHistory (historyChoice) {
   fetchForCoord(stored, chosen);
 }
 
-// fetch first set of APIs to retrieve lat and log coordinates
+// fetch first API for lat and lon cooord
 async function fetchForCoord(stored, chosen) {
 
-  // fetch APIs of only existing cities in search menu
   var response = await fetch(chosen);
   var data = await response.json();
 
@@ -361,7 +362,7 @@ async function fetchForCoord(stored, chosen) {
   getCoord(latitude, longitude, name);
 }
 
-// get second set of APIs for the UV index 
+// get second API for the UV index 
 async function getCoord(latitude, longitude, name) {
   var api = 'https://api.openweathermap.org/data/2.5/onecall?lat=';
   var units = '&&units=imperial&lon=';
@@ -373,6 +374,7 @@ async function getCoord(latitude, longitude, name) {
   clickedCity(weatherChoice, cityName)
 }
   
+// Pass on info to infoWeather()
 function clickedCity (weatherChoice, cityName) {
   var chosenAPI = weatherChoice;
   var city = cityName;
