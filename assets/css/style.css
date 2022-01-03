@@ -109,6 +109,12 @@ main {
 
 .search-heading h2 {
     text-align: center;
+    margin-left: -18px;
+}
+
+.search-heading p {
+    margin-left: 96px;
+    margin-top: -10px;
 }
 
 .bar {
@@ -119,6 +125,11 @@ main {
     width: 70%;
     height: 35px;
     margin-top: 10px;
+}
+
+.display-history h2 {
+    margin-left: 119px;
+
 }
 
 .bar button {
@@ -145,6 +156,30 @@ main {
     border-radius: 5px;
 }
 
+.menu-display {
+    background-color: #566573;
+    width: 72%;
+    margin-left: 50px;
+    margin-top: 0px;
+    color: white;
+    border-radius: 5px;
+    position: absolute;
+}
+
+.menu-display p {
+    font-size: 17px;
+    margin-left: 4px;
+    text-align: center;
+}
+
+.menu-display p:hover {
+    text-decoration: underline;
+}
+
+.menu-display p:active {
+    color: #090CED;
+}
+
 @media screen and (max-width: 768px) {
 
     header {
@@ -155,7 +190,7 @@ main {
     }
 
     header h1 {
-        margin-left: -90px;
+        margin-left: -95px;
         font-size: 75px;
     }
 
@@ -168,6 +203,12 @@ main {
    .search h2 {
        font-size: 50px;
        margin-left: -15%;
+   }
+
+   .search p {
+       font-size: 30px;
+       margin-top: -5%;
+       margin-left: 145px;
    }
 
    .bar input {
@@ -227,6 +268,19 @@ main {
        width: 19%;
        height: 390px;
    }
+
+   .display-history {
+       margin-top: 1200px;
+   }
+
+   .display-history h2 {
+       margin-left: 165px;
+   }
+
+   .display-history p {
+       margin-top: 10px;
+       margin-right: 145px;
+   }
 }
 
 @media screen and (max-width: 540px) {
@@ -237,15 +291,24 @@ main {
 
     header h1 {
         font-size: 80px;
-        margin-left: -3px;
+        margin-left: -65px;
     }
 
     .search {
-        margin-left: 40px;
+        margin-left: 13px;
+        margin-top: 90px;
     }
 
-    .search-heading h2 {
-        margin-left: -55px;
+    .search h2 {
+        margin-left: 60px;
+        margin-top: -40px;
+        position: absolute;
+    }
+
+    .search p {
+        position: absolute;
+        margin-left: 57px;
+        margin-top: 25px;
     }
 
     .bar input {
@@ -258,8 +321,8 @@ main {
 
     .conditions {
         width: 95%;
-        margin-top: 1000px;
-        margin-left: 26px;
+        margin-top: 1050px;
+        margin-left: 0px;
     }
 
     .current {
@@ -274,21 +337,61 @@ main {
         width: 20%;
         height: 275px;
     }
+
+    .display-history {
+        margin-top: 1350px;
+        margin-left: 23px;
+    }
+
+    .display-history h2 {
+        margin-left: 60px;
+    }
+
+    .menu-display {
+        background-color: #AEB6BF;
+        margin-top: 50px;
+        margin-left: 80px;
+    }
+
+    .display-history p {
+        margin-left: 20px;
+        position: relative;
+        color: #090CED;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    .display-history p:active {
+        color: #34495E;
+    }
+
+    #menu-a, #menu-b, #menu-c, #menu-d, #menu-e, #menu-f,
+    #menu-g, #menu-h, #menu-i, #menu-j, #menu-k,
+    #menu-l
+    {
+        position: relative;
+        margin-top: 0;
+    }
 }
 
 @media screen and (max-width: 414px) {
     
     header h1 {
-        margin: 8px;
+        margin-left: -75px;
     }
 
     .search {
-        margin-left: 18px;
-        margin-top: 0px;
+        margin-left: -14px;
+        margin-top: 80px;
     }
 
     .search h2 {
-        margin-left: -10px;
+        margin-left: 13px;
+        margin-top: -70px;
+    }
+
+    .search p {
+        margin-top: -7px;
     }
 
     .bar input {
@@ -296,7 +399,7 @@ main {
     }
 
     .conditions {
-        margin-left: 20px;
+        margin-left: -18px;
     }
 
     .days p {
@@ -307,12 +410,25 @@ main {
         width: 20%;
         height: 200px;
     }
+
+    .display-history {
+        margin-top: 1250px;
+    }
+
+    .menu-display {
+        margin-top: 0px;
+        background-color: none;
+    }
 }
 
 @media screen and (max-width: 375px) {
+
+    header h1 {
+        margin-left: -45px;
+    }
     
     .search {
-        margin-left: 15px;
+        margin-left: -6px;
     }
 
     .search h2 {
@@ -321,5 +437,14 @@ main {
 
     .bar input {
         margin-left: 13%;;
+    }
+
+    .conditions {
+        margin-left: -5px;
+        margin-top: 1000px;
+    }
+
+    .display-history {
+        margin-top: 1250px;
     }
 }

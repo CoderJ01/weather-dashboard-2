@@ -19,11 +19,12 @@
             <div class="search">
                 <div class="search-heading">
                     <h2>Search for a City</h2>
+                    <p>Scroll down for search history</p>
                 </div>
                 <div class="bar">
                     <form id="city-form">
                         <input type="text" class="input" placeholder="San Diego" id="input">
-                        <button id="search" onclick="store();">Search</button> <!-- This button responds to seacrh input -->
+                        <button id="search" onclick="storeSearch();">Search</button> <!-- This button responds to seacrh input -->
                     </form>
                 </div>
                 <hr>
@@ -36,6 +37,23 @@
                     <button id="seattle" onclick="infoSeattle();">Seattle</button>
                     <button id="denver" onclick="infoDenver();">Denver</button>
                     <button id="atlanta" onclick="infoAtlanta();">Atlanta</button>
+                </div>
+                <div class="display-history">
+                    <h2>Search History</h2>
+                    <div class="menu-display">
+                        <p id="menu-a" onclick="menuA();"></p>
+                        <p id="menu-b" onclick="menuB();"></p>
+                        <p id="menu-c" onclick="menuC();"></p>
+                        <p id="menu-d" onclick="menuD();"></p>
+                        <p id="menu-e" onclick="menuE();"></p>
+                        <p id="menu-f" onclick="menuF();"></p>
+                        <p id="menu-g" onclick="menuG();"></p>
+                        <p id="menu-h" onclick="menuH();"></p>
+                        <p id="menu-i" onclick="menuI();"></p>
+                        <p id="menu-j" onclick="menuJ();"></p>
+                        <p id="menu-k" onclick="menuK();"></p>
+                        <p id="menu-l" onclick="menuL();"></p>
+                    </div>
                 </div>
             </div>
 
@@ -96,9 +114,7 @@
             </div>
         </main>
         <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
-        <script src="./assets/js/api-keys.js"></script>
         <script src="./assets/js/script.js"></script>
-        <script src="./assets/js/secondary-script.js"></script>
     </body>
 
 </html>

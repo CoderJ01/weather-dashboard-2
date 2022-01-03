@@ -10,14 +10,7 @@ function displayDate () {
     var fourth = moment().add(4, 'day').format('L');
     var last = moment().add(5, 'day').format('L');
 
-    return {
-        today,
-        tommorow,
-        next,
-        then, 
-        fourth,
-        last
-    };
+    return {today, tommorow, next, then, fourth, last}; 
 }
 
 var {today, tommorow, next, then, fourth, last} = displayDate();
@@ -33,2062 +26,478 @@ function retrieveAPIs() {
     var weatherDenver = 'https://api.openweathermap.org/data/2.5/onecall?lat=39.44&&units=imperial&lon=-104.56&exclude=hourly&appid=' + freeAPI;
     var weatherAtlanta = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.45&&units=imperial&lon=-84.23&exclude=hourly&appid=' + freeAPI;
 
-    return {weatherChicago, 
-        weatherAustin,
-        weatherNewYork, 
-        weatherOrlando, 
-        weatherSanFrancisco, 
-        weatherSeattle, 
-        weatherDenver, 
-        weatherAtlanta};
+    var weatherAPI = [];
+    weatherAPI[0] =  weatherChicago;
+    weatherAPI[1] =  weatherAustin;
+    weatherAPI[2] =  weatherNewYork;
+    weatherAPI[3] =  weatherOrlando;
+    weatherAPI[4] =  weatherSanFrancisco;
+    weatherAPI[5] =  weatherSeattle;
+    weatherAPI[6] =  weatherDenver;
+    weatherAPI[7] =  weatherAtlanta;
+
+    return weatherAPI;
 }
 
-var {weatherChicago, weatherAustin, weatherNewYork, weatherOrlando, weatherSanFrancisco, weatherSeattle, weatherDenver, weatherAtlanta} = retrieveAPIs();
+var weatherAPI = retrieveAPIs();
 
-async function infoChicago() {
-
-    // fetch api infomation of popular city
-    var response = await fetch(weatherChicago);
-    var data = await response.json();
-
-    // display weather conditions for the current day
-    document.getElementById('city').textContent = "Chicago " + today;
-    document.getElementById('c-temp').textContent = data.current.temp;
-    document.getElementById('c-wind').textContent = data.current.wind_speed + " ";
-    document.getElementById('c-humidity').textContent = data.current.humidity;
-    document.getElementById('c-uv').textContent = data.current.uvi;
-
-    // display weather conditions for the next five days 
-    // 1 : 2 : 3 : 4 : 5 :: f : s : t : o : i
-    document.getElementById('f-day').textContent = tommorow;
-    document.getElementById('f-temp').textContent = data.daily[1].temp.day
-    document.getElementById('f-wind').textContent = data.daily[1].wind_speed + " ";
-    document.getElementById('f-humidity').textContent = data.daily[1].humidity;
-
-    document.getElementById('s-day').textContent = next;
-    document.getElementById('s-temp').textContent = data.daily[2].temp.day
-    document.getElementById('s-wind').textContent = data.daily[2].wind_speed + " ";
-    document.getElementById('s-humidity').textContent = data.daily[2].humidity;
-
-    document.getElementById('t-day').textContent = then;
-    document.getElementById('t-temp').textContent = data.daily[3].temp.day
-    document.getElementById('t-wind').textContent = data.daily[3].wind_speed + " ";
-    document.getElementById('t-humidity').textContent = data.daily[3].humidity;
-
-    document.getElementById('o-day').textContent = fourth;
-    document.getElementById('o-temp').textContent = data.daily[4].temp.day
-    document.getElementById('o-wind').textContent = data.daily[4].wind_speed + " ";
-    document.getElementById('o-humidity').textContent = data.daily[4].humidity;
-
-    document.getElementById('i-day').textContent = last;
-    document.getElementById('i-temp').textContent = data.daily[5].temp.day
-    document.getElementById('i-wind').textContent = data.daily[5].wind_speed + " ";
-    document.getElementById('i-humidity').textContent = data.daily[5].humidity; 
-    
-    // place icon with current day conditions
-    var div = document.getElementById('icon');
-
-    if (data.current.wind_speed > 20) { 
-        div.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.current.weather[0].description === "few clouds" ||
-        data.current.weather[0].description === "scattered clouds" ||
-        data.current.weather[0].description === "broken clouds") 
-        {
-            div.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.current.weather[0].description === "shower rain" ||
-        data.current.weather[0].description === "rain")
-        {
-            div.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.current.weather[0].description === "thunderstorm")
-        {
-            div.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.current.weather[0].description === "snow")
-        {
-            div.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            div.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    // place icon for next five days, same anology expression (1 : 2 :: f : s) applys
-    var divF = document.getElementById('f-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divF.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divF.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divF.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divF.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divF.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divF.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divS = document.getElementById('s-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divS.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divS.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divS.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divS.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divS.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divS.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divT = document.getElementById('t-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divT.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divT.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divT.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divT.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divT.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divT.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divO = document.getElementById('o-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divO.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divO.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divO.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divO.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divO.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divO.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divI = document.getElementById('i-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divI.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divI.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divI.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divI.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divI.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divI.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    // set up color scheme depending of UV index
-    var uvIndex = document.getElementById('c-uv');
-
-    uvIndex.style.background = "none";
-    uvIndex.style.fontWeight = "bold";
-
-    if (data.current.uvi >= 0 && data.current.uvi <= 2) {
-        uvIndex.style.background = "green";
-        uvIndex.style.color = "white";
-    }
-    else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
-        uvIndex.style.background = "yellow";
-        uvIndex.style.color = "black";
-    }
-    else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
-        uvIndex.style.background = "orange";
-        uvIndex.style.color = "black";
-    } 
-    else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
-        uvIndex.style.background = "red";
-        uvIndex.style.color = "white";
-    }
-    else {
-        uvIndex.style.background = "purple";
-        uvIndex.style.color = "white";
-    }
+// Popular cities (buttons)
+async function infoChicago () {
+  var chosenAPI = weatherAPI[0];
+  var city = "Chicago ";
+  infoWeather(chosenAPI, city);
 }
- 
+
 async function infoAustin () {
-    var response = await fetch(weatherAustin);
-    var data = await response.json();
-
-    document.getElementById('city').textContent = "Austin " + today;
-    document.getElementById('c-temp').textContent = data.current.temp;
-    document.getElementById('c-wind').textContent = data.current.wind_speed + " ";
-    document.getElementById('c-humidity').textContent = data.current.humidity;
-    document.getElementById('c-uv').textContent = data.current.uvi;
-
-    document.getElementById('f-day').textContent = tommorow;
-    document.getElementById('f-temp').textContent = data.daily[1].temp.day
-    document.getElementById('f-wind').textContent = data.daily[1].wind_speed + " ";
-    document.getElementById('f-humidity').textContent = data.daily[1].humidity;
-
-    document.getElementById('s-day').textContent = next;
-    document.getElementById('s-temp').textContent = data.daily[2].temp.day
-    document.getElementById('s-wind').textContent = data.daily[2].wind_speed + " ";
-    document.getElementById('s-humidity').textContent = data.daily[2].humidity;
-
-    document.getElementById('t-day').textContent = then;
-    document.getElementById('t-temp').textContent = data.daily[3].temp.day
-    document.getElementById('t-wind').textContent = data.daily[3].wind_speed + " ";
-    document.getElementById('t-humidity').textContent = data.daily[3].humidity;
-
-    document.getElementById('o-day').textContent = fourth;
-    document.getElementById('o-temp').textContent = data.daily[4].temp.day
-    document.getElementById('o-wind').textContent = data.daily[4].wind_speed + " ";
-    document.getElementById('o-humidity').textContent = data.daily[4].humidity;
-
-    document.getElementById('i-day').textContent = last;
-    document.getElementById('i-temp').textContent = data.daily[5].temp.day
-    document.getElementById('i-wind').textContent = data.daily[5].wind_speed + " ";
-    document.getElementById('i-humidity').textContent = data.daily[5].humidity;
-    
-    var div = document.getElementById('icon');
-
-    var div = document.getElementById('icon');
-
-    if (data.current.wind_speed > 20) { 
-        div.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.current.weather[0].description === "few clouds" ||
-        data.current.weather[0].description === "scattered clouds" ||
-        data.current.weather[0].description === "broken clouds") 
-        {
-            div.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.current.weather[0].description === "shower rain" ||
-        data.current.weather[0].description === "rain")
-        {
-            div.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.current.weather[0].description === "thunderstorm")
-        {
-            div.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.current.weather[0].description === "snow")
-        {
-            div.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            div.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divF = document.getElementById('f-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divF.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divF.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divF.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divF.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divF.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divF.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divS = document.getElementById('s-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divS.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divS.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divS.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divS.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divS.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divS.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divT = document.getElementById('t-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divT.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divT.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divT.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divT.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divT.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divT.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divO = document.getElementById('o-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divO.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divO.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divO.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divO.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divO.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divO.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divI = document.getElementById('i-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divI.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divI.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divI.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divI.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divI.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divI.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var uvIndex = document.getElementById('c-uv');
-
-    uvIndex.style.background = "none";
-    uvIndex.style.fontWeight = "bold";
-
-    if (data.current.uvi >= 0 && data.current.uvi <= 2) {
-        uvIndex.style.background = "green";
-        uvIndex.style.color = "white";
-    }
-    else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
-        uvIndex.style.background = "yellow";
-        uvIndex.style.color = "black";
-    }
-    else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
-        uvIndex.style.background = "orange";
-        uvIndex.style.color = "black";
-    } 
-    else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
-        uvIndex.style.background = "red";
-        uvIndex.style.color = "white";
-    }
-    else {
-        uvIndex.style.background = "purple";
-        uvIndex.style.color = "white";
-    }
-
+  var chosenAPI = weatherAPI[1];
+  var city = "Austin ";
+  infoWeather(chosenAPI, city);
 }
 
 async function infoNewYork () {
-
-    var response = await fetch(weatherNewYork);
-    var data = await response.json();
-
-    document.getElementById('city').textContent = "New York " + today;
-    document.getElementById('c-temp').textContent = data.current.temp;
-    document.getElementById('c-wind').textContent = data.current.wind_speed + " ";
-    document.getElementById('c-humidity').textContent = data.current.humidity;
-    document.getElementById('c-uv').textContent = data.current.uvi;
-
-    document.getElementById('f-day').textContent = tommorow;
-    document.getElementById('f-temp').textContent = data.daily[1].temp.day
-    document.getElementById('f-wind').textContent = data.daily[1].wind_speed + " ";
-    document.getElementById('f-humidity').textContent = data.daily[1].humidity;
-
-    document.getElementById('s-day').textContent = next;
-    document.getElementById('s-temp').textContent = data.daily[2].temp.day
-    document.getElementById('s-wind').textContent = data.daily[2].wind_speed + " ";
-    document.getElementById('s-humidity').textContent = data.daily[2].humidity;
-
-    document.getElementById('t-day').textContent = then;
-    document.getElementById('t-temp').textContent = data.daily[3].temp.day
-    document.getElementById('t-wind').textContent = data.daily[3].wind_speed + " ";
-    document.getElementById('t-humidity').textContent = data.daily[3].humidity;
-
-    document.getElementById('o-day').textContent = fourth;
-    document.getElementById('o-temp').textContent = data.daily[4].temp.day
-    document.getElementById('o-wind').textContent = data.daily[4].wind_speed + " ";
-    document.getElementById('o-humidity').textContent = data.daily[4].humidity;
-
-    document.getElementById('i-day').textContent = last;
-    document.getElementById('i-temp').textContent = data.daily[5].temp.day
-    document.getElementById('i-wind').textContent = data.daily[5].wind_speed + " ";
-    document.getElementById('i-humidity').textContent = data.daily[5].humidity;
-    
-    var div = document.getElementById('icon');
-
-    if (data.current.wind_speed > 20) { 
-        div.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.current.weather[0].description === "few clouds" ||
-        data.current.weather[0].description === "scattered clouds" ||
-        data.current.weather[0].description === "broken clouds") 
-        {
-            div.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.current.weather[0].description === "shower rain" ||
-        data.current.weather[0].description === "rain")
-        {
-            div.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.current.weather[0].description === "thunderstorm")
-        {
-            div.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.current.weather[0].description === "snow")
-        {
-            div.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            div.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divF = document.getElementById('f-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divF.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divF.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divF.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divF.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divF.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divF.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divS = document.getElementById('s-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divS.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divS.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divS.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divS.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divS.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divS.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divT = document.getElementById('t-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divT.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divT.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divT.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divT.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divT.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divT.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divO = document.getElementById('o-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divO.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divO.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divO.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divO.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divO.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divO.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divI = document.getElementById('i-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divI.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divI.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divI.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divI.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divI.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divI.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var uvIndex = document.getElementById('c-uv');
-
-    uvIndex.style.background = "none";
-    uvIndex.style.fontWeight = "bold";
-
-    if (data.current.uvi >= 0 && data.current.uvi <= 2) {
-        uvIndex.style.background = "green";
-        uvIndex.style.color = "white";
-    }
-    else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
-        uvIndex.style.background = "yellow";
-        uvIndex.style.color = "black";
-    }
-    else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
-        uvIndex.style.background = "orange";
-        uvIndex.style.color = "black";
-    } 
-    else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
-        uvIndex.style.background = "red";
-        uvIndex.style.color = "white";
-    }
-    else {
-        uvIndex.style.background = "purple";
-        uvIndex.style.color = "white";
-    }
-    
+  var chosenAPI = weatherAPI[2];
+  var city = "New York ";
+  infoWeather(chosenAPI, city);
 }
 
 async function infoOrlando () {
-
-    var response = await fetch(weatherOrlando);
-    var data = await response.json();
-
-    document.getElementById('city').textContent = "Orlando " + today;
-    document.getElementById('c-temp').textContent = data.current.temp;
-    document.getElementById('c-wind').textContent = data.current.wind_speed + " ";
-    document.getElementById('c-humidity').textContent = data.current.humidity;
-    document.getElementById('c-uv').textContent = data.current.uvi;
-
-    document.getElementById('f-day').textContent = tommorow;
-    document.getElementById('f-temp').textContent = data.daily[1].temp.day
-    document.getElementById('f-wind').textContent = data.daily[1].wind_speed + " ";
-    document.getElementById('f-humidity').textContent = data.daily[1].humidity;
-
-    document.getElementById('s-day').textContent = next;
-    document.getElementById('s-temp').textContent = data.daily[2].temp.day
-    document.getElementById('s-wind').textContent = data.daily[2].wind_speed + " ";
-    document.getElementById('s-humidity').textContent = data.daily[2].humidity;
-
-    document.getElementById('t-day').textContent = then;
-    document.getElementById('t-temp').textContent = data.daily[3].temp.day
-    document.getElementById('t-wind').textContent = data.daily[3].wind_speed + " ";
-    document.getElementById('t-humidity').textContent = data.daily[3].humidity;
-
-    document.getElementById('o-day').textContent = fourth;
-    document.getElementById('o-temp').textContent = data.daily[4].temp.day
-    document.getElementById('o-wind').textContent = data.daily[4].wind_speed + " ";
-    document.getElementById('o-humidity').textContent = data.daily[4].humidity;
-
-    document.getElementById('i-day').textContent = last;
-    document.getElementById('i-temp').textContent = data.daily[5].temp.day
-    document.getElementById('i-wind').textContent = data.daily[5].wind_speed + " ";
-    document.getElementById('i-humidity').textContent = data.daily[5].humidity;
-    
-    var div = document.getElementById('icon');
-
-    if (data.current.wind_speed > 20) { 
-        div.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.current.weather[0].description === "few clouds" ||
-        data.current.weather[0].description === "scattered clouds" ||
-        data.current.weather[0].description === "broken clouds") 
-        {
-            div.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.current.weather[0].description === "shower rain" ||
-        data.current.weather[0].description === "rain")
-        {
-            div.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.current.weather[0].description === "thunderstorm")
-        {
-            div.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.current.weather[0].description === "snow")
-        {
-            div.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            div.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divF = document.getElementById('f-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divF.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divF.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divF.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divF.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divF.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divF.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divS = document.getElementById('s-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divS.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divS.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divS.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divS.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divS.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divS.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divT = document.getElementById('t-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divT.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divT.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divT.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divT.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divT.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divT.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divO = document.getElementById('o-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divO.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divO.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divO.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divO.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divO.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divO.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divI = document.getElementById('i-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divI.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divI.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divI.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divI.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divI.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divI.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var uvIndex = document.getElementById('c-uv');
-
-    uvIndex.style.background = "none";
-    uvIndex.style.fontWeight = "bold";
-
-    if (data.current.uvi >= 0 && data.current.uvi <= 2) {
-        uvIndex.style.background = "green";
-        uvIndex.style.color = "white";
-    }
-    else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
-        uvIndex.style.background = "yellow";
-        uvIndex.style.color = "black";
-    }
-    else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
-        uvIndex.style.background = "orange";
-        uvIndex.style.color = "black";
-    } 
-    else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
-        uvIndex.style.background = "red";
-        uvIndex.style.color = "white";
-    }
-    else {
-        uvIndex.style.background = "purple";
-        uvIndex.style.color = "white";
-    }
-    
+  var chosenAPI = weatherAPI[3];
+  var city = "Orlando ";
+  infoWeather(chosenAPI, city);
 }
 
 async function infoSanFrancisco () {
-
-    var response = await fetch(weatherSanFrancisco);
-    var data = await response.json();
-
-    document.getElementById('city').textContent = "San Francisco " + today;
-    document.getElementById('c-temp').textContent = data.current.temp;
-    document.getElementById('c-wind').textContent = data.current.wind_speed + " ";
-    document.getElementById('c-humidity').textContent = data.current.humidity;
-    document.getElementById('c-uv').textContent = data.current.uvi;
-
-    document.getElementById('f-day').textContent = tommorow;
-    document.getElementById('f-temp').textContent = data.daily[1].temp.day
-    document.getElementById('f-wind').textContent = data.daily[1].wind_speed + " ";
-    document.getElementById('f-humidity').textContent = data.daily[1].humidity;
-
-    document.getElementById('s-day').textContent = next;
-    document.getElementById('s-temp').textContent = data.daily[2].temp.day
-    document.getElementById('s-wind').textContent = data.daily[2].wind_speed + " ";
-    document.getElementById('s-humidity').textContent = data.daily[2].humidity;
-
-    document.getElementById('t-day').textContent = then;
-    document.getElementById('t-temp').textContent = data.daily[3].temp.day
-    document.getElementById('t-wind').textContent = data.daily[3].wind_speed + " ";
-    document.getElementById('t-humidity').textContent = data.daily[3].humidity;
-
-    document.getElementById('o-day').textContent = fourth;
-    document.getElementById('o-temp').textContent = data.daily[4].temp.day
-    document.getElementById('o-wind').textContent = data.daily[4].wind_speed + " ";
-    document.getElementById('o-humidity').textContent = data.daily[4].humidity;
-
-    document.getElementById('i-day').textContent = last;
-    document.getElementById('i-temp').textContent = data.daily[5].temp.day
-    document.getElementById('i-wind').textContent = data.daily[5].wind_speed + " ";
-    document.getElementById('i-humidity').textContent = data.daily[5].humidity;
-    
-    var div = document.getElementById('icon');
-
-    if (data.current.wind_speed > 20) { 
-        div.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.current.weather[0].description === "few clouds" ||
-        data.current.weather[0].description === "scattered clouds" ||
-        data.current.weather[0].description === "broken clouds") 
-        {
-            div.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.current.weather[0].description === "shower rain" ||
-        data.current.weather[0].description === "rain")
-        {
-            div.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.current.weather[0].description === "thunderstorm")
-        {
-            div.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.current.weather[0].description === "snow")
-        {
-            div.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            div.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divF = document.getElementById('f-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divF.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divF.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divF.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divF.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divF.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divF.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divS = document.getElementById('s-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divS.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divS.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divS.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divS.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divS.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divS.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divT = document.getElementById('t-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divT.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divT.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divT.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divT.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divT.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divT.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divO = document.getElementById('o-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divO.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divO.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divO.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divO.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divO.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divO.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divI = document.getElementById('i-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divI.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divI.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divI.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divI.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divI.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divI.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var uvIndex = document.getElementById('c-uv');
-
-    uvIndex.style.background = "none";
-    uvIndex.style.fontWeight = "bold";
-
-    if (data.current.uvi >= 0 && data.current.uvi <= 2) {
-        uvIndex.style.background = "green";
-        uvIndex.style.color = "white";
-    }
-    else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
-        uvIndex.style.background = "yellow";
-        uvIndex.style.color = "black";
-    }
-    else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
-        uvIndex.style.background = "orange";
-        uvIndex.style.color = "black";
-    } 
-    else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
-        uvIndex.style.background = "red";
-        uvIndex.style.color = "white";
-    }
-    else {
-        uvIndex.style.background = "purple";
-        uvIndex.style.color = "white";
-    }
-    
+  var chosenAPI = weatherAPI[4];
+  var city = "San Francisco ";
+  infoWeather(chosenAPI, city);
 }
 
 async function infoSeattle () {
-
-    var response = await fetch(weatherSeattle);
-    var data = await response.json();
-
-    document.getElementById('city').textContent = "Seattle " + today;
-    document.getElementById('c-temp').textContent = data.current.temp;
-    document.getElementById('c-wind').textContent = data.current.wind_speed + " ";
-    document.getElementById('c-humidity').textContent = data.current.humidity;
-    document.getElementById('c-uv').textContent = data.current.uvi;
-
-    document.getElementById('f-day').textContent = tommorow;
-    document.getElementById('f-temp').textContent = data.daily[1].temp.day
-    document.getElementById('f-wind').textContent = data.daily[1].wind_speed + " ";
-    document.getElementById('f-humidity').textContent = data.daily[1].humidity;
-
-    document.getElementById('s-day').textContent = next;
-    document.getElementById('s-temp').textContent = data.daily[2].temp.day
-    document.getElementById('s-wind').textContent = data.daily[2].wind_speed + " ";
-    document.getElementById('s-humidity').textContent = data.daily[2].humidity;
-
-    document.getElementById('t-day').textContent = then;
-    document.getElementById('t-temp').textContent = data.daily[3].temp.day
-    document.getElementById('t-wind').textContent = data.daily[3].wind_speed + " ";
-    document.getElementById('t-humidity').textContent = data.daily[3].humidity;
-
-    document.getElementById('o-day').textContent = fourth;
-    document.getElementById('o-temp').textContent = data.daily[4].temp.day
-    document.getElementById('o-wind').textContent = data.daily[4].wind_speed + " ";
-    document.getElementById('o-humidity').textContent = data.daily[4].humidity;
-
-    document.getElementById('i-day').textContent = last;
-    document.getElementById('i-temp').textContent = data.daily[5].temp.day
-    document.getElementById('i-wind').textContent = data.daily[5].wind_speed + " ";
-    document.getElementById('i-humidity').textContent = data.daily[5].humidity;
-    
-    var div = document.getElementById('icon');
-
-    if (data.current.wind_speed > 20) { 
-        div.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.current.weather[0].description === "few clouds" ||
-        data.current.weather[0].description === "scattered clouds" ||
-        data.current.weather[0].description === "broken clouds") 
-        {
-            div.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.current.weather[0].description === "shower rain" ||
-        data.current.weather[0].description === "rain")
-        {
-            div.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.current.weather[0].description === "thunderstorm")
-        {
-            div.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.current.weather[0].description === "snow")
-        {
-            div.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            div.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divF = document.getElementById('f-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divF.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divF.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divF.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divF.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divF.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divF.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divS = document.getElementById('s-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divS.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divS.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divS.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divS.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divS.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divS.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divT = document.getElementById('t-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divT.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divT.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divT.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divT.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divT.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divT.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divO = document.getElementById('o-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divO.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divO.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divO.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divO.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divO.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divO.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divI = document.getElementById('i-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divI.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divI.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divI.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divI.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divI.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divI.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var uvIndex = document.getElementById('c-uv');
-
-    uvIndex.style.background = "none";
-    uvIndex.style.fontWeight = "bold";
-
-    if (data.current.uvi >= 0 && data.current.uvi <= 2) {
-        uvIndex.style.background = "green";
-        uvIndex.style.color = "white";
-    }
-    else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
-        uvIndex.style.background = "yellow";
-        uvIndex.style.color = "black";
-    }
-    else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
-        uvIndex.style.background = "orange";
-        uvIndex.style.color = "black";
-    } 
-    else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
-        uvIndex.style.background = "red";
-        uvIndex.style.color = "white";
-    }
-    else {
-        uvIndex.style.background = "purple";
-        uvIndex.style.color = "white";
-    }
-    
+  var chosenAPI = weatherAPI[5];
+  var city = "Seattle ";
+  infoWeather(chosenAPI, city);
 }
 
 async function infoDenver () {
-
-    var response = await fetch(weatherDenver);
-    var data = await response.json();
-
-    document.getElementById('city').textContent = "Denver " + today;
-    document.getElementById('c-temp').textContent = data.current.temp;
-    document.getElementById('c-wind').textContent = data.current.wind_speed + " ";
-    document.getElementById('c-humidity').textContent = data.current.humidity;
-    document.getElementById('c-uv').textContent = data.current.uvi;
-
-    document.getElementById('f-day').textContent = tommorow;
-    document.getElementById('f-temp').textContent = data.daily[1].temp.day
-    document.getElementById('f-wind').textContent = data.daily[1].wind_speed + " ";
-    document.getElementById('f-humidity').textContent = data.daily[1].humidity;
-
-    document.getElementById('s-day').textContent = next;
-    document.getElementById('s-temp').textContent = data.daily[2].temp.day
-    document.getElementById('s-wind').textContent = data.daily[2].wind_speed + " ";
-    document.getElementById('s-humidity').textContent = data.daily[2].humidity;
-
-    document.getElementById('t-day').textContent = then;
-    document.getElementById('t-temp').textContent = data.daily[3].temp.day
-    document.getElementById('t-wind').textContent = data.daily[3].wind_speed + " ";
-    document.getElementById('t-humidity').textContent = data.daily[3].humidity;
-
-    document.getElementById('o-day').textContent = fourth;
-    document.getElementById('o-temp').textContent = data.daily[4].temp.day
-    document.getElementById('o-wind').textContent = data.daily[4].wind_speed + " ";
-    document.getElementById('o-humidity').textContent = data.daily[4].humidity;
-
-    document.getElementById('i-day').textContent = last;
-    document.getElementById('i-temp').textContent = data.daily[5].temp.day
-    document.getElementById('i-wind').textContent = data.daily[5].wind_speed + " ";
-    document.getElementById('i-humidity').textContent = data.daily[5].humidity;
-    
-    var div = document.getElementById('icon');
-
-    if (data.current.wind_speed > 20) { 
-        div.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.current.weather[0].description === "few clouds" ||
-        data.current.weather[0].description === "scattered clouds" ||
-        data.current.weather[0].description === "broken clouds") 
-        {
-            div.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.current.weather[0].description === "shower rain" ||
-        data.current.weather[0].description === "rain")
-        {
-            div.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.current.weather[0].description === "thunderstorm")
-        {
-            div.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.current.weather[0].description === "snow")
-        {
-            div.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            div.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divF = document.getElementById('f-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divF.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divF.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divF.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divF.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divF.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divF.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divS = document.getElementById('s-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divS.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divS.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divS.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divS.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divS.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divS.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divT = document.getElementById('t-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divT.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divT.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divT.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divT.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divT.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divT.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divO = document.getElementById('o-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divO.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divO.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divO.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divO.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divO.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divO.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var divI = document.getElementById('i-icon');
-
-    if (data.current.wind_speed > 20) { 
-        divI.classList.add('fas', 'fa-wind');
-    }
-    else {
-
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divI.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divI.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divI.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divI.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divI.classList.add('fas', 'fa-sun');
-        }
-    }
-
-    var uvIndex = document.getElementById('c-uv');
-
-    uvIndex.style.background = "none";
-    uvIndex.style.fontWeight = "bold";
-
-    if (data.current.uvi >= 0 && data.current.uvi <= 2) {
-        uvIndex.style.background = "green";
-        uvIndex.style.color = "white";
-    }
-    else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
-        uvIndex.style.background = "yellow";
-        uvIndex.style.color = "black";
-    }
-    else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
-        uvIndex.style.background = "orange";
-        uvIndex.style.color = "black";
-    } 
-    else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
-        uvIndex.style.background = "red";
-        uvIndex.style.color = "white";
-    }
-    else {
-        uvIndex.style.background = "purple";
-        uvIndex.style.color = "white";
-    }
+  var chosenAPI = weatherAPI[6];
+  var city = "Denver ";
+  infoWeather(chosenAPI, city);
 }
 
 async function infoAtlanta () {
+  var chosenAPI = weatherAPI[7];
+  var city = "Atlanta ";
+  infoWeather(chosenAPI, city);
+}
 
-    var response = await fetch(weatherAtlanta);
-    var data = await response.json();
+// fetch info for API (button or history menu)
+function infoWeather(chosenAPI, city) {
+  fetch(chosenAPI)
+  .then(function(response) {
+    // request was successful
+    if (response.ok) {  
+      response.json().then(function(data) {
+        
+        // create variables for current conditions
+        var temp = data.current.temp;
+        var wind = data.current.wind_speed;
+        var humid = data.current.humidity;
+        var uvi = data.current.uvi;
+        displayCurrent (data, temp, wind, humid, uvi);
+        var fiveDayTemp = [];
+        var fiveDayWind = [];
+        var fiveDayHumid = [];
+        var description = [];
 
-    document.getElementById('city').textContent = "Atlanta " + today;
-    document.getElementById('c-temp').textContent = data.current.temp;
-    document.getElementById('c-wind').textContent = data.current.wind_speed + " ";
-    document.getElementById('c-humidity').textContent = data.current.humidity;
-    document.getElementById('c-uv').textContent = data.current.uvi;
+        for (var i = 0; i < 6; i++) {
+            fiveDayTemp[i] = data.daily[i].temp.day;
+            fiveDayWind[i] = data.daily[i].wind_speed;
+            fiveDayHumid[i] = data.daily[i].humidity;
+            description[i] = data.daily[i].weather[0].description;
+        }
 
-    document.getElementById('f-day').textContent = tommorow;
-    document.getElementById('f-temp').textContent = data.daily[1].temp.day
-    document.getElementById('f-wind').textContent = data.daily[1].wind_speed + " ";
-    document.getElementById('f-humidity').textContent = data.daily[1].humidity;
+        tempForFive(fiveDayTemp);
+        windForFive(fiveDayWind);
+        humidForFive(fiveDayHumid);
+        displayIcons(wind, description);
+        uvIndex(uvi);
+      });
+    } else {
+      alert("Error: " + response.statusText);
+    }
+  })
+  .catch(function(error) {
+    alert("Unable to connect to Open Weather");
+  });
 
-    document.getElementById('s-day').textContent = next;
-    document.getElementById('s-temp').textContent = data.daily[2].temp.day
-    document.getElementById('s-wind').textContent = data.daily[2].wind_speed + " ";
-    document.getElementById('s-humidity').textContent = data.daily[2].humidity;
+  document.getElementById('city').textContent = city + today;
+}
 
-    document.getElementById('t-day').textContent = then;
-    document.getElementById('t-temp').textContent = data.daily[3].temp.day
-    document.getElementById('t-wind').textContent = data.daily[3].wind_speed + " ";
-    document.getElementById('t-humidity').textContent = data.daily[3].humidity;
+// fetch API info for searched city
+async function searchInput(event) {
+   
+  var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
+  var settings = '&units=imperial&appid=' + freeAPI;
 
-    document.getElementById('o-day').textContent = fourth;
-    document.getElementById('o-temp').textContent = data.daily[4].temp.day
-    document.getElementById('o-wind').textContent = data.daily[4].wind_speed + " ";
-    document.getElementById('o-humidity').textContent = data.daily[4].humidity;
+  var apiUVI = 'https://api.openweathermap.org/data/2.5/onecall?lat=';
+  var units = '&&units=imperial&lon=';
+  var settingsUVI = '&exclude=hourly&appid=' + freeAPI;
 
-    document.getElementById('i-day').textContent = last;
-    document.getElementById('i-temp').textContent = data.daily[5].temp.day
-    document.getElementById('i-wind').textContent = data.daily[5].wind_speed + " ";
-    document.getElementById('i-humidity').textContent = data.daily[5].humidity;
+  event.preventDefault();
+  var weatherChoice = api + searchChoice.value + settings;
+
+  fetch(weatherChoice)
+  .then(function(response) {
+    // request was successful
+    if (response.ok) {  
+      //var preventSave = false; 
+      response.json().then(function(data) {
+
+        var weatherUVI = apiUVI + data.coord.lat + units + data.coord.lon + settingsUVI;
+
+        // fetches API for the retrieval of UV index, the API fetched from weatherChoice
+        // first API within this function lacks the info for UV index
+        fetch(weatherUVI)
+        .then(function (responseUVI) {
+          if(responseUVI.ok) {
+            responseUVI.json().then(function (dataUVI) {
+
+              var temp = data.main.temp;
+              var wind = data.wind.speed + " ";
+              var humid = data.main.humidity;
+              var uvi = dataUVI.current.uvi;
+              displayCurrent (data, temp, wind, humid, uvi);
+              var fiveDayTemp = [];
+              var fiveDayWind = [];
+              var fiveDayHumid = [];
+              var description = [];
     
-    var div = document.getElementById('icon');
+              for (var i = 0; i < 6; i++) {
+                  fiveDayTemp[i] = dataUVI.daily[i].temp.day;
+                  fiveDayWind[i] = dataUVI.daily[i].wind_speed;
+                  fiveDayHumid[i] = dataUVI.daily[i].humidity;
+                  description[i] = dataUVI.daily[i].weather[0].description;
+              }
+    
+              tempForFive(fiveDayTemp);
+              windForFive(fiveDayWind);
+              humidForFive(fiveDayHumid);
+              displayIcons(wind, description);
+              uvIndex(uvi);
+            });
+          }
+          else {
+            alert("Error: " + responseUVI.statusText);
+          }
+        }).catch(function (error) {
+            alert("Unable to connect to Open Weather");
+        }); 
 
-    if (data.current.wind_speed > 20) { 
-        div.classList.add('fas', 'fa-wind');
-    }
+      });
+    } 
     else {
-
-        if (data.current.weather[0].description === "few clouds" ||
-        data.current.weather[0].description === "scattered clouds" ||
-        data.current.weather[0].description === "broken clouds") 
-        {
-            div.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.current.weather[0].description === "shower rain" ||
-        data.current.weather[0].description === "rain")
-        {
-            div.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.current.weather[0].description === "thunderstorm")
-        {
-            div.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.current.weather[0].description === "snow")
-        {
-            div.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            div.classList.add('fas', 'fa-sun');
-        }
+      alert("Error: " + response.statusText);
+      //preventSave = true;
     }
+    //storeSearch(preventSave); // uncommit and pass on to storeSearch() to prioritize
+    // storage quality over searchability
+  })
+  .catch(function(error) {
+    alert("Unable to connect to Open Weather");
+  });
 
-    var divF = document.getElementById('f-icon');
+  document.getElementById('city').textContent = searchChoice.value + " " + today;
+}
 
-    if (data.current.wind_speed > 20) { 
-        divF.classList.add('fas', 'fa-wind');
+var searchChoice = document.getElementById('input'); 
+
+// Store city that user submits to search bar
+function storeSearch () {
+
+  var new_data =  searchChoice.value;
+
+  // Prohibit storage of popular cities with buttons
+  if(new_data === "Austin" || new_data === "Chicago" || new_data === "New York" || new_data === "Orlando" || 
+  new_data === "San Franciso" || new_data === "Seattle" || new_data === "Denver" || new_data === "Atlanta") 
+  {
+    new_data = "";
+  }
+  else 
+  {
+    new_data = new_data;
+  }
+  
+  if(localStorage.getItem('data') === null) {
+      localStorage.setItem('data', '[]');
+  }
+
+  var old_data = JSON.parse(localStorage.getItem('data'));
+  old_data.push(new_data);
+
+  localStorage.setItem('data', JSON.stringify(old_data));
+
+  // delete blanks from array
+  var output = old_data.filter(function (x) {
+    return x;
+  });
+
+  // delete duplicates from array
+  var result = [];
+  result = [...new Set(output)];
+
+  // Prevent display of the word "undefined" in search menu
+  for (var i = 0; i < 12; i++) {
+    
+    if (result[i] === undefined) {
+      result[i] = "";
     }
-    else {
+  
+  }
 
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divF.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divF.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divF.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divF.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divF.classList.add('fas', 'fa-sun');
-        }
-    }
+  return result;
+}
 
-    var divS = document.getElementById('s-icon');
+var result = storeSearch();
 
-    if (data.current.wind_speed > 20) { 
-        divS.classList.add('fas', 'fa-wind');
-    }
-    else {
+// display user's search history
+async function displayResultsMenu() {
 
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divS.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divS.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divS.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divS.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divS.classList.add('fas', 'fa-sun');
-        }
-    }
+  document.getElementById('menu-a').innerHTML = result[0];
+  document.getElementById('menu-b').innerHTML = result[1];
+  document.getElementById('menu-c').innerHTML = result[2];
+  document.getElementById('menu-d').innerHTML = result[3];
+  document.getElementById('menu-e').innerHTML = result[4];
+  document.getElementById('menu-f').innerHTML = result[5];
+  document.getElementById('menu-g').innerHTML = result[6];
+  document.getElementById('menu-h').innerHTML = result[7];
+  document.getElementById('menu-i').innerHTML = result[8];
+  document.getElementById('menu-j').innerHTML = result[9];
+  document.getElementById('menu-k').innerHTML = result[10];
+  document.getElementById('menu-l').innerHTML = result[11];
+}
 
-    var divT = document.getElementById('t-icon');
+displayResultsMenu();
 
-    if (data.current.wind_speed > 20) { 
-        divT.classList.add('fas', 'fa-wind');
-    }
-    else {
+// Allow user to retrieve weather conditions from search history
+function menuA () {
+  var historyChoice = result[0];
+  apiFromHistory(historyChoice);
+}
 
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divT.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divT.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divT.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divT.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divT.classList.add('fas', 'fa-sun');
-        }
-    }
+function menuB () {
+  var historyChoice = result[1];
+  apiFromHistory(historyChoice);
+}
 
-    var divO = document.getElementById('o-icon');
+function menuC () {
+  var historyChoice = result[2];
+  apiFromHistory(historyChoice);
+}
 
-    if (data.current.wind_speed > 20) { 
-        divO.classList.add('fas', 'fa-wind');
-    }
-    else {
+function menuD () {
+  var historyChoice = result[3];
+  apiFromHistory(historyChoice);
+}
 
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divO.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divO.classList.add('fas', 'cloud-rain');
-        }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divO.classList.add('fas', 'fa-bolt');
-        }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divO.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divO.classList.add('fas', 'fa-sun');
-        }
-    }
+function menuE () {
+  var historyChoice = result[4];
+  apiFromHistory(historyChoice);
+}
 
-    var divI = document.getElementById('i-icon');
+function menuF () {
+  var historyChoice = result[5];
+  apiFromHistory(historyChoice);
+}
 
-    if (data.current.wind_speed > 20) { 
-        divI.classList.add('fas', 'fa-wind');
-    }
-    else {
+function menuG () {
+  var historyChoice = result[6];
+  apiFromHistory(historyChoice);
+}
 
-        if (data.daily[1].weather[0].description === "few clouds" ||
-        data.daily[1].weather[0].description === "scattered clouds" ||
-        data.daily[1].weather[0].description === "broken clouds") 
-        {
-            divI.classList.add('fas', 'fa-cloud-sun');
-        } 
-        else if (data.daily[1].weather[0].description === "shower rain" ||
-        data.daily[1].weather[0].description === "rain")
-        {
-            divI.classList.add('fas', 'cloud-rain');
+function menuH () {
+  var historyChoice = result[7];
+  apiFromHistory(historyChoice);
+}
+
+function menuI () {
+  var historyChoice = result[8];
+  apiFromHistory(historyChoice);
+}
+
+function menuJ () {
+  var historyChoice = result[9];
+  apiFromHistory(historyChoice);
+}
+
+function menuK () {
+  var historyChoice = result[10];
+  apiFromHistory(historyChoice);
+}
+
+function menuL () {
+  var historyChoice = result[11];
+  apiFromHistory(historyChoice);
+}
+
+
+// set up first API from clicked city (history menu)
+function apiFromHistory (historyChoice) {
+  var api = 'https://api.openweathermap.org/data/2.5/weather?q=';
+  var settings = '&units=imperial&appid=' + freeAPI;
+
+  weatherChoice = api + historyChoice + settings;
+
+  var stored = historyChoice;
+  var chosen = weatherChoice;
+  fetchForCoord(stored, chosen);
+}
+
+// fetch first API for lat and lon cooord
+async function fetchForCoord(stored, chosen) {
+
+  var response = await fetch(chosen);
+  var data = await response.json();
+
+  // Obtain coordinates for use
+  var latitude = data.coord.lat;
+  var longitude = data.coord.lon;
+
+  // Obtain city names
+  var name = stored;
+    
+  getCoord(latitude, longitude, name);
+}
+
+// get second API for the UV index 
+async function getCoord(latitude, longitude, name) {
+  var api = 'https://api.openweathermap.org/data/2.5/onecall?lat=';
+  var units = '&&units=imperial&lon=';
+  var settings = '&exclude=hourly&appid=' + freeAPI;
+ 
+  var weatherChoice = api + latitude + units + longitude + settings;
+  var cityName = name + " ";
+
+  clickedCity(weatherChoice, cityName)
+}
+  
+// Pass on info to infoWeather()
+function clickedCity (weatherChoice, cityName) {
+  var chosenAPI = weatherChoice;
+  var city = cityName;
+  infoWeather(chosenAPI, city);
+}
+
+// display weather conditions for the current day
+function displayCurrent (data, temp, wind, humid, uvi) {
+    document.getElementById('c-temp').textContent = temp;
+    document.getElementById('c-wind').textContent = wind + " ";
+    document.getElementById('c-humidity').textContent = humid;
+    document.getElementById('c-uv').textContent = uvi; 
+    fiveDates();
+}
+
+// display dates for next five days   
+function fiveDates() {
+    document.getElementById('f-day').textContent = tommorow;
+    document.getElementById('s-day').textContent = next;
+    document.getElementById('t-day').textContent = then;
+    document.getElementById('o-day').textContent = fourth;
+    document.getElementById('i-day').textContent = last;
+}
+
+// get temperature for next five days
+function tempForFive(fiveDayTemp) {
+    document.getElementById('f-temp').textContent = fiveDayTemp[1];
+    document.getElementById('s-temp').textContent = fiveDayTemp[2];
+    document.getElementById('t-temp').textContent = fiveDayTemp[3];
+    document.getElementById('o-temp').textContent = fiveDayTemp[4];
+    document.getElementById('i-temp').textContent = fiveDayTemp[5]; 
+}
+
+// get wind speed for five days
+function windForFive(fiveDayWind) {
+    document.getElementById('f-wind').textContent = fiveDayWind[1] + " ";
+    document.getElementById('s-wind').textContent = fiveDayWind[2] + " ";
+    document.getElementById('t-wind').textContent = fiveDayWind[3] + " ";
+    document.getElementById('o-wind').textContent = fiveDayWind[4] + " ";
+    document.getElementById('i-wind').textContent = fiveDayWind[5] + " ";
+}
+
+// get humidity for five days
+function humidForFive(fiveDayHumid) {
+    document.getElementById('f-humidity').textContent = fiveDayHumid[1];
+    document.getElementById('s-humidity').textContent = fiveDayHumid[2];
+    document.getElementById('t-humidity').textContent = fiveDayHumid[3];
+    document.getElementById('o-humidity').textContent = fiveDayHumid[4];
+    document.getElementById('i-humidity').textContent = fiveDayHumid[5];    
+}
+
+// place icons
+function displayIcons (wind, description) {
+
+    var div = [];
+    div[0] = document.getElementById('icon');
+    div[1] = document.getElementById('f-icon');
+    div[2] = document.getElementById('s-icon');
+    div[3] = document.getElementById('t-icon');
+    div[4] = document.getElementById('o-icon');
+    div[5] = document.getElementById('i-icon');
+
+    for (var i = 0; i < 6; i++) {
+
+        if (wind > 20) { 
+            div[i].classList.add('fas', 'fa-wind');
         }
-        else if (data.daily[1].weather[0].description === "thunderstorm")
-        {
-            divI.classList.add('fas', 'fa-bolt');
+        else {
+    
+            if (description[i] === "few clouds" ||
+            description[i] === "scattered clouds" ||
+            description[i] === "broken clouds") 
+            {
+                div[i].classList.add('fas', 'fa-cloud-sun');
+            } 
+            else if (description[i] === "shower rain" ||
+            description[i] === "rain")
+            {
+                div[i].classList.add('fas', 'cloud-rain');
+            }
+            else if (description[i] === "thunderstorm")
+            {
+                div[i].classList.add('fas', 'fa-bolt');
+            }
+            else if (description[i] === "snow")
+            {
+                div[i].classList.add('fas', 'fa-snowflake');
+            }
+            else 
+            {
+                div[i].classList.add('fas', 'fa-sun');
+            }
         }
-        else if (data.daily[1].weather[0].description === "snow")
-        {
-            divI.classList.add('fas', 'fa-snowflake');
-        }
-        else 
-        {
-            divI.classList.add('fas', 'fa-sun');
-        }
-    }
+    } 
+}
+
+// set up color scheme depending of UV index
+function uvIndex (uvi) {
 
     var uvIndex = document.getElementById('c-uv');
 
     uvIndex.style.background = "none";
     uvIndex.style.fontWeight = "bold";
 
-    if (data.current.uvi >= 0 && data.current.uvi <= 2) {
+    if (uvi >= 0 && uvi <= 3) {
         uvIndex.style.background = "green";
         uvIndex.style.color = "white";
     }
-    else if (data.current.uvi >= 3 && data.current.uvi <= 5) {
+    else if (uvi >= 3 && uvi <= 6) {
         uvIndex.style.background = "yellow";
         uvIndex.style.color = "black";
     }
-    else if (data.current.uvi >= 6 && data.current.uvi <= 7) {
+    else if (uvi >= 6 && uvi <= 8) {
         uvIndex.style.background = "orange";
         uvIndex.style.color = "black";
     } 
-    else if (data.current.uvi >= 8 && data.current.uvi <= 10) {
+    else if (uvi >= 8 && uvi <= 10) {
         uvIndex.style.background = "red";
         uvIndex.style.color = "white";
     }
@@ -2098,7 +507,17 @@ async function infoAtlanta () {
     }
 }
 
+// allow users to press 'Enter' key on keyboard for convenience
+var enterKey = document.getElementById('input');
+
+enterKey.addEventListener("keyup", function(event) {
+    if(event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById('search').click();
+    }
+});
 
 
+document.getElementById('search').addEventListener("click", searchInput);
 
-
+ 
