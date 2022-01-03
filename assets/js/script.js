@@ -212,7 +212,7 @@ async function searchInput(event) {
 var searchChoice = document.getElementById('input'); 
 
 // Store city that user submits to search bar
-function storeSearch (event) {
+function storeSearch () {
 
   var new_data =  searchChoice.value;
 
@@ -305,34 +305,40 @@ function menuE () {
 }
 
 function menuF () {
-  var historyChoice = result[6];
+  var historyChoice = result[5];
   apiFromHistory(historyChoice);
 }
 
 function menuG () {
-  var historyChoice = result[7];
+  var historyChoice = result[6];
   apiFromHistory(historyChoice);
 }
 
 function menuH () {
-  var historyChoice = result[8];
+  var historyChoice = result[7];
   apiFromHistory(historyChoice);
 }
 
 function menuI () {
-  var historyChoice = result[9];
+  var historyChoice = result[8];
   apiFromHistory(historyChoice);
 }
 
 function menuJ () {
-  var historyChoice = result[10];
+  var historyChoice = result[9];
   apiFromHistory(historyChoice);
 }
 
 function menuK () {
+  var historyChoice = result[10];
+  apiFromHistory(historyChoice);
+}
+
+function menuL () {
   var historyChoice = result[11];
   apiFromHistory(historyChoice);
 }
+
 
 // set up first API from clicked city (history menu)
 function apiFromHistory (historyChoice) {
